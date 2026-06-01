@@ -18,16 +18,91 @@ async function carregarDados() {
       .getElementById('data')
       .value;
 
+  const loja =
+    document
+      .getElementById('loja')
+      .value;
+
   const resultado =
     await apiGet({
 
-      acao:
-        'funcionarios-data',
+      acao: 'funcionarios-data',
 
-      data
+      data,
+
+      loja
 
     });
 
   renderizar(resultado);
+
+}
+
+function renderizar(dados) {
+
+  document
+    .getElementById('resumo')
+    .innerHTML = `
+
+      <h3>
+
+      Total:
+      ${dados.totalFuncionarios}
+
+      | Pendentes:
+      ${dados.totalPendentes}
+
+      | Lançados:
+      ${dados.totalLancados}
+
+      </h3>
+
+    `;
+
+  let htmlPendentes =
+    '<h3>Pendentes</h3>';
+
+  dados.pendentes
+    .forEach(item => {
+
+      htmlPendentes += `
+
+        <div>
+
+          ${item.funcionario.nome}
+
+        </div>
+
+      `;
+
+    });
+
+  document
+    .getElementById('pendentes')
+    .innerHTML =
+      htmlPendentes;
+
+  let htmlLancados =
+    '<h3>Lançados</h3>';
+
+  dados.lancados
+    .forEach(item => {
+
+      htmlLancados += `
+
+        <div>
+
+          ${item.funcionario.nome}
+
+        </div>
+
+      `;
+
+    });
+
+  document
+    .getElementById('lancados')
+    .innerHTML =
+      htmlLancados;
 
 }
