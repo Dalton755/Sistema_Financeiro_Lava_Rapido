@@ -1,1 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
 
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1">
+
+<title>Ponto</title>
+
+<link rel="stylesheet"
+href="./css/style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Lançamento Diário</h2>
+
+<label>Data</label>
+
+<input
+type="date"
+id="data">
+
+<br><br>
+
+<label>Loja</label>
+
+<select id="loja">
+
+<option>
+Loja A
+</option>
+
+<option>
+Loja B
+</option>
+
+</select>
+
+<br><br>
+
+<button onclick="carregarDados()">
+
+Carregar
+
+</button>
+
+<div id="resumo"></div>
+
+<div id="pendentes"></div>
+
+<div id="lancados"></div>
+
+</div>
+
+<script
+src=".js/config.js">
+</script>
+
+<script
+src=".js/api.js">
+</script>
+
+<script
+src="./js/ponto.js">
+</script>
+
+</body>
+
+</html>
