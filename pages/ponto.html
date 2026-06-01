@@ -56,6 +56,81 @@ id="data">
 <div id="pendentes"></div>
 
 <div id="lancados"></div>
+  <hr>
+
+<div id="formularioPonto" style="display:none;">
+
+  <h3 id="nomeFuncionario"></h3>
+
+  <input
+    type="hidden"
+    id="funcionarioId">
+
+  <label>Escala</label>
+
+  <select id="escala">
+
+    <option value="">
+      Selecione
+    </option>
+
+    <option value="07-16">
+      07-16
+    </option>
+
+    <option value="08-17">
+      08-17
+    </option>
+
+    <option value="12-20">
+      12-20
+    </option>
+
+    <option value="14-21">
+      14-21
+    </option>
+
+  </select>
+
+  <br><br>
+
+  <label>Entrada</label>
+  <input type="time" id="entrada">
+
+  <br><br>
+
+  <label>Saída Almoço</label>
+  <input type="time" id="saidaAlmoco">
+
+  <br><br>
+
+  <label>Retorno Almoço</label>
+  <input type="time" id="retornoAlmoco">
+
+  <br><br>
+
+  <label>Saída</label>
+  <input type="time" id="saida">
+
+  <br><br>
+
+  <label>Horas</label>
+  <input
+    type="number"
+    id="horas"
+    readonly>
+
+  <br><br>
+
+  <button
+    id="btnSalvarPonto"
+    onclick="salvarPonto()">
+
+    Salvar
+
+  </button>
+
+</div>
 
 </div>
 
