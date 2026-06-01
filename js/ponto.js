@@ -126,13 +126,23 @@ function renderizar(dados) {
 
       htmlPendentes += `
 
-        <div>
+  <div
+    onclick="abrirFormulario(
+      '${item.funcionario.id}',
+      '${item.funcionario.nome}'
+    )"
+    style="
+      padding:10px;
+      margin:5px 0;
+      border:1px solid #ddd;
+      cursor:pointer;
+    ">
 
-          ${item.funcionario.nome}
+    ${item.funcionario.nome}
 
-        </div>
+  </div>
 
-      `;
+`;
 
     });
 
