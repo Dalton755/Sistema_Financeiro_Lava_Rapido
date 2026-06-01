@@ -13,8 +13,9 @@ window.onload = () => {
 
 async function carregarDados() {
 
-  const botao = document.querySelector(
-    'button[onclick="carregarDados()"]'
+  const botao =
+  document.getElementById(
+    'btnCarregar'
   );
 
   const textoOriginal = botao.innerText;
