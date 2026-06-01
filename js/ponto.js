@@ -431,3 +431,25 @@ async function salvarPonto() {
   }
 
 }
+
+[
+  'entrada',
+  'saidaAlmoco',
+  'retornoAlmoco',
+  'saida'
+].forEach(id => {
+
+  document.addEventListener(
+    'input',
+    function(e) {
+
+      if (e.target.id === id) {
+
+        calcularHorasTela();
+
+      }
+
+    }
+  );
+
+});
