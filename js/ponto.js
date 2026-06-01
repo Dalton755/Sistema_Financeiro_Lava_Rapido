@@ -203,3 +203,78 @@ function abrirFormulario(
       nome;
 
 }
+
+function calcularHorasTela() {
+
+  const entrada =
+    document.getElementById(
+      'entrada'
+    ).value;
+
+  const saidaAlmoco =
+    document.getElementById(
+      'saidaAlmoco'
+    ).value;
+
+  const retornoAlmoco =
+    document.getElementById(
+      'retornoAlmoco'
+    ).value;
+
+  const saida =
+    document.getElementById(
+      'saida'
+    ).value;
+
+  if (
+    !entrada ||
+    !saidaAlmoco ||
+    !retornoAlmoco ||
+    !saida
+  ) return;
+
+  const inicio =
+    new Date(
+      `2000-01-01 ${entrada}`
+    );
+
+  const almocoInicio =
+    new Date(
+      `2000-01-01 ${saidaAlmoco}`
+    );
+
+  const almocoFim =
+    new Date(
+      `2000-01-01 ${retornoAlmoco}`
+    );
+
+  const fim =
+    new Date(
+      `2000-01-01 ${saida}`
+    );
+
+  const horas =
+
+    (
+      (
+        almocoInicio -
+        inicio
+      )
+
+      +
+
+      (
+        fim -
+        almocoFim
+      )
+
+    ) / 3600000;
+
+  document
+    .getElementById(
+      'horas'
+    )
+    .value =
+      horas.toFixed(2);
+
+}
