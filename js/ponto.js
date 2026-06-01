@@ -318,3 +318,116 @@ function calcularHorasTela() {
       horas.toFixed(2);
 
 }
+
+async function salvarPonto() {
+
+  const btn =
+    document.getElementById(
+      'btnSalvarPonto'
+    );
+
+  const textoOriginal =
+    btn.innerText;
+
+  btn.disabled = true;
+  btn.innerText = 'Salvando...';
+
+  try {
+
+    const payload = {
+
+      acao: 'salvarPonto',
+
+      data:
+        document
+          .getElementById('data')
+          .value,
+
+      funcionarioId:
+        document
+          .getElementById(
+            'funcionarioId'
+          )
+          .value,
+
+      escala:
+        document
+          .getElementById(
+            'escala'
+          )
+          .value,
+
+      entrada:
+        document
+          .getElementById(
+            'entrada'
+          )
+          .value,
+
+      saidaAlmoco:
+        document
+          .getElementById(
+            'saidaAlmoco'
+          )
+          .value,
+
+      retornoAlmoco:
+        document
+          .getElementById(
+            'retornoAlmoco'
+          )
+          .value,
+
+      saida:
+        document
+          .getElementById(
+            'saida'
+          )
+          .value
+
+    };
+
+    const resultado =
+      await apiPost(payload);
+
+    if (!resultado.sucesso) {
+
+      alert(
+        resultado.mensagem
+      );
+
+      return;
+
+    }
+
+    alert(
+      'Ponto salvo com sucesso.'
+    );
+
+    carregarDados();
+
+    document
+      .getElementById(
+        'formularioPonto'
+      )
+      .style.display =
+        'none';
+
+  } catch (erro) {
+
+    console.error(erro);
+
+    alert(
+      'Erro ao salvar.'
+    );
+
+  } finally {
+
+    btn.disabled = false;
+
+    btn.innerText =
+      textoOriginal;
+
+  }
+
+}
