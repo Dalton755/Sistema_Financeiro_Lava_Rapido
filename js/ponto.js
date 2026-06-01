@@ -13,28 +13,54 @@ window.onload = () => {
 
 async function carregarDados() {
 
-  const data =
-    document
-      .getElementById('data')
-      .value;
+  const botao = document.querySelector(
+    'button[onclick="carregarDados()"]'
+  );
 
-  const loja =
-    document
-      .getElementById('loja')
-      .value;
+  const textoOriginal = botao.innerText;
 
-  const resultado =
-    await apiGet({
+  botao.disabled = true;
+  botao.innerText = 'Carregando...';
 
-      acao: 'funcionarios-data',
+  try {
 
-      data,
+    const data =
+      document
+        .getElementById('data')
+        .value;
 
-      loja
+    const loja =
+      document
+        .getElementById('loja')
+        .value;
 
-    });
+    const resultado =
+      await apiGet({
 
-  renderizar(resultado);
+        acao: 'funcionarios-data',
+
+        data,
+
+        loja
+
+      });
+
+    renderizar(resultado);
+
+  } catch (erro) {
+
+    console.error(erro);
+
+    alert(
+      'Erro ao carregar os dados.'
+    );
+
+  } finally {
+
+    botao.disabled = false;
+    botao.innerText = textoOriginal;
+
+  }
 
 }
 
