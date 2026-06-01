@@ -1,3 +1,35 @@
+const ESCALAS = {
+
+  '07-16': {
+    entrada: '07:00',
+    saidaAlmoco: '12:00',
+    retornoAlmoco: '13:00',
+    saida: '16:00'
+  },
+
+  '08-17': {
+    entrada: '08:00',
+    saidaAlmoco: '12:00',
+    retornoAlmoco: '13:00',
+    saida: '17:00'
+  },
+
+  '12-20': {
+    entrada: '12:00',
+    saidaAlmoco: '17:00',
+    retornoAlmoco: '18:00',
+    saida: '20:00'
+  },
+
+  '14-21': {
+    entrada: '14:00',
+    saidaAlmoco: '17:00',
+    retornoAlmoco: '18:00',
+    saida: '21:00'
+  }
+
+};
+
 window.onload = () => {
 
   const hoje =
