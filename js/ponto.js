@@ -204,6 +204,46 @@ function abrirFormulario(
 
 }
 
+document.addEventListener(
+  'change',
+  function(e) {
+
+    if (
+      e.target.id !== 'escala'
+    ) return;
+
+    const escala =
+      ESCALAS[
+        e.target.value
+      ];
+
+    if (!escala) return;
+
+    document.getElementById(
+      'entrada'
+    ).value =
+      escala.entrada;
+
+    document.getElementById(
+      'saidaAlmoco'
+    ).value =
+      escala.saidaAlmoco;
+
+    document.getElementById(
+      'retornoAlmoco'
+    ).value =
+      escala.retornoAlmoco;
+
+    document.getElementById(
+      'saida'
+    ).value =
+      escala.saida;
+
+    calcularHorasTela();
+
+  }
+);
+
 function calcularHorasTela() {
 
   const entrada =
