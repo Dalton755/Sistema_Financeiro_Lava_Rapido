@@ -14,18 +14,19 @@ async function apiGet(params = {}) {
 
 async function apiPost(data) {
 
+  const formData = new FormData();
+
+  formData.append(
+    'payload',
+    JSON.stringify(data)
+  );
+
   const response =
     await fetch(API_URL, {
 
       method: 'POST',
 
-      headers: {
-        'Content-Type':
-          'application/json'
-      },
-
-      body:
-        JSON.stringify(data)
+      body: formData
 
     });
 
