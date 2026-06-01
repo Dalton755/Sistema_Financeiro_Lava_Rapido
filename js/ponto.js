@@ -175,3 +175,31 @@ function renderizar(dados) {
       htmlLancados;
 
 }
+
+function abrirFormulario(
+  funcionarioId,
+  nome
+) {
+
+  document
+    .getElementById(
+      'formularioPonto'
+    )
+    .style.display =
+      'block';
+
+  document
+    .getElementById(
+      'funcionarioId'
+    )
+    .value =
+      funcionarioId;
+
+  document
+    .getElementById(
+      'nomeFuncionario'
+    )
+    .innerText =
+      nome;
+
+}
