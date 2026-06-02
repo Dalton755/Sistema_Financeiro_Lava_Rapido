@@ -559,3 +559,18 @@ function mostrarMensagem(texto) {
   }, 3000);
 
 }
+
+document.addEventListener(
+  'change',
+  async function(e) {
+
+    if (
+      e.target.id === 'loja'
+    ) {
+
+      await carregarDados();
+
+    }
+
+  }
+);
