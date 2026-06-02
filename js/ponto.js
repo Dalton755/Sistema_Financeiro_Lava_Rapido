@@ -205,38 +205,31 @@ function renderizar(dados) {
     '<h3>Lançados</h3>';
 
   window.lancadosCache = dados.lancados;
-  dados.lancados
-    .forEach(item => {
+ dados.lancados.forEach((item, index) => {
 
-     htmlLancados += `
+  htmlLancados += `
 
-<div
-  class="funcionario"
-  onclick="editarPonto(${encodeURIComponent(JSON.stringify(item))})">
+  <div
+    class="funcionario"
+    onclick="editarPonto(${index})">
 
-  <div class="funcionario-nome">
-    ${item.funcionario.nome}
-  </div>
+    <div class="funcionario-nome">
 
-  <div class="funcionario-info">
-    ${item.ponto.horas} horas
-  </div>
+      ${item.funcionario.nome}
 
-</div>
+    </div>
 
-`;
+    <div class="funcionario-info">
 
-  <div class="funcionario-info">
+      ${item.ponto.horas} horas
 
-    ${item.ponto.horas} horas
+    </div>
 
   </div>
 
-</div>
+  `;
 
-`;
-
-    });
+});
 
   document
     .getElementById('lancados')
