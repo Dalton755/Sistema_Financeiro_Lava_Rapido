@@ -70,9 +70,24 @@ id="data">
 <div id="lancados"></div>
   <hr>
 
-<div id="formularioPonto" style="display:none;">
+<div
+  id="overlay"
+  class="overlay">
+
+  <div
+    id="formularioPonto"
+    class="bottom-sheet">
 
   <h3 id="nomeFuncionario"></h3>
+
+    <button
+  type="button"
+  class="btn-fechar"
+  onclick="fecharFormulario()">
+
+  ✕
+
+</button>
 
   <input
     type="hidden"
