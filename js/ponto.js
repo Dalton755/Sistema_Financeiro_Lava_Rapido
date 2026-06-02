@@ -506,12 +506,7 @@ async function salvarPonto() {
 
     carregarDados();
 
-    document
-      .getElementById(
-        'formularioPonto'
-      )
-      .style.display =
-        'none';
+    fecharFormulario();
 
   } catch (erro) {
 
