@@ -129,7 +129,7 @@ function renderizar(dados) {
   <div
     onclick="abrirFormulario(
       '${item.funcionario.id}',
-      ${item.funcionario.nome} - ${item.ponto.horas}h
+      ${item.funcionario.nome} 
     )"
     style="
       padding:10px;
@@ -161,7 +161,7 @@ function renderizar(dados) {
 
         <div>
 
-          ${item.funcionario.nome}
+          ${item.funcionario.nome} - ${item.ponto.horas}h
 
         </div>
 
@@ -175,6 +175,10 @@ function renderizar(dados) {
       htmlLancados;
 
 }
+function editarPonto(
+  funcionario,
+  ponto
+)
 
 function abrirFormulario(
   funcionarioId,
