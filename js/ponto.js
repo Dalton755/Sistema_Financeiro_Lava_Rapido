@@ -421,9 +421,9 @@ async function salvarPonto() {
 
     console.error(erro);
 
-    alert(
-      'Erro ao salvar.'
-    );
+    mostrarMensagem(
+  '❌ Erro ao salvar.'
+);
 
   } finally {
 
