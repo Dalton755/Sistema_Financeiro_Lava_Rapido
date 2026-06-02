@@ -204,6 +204,7 @@ function renderizar(dados) {
   let htmlLancados =
     '<h3>Lançados</h3>';
 
+  window.lancadosCache = dados.lancados;
   dados.lancados
     .forEach(item => {
 
