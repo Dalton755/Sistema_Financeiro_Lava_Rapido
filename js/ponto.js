@@ -100,8 +100,8 @@ async function carregarDados() {
 function renderizar(dados) {
 
   document
-    .getElementById('resumo')
-    .innerHTML = `
+  .getElementById('resumo')
+  .innerHTML = `
 
       <h3>
 
@@ -117,6 +117,7 @@ function renderizar(dados) {
       </h3>
 
     `;
+
 
   let htmlPendentes =
     '<h3>Pendentes</h3>';
