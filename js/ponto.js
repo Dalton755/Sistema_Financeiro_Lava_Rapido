@@ -190,10 +190,7 @@ function renderizar(dados) {
       htmlLancados;
 
 }
-function editarPonto(
-  funcionario,
-  ponto
-)
+
 
 function abrirFormulario(
   funcionarioId,
