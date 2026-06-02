@@ -101,8 +101,14 @@ if (botao) {
 
   } finally {
 
-    botao.disabled = false;
-    botao.innerText = textoOriginal;
+   if (botao) {
+
+  botao.disabled = false;
+
+  botao.innerText =
+    textoOriginal;
+
+}
 
   }
 
