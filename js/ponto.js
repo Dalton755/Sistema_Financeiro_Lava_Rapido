@@ -404,9 +404,9 @@ async function salvarPonto() {
 
     }
 
-    alert(
-      'Ponto salvo com sucesso.'
-    );
+    mostrarMensagem(
+  '✅ Ponto salvo com sucesso.'
+);
 
     carregarDados();
 
