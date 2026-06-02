@@ -129,7 +129,7 @@ function renderizar(dados) {
   <div
     onclick="abrirFormulario(
       '${item.funcionario.id}',
-      '${item.funcionario.nome}'
+      ${item.funcionario.nome} - ${item.ponto.horas}h
     )"
     style="
       padding:10px;
