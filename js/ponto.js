@@ -565,7 +565,8 @@ document.addEventListener(
   async function(e) {
 
     if (
-      e.target.id === 'loja'
+      e.target.id === 'loja' ||
+      e.target.id === 'data'
     ) {
 
       await carregarDados();
