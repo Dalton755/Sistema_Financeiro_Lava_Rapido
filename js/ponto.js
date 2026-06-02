@@ -47,15 +47,24 @@ window.onload = async () => {
 
 async function carregarDados() {
 
-  const botao =
+ const botao =
   document.getElementById(
     'btnCarregar'
   );
 
-  const textoOriginal = botao.innerText;
+let textoOriginal = '';
+
+if (botao) {
+
+  textoOriginal =
+    botao.innerText;
 
   botao.disabled = true;
-  botao.innerText = 'Carregando...';
+
+  botao.innerText =
+    'Carregando...';
+
+}
 
   try {
 
