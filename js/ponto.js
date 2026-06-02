@@ -207,15 +207,23 @@ function renderizar(dados) {
   dados.lancados
     .forEach(item => {
 
-      htmlLancados += `
+     htmlLancados += `
 
-<div class="funcionario">
+<div
+  class="funcionario"
+  onclick="editarPonto(${encodeURIComponent(JSON.stringify(item))})">
 
   <div class="funcionario-nome">
-
     ${item.funcionario.nome}
-
   </div>
+
+  <div class="funcionario-info">
+    ${item.ponto.horas} horas
+  </div>
+
+</div>
+
+`;
 
   <div class="funcionario-info">
 
