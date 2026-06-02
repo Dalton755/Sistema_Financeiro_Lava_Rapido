@@ -244,7 +244,7 @@ function abrirFormulario(
 
   document
     .getElementById(
-      'formularioPonto'
+      'overlay'
     )
     .style.display =
       'block';
