@@ -124,23 +124,28 @@ function renderizar(dados) {
   dados.pendentes
     .forEach(item => {
 
-      htmlPendentes += `
+     htmlPendentes += `
 
-  <div
-    onclick="abrirFormulario(
-      '${item.funcionario.id}',
-      ${item.funcionario.nome} 
-    )"
-    style="
-      padding:10px;
-      margin:5px 0;
-      border:1px solid #ddd;
-      cursor:pointer;
-    ">
+<div
+  class="funcionario"
+  onclick="abrirFormulario(
+    '${item.funcionario.id}',
+    '${item.funcionario.nome}'
+  )">
+
+  <div class="funcionario-nome">
 
     ${item.funcionario.nome}
 
   </div>
+
+  <div class="funcionario-info">
+
+    Pendente
+
+  </div>
+
+</div>
 
 `;
 
