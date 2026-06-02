@@ -30,7 +30,7 @@ const ESCALAS = {
 
 };
 
-window.onload = () => {
+window.onload = async () => {
 
   const hoje =
     new Date()
@@ -40,6 +40,8 @@ window.onload = () => {
   document
     .getElementById('data')
     .value = hoje;
+
+  await carregarDados();
 
 };
 
