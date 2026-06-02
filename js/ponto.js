@@ -99,24 +99,51 @@ async function carregarDados() {
 
 function renderizar(dados) {
 
-  document
-  .getElementById('resumo')
-  .innerHTML = `
+ document
+.getElementById('resumo')
+.innerHTML = `
 
-      <h3>
+<div class="resumo">
 
-      Total:
+  <div class="resumo-card">
+
+    <div class="resumo-numero">
       ${dados.totalFuncionarios}
+    </div>
 
-      | Pendentes:
+    <div class="resumo-label">
+      Total
+    </div>
+
+  </div>
+
+  <div class="resumo-card">
+
+    <div class="resumo-numero">
       ${dados.totalPendentes}
+    </div>
 
-      | Lançados:
+    <div class="resumo-label">
+      Pendentes
+    </div>
+
+  </div>
+
+  <div class="resumo-card">
+
+    <div class="resumo-numero">
       ${dados.totalLancados}
+    </div>
 
-      </h3>
+    <div class="resumo-label">
+      Lançados
+    </div>
 
-    `;
+  </div>
+
+</div>
+
+`;
 
 
   let htmlPendentes =
