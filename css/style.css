@@ -1,23 +1,241 @@
-body {
-  margin: 0;
-  padding: 20px;
-  font-family: Arial, sans-serif;
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
 }
 
-.container {
-  max-width: 1200px;
-  margin: auto;
+body{
+
+  font-family:
+    Inter,
+    Arial,
+    sans-serif;
+
+  background:#f5f7fa;
+
+  color:#222;
+
+  padding:16px;
+
 }
 
-.menu {
-  display: flex;
-  gap: 15px;
-  flex-wrap: wrap;
+.container{
+
+  max-width:600px;
+
+  margin:auto;
+
 }
 
-.menu a {
-  padding: 12px 20px;
-  text-decoration: none;
-  border: 1px solid #ddd;
-  border-radius: 8px;
+h2{
+
+  margin-bottom:20px;
+
+  font-size:24px;
+
+}
+
+label{
+
+  display:block;
+
+  margin-bottom:6px;
+
+  font-size:14px;
+
+  font-weight:600;
+
+}
+
+input,
+select{
+
+  width:100%;
+
+  padding:14px;
+
+  border:1px solid #ddd;
+
+  border-radius:12px;
+
+  font-size:16px;
+
+  background:white;
+
+}
+
+button{
+
+  width:100%;
+
+  border:none;
+
+  border-radius:12px;
+
+  padding:14px;
+
+  font-size:16px;
+
+  font-weight:600;
+
+  cursor:pointer;
+
+  background:#2563eb;
+
+  color:white;
+
+}
+
+button:disabled{
+
+  opacity:.6;
+
+}
+
+#mensagem{
+
+  margin-top:10px;
+
+}
+
+.card{
+
+  background:white;
+
+  border-radius:16px;
+
+  padding:16px;
+
+  margin-top:12px;
+
+  box-shadow:
+    0 2px 10px
+    rgba(0,0,0,.05);
+
+}
+
+.card-titulo{
+
+  font-size:18px;
+
+  font-weight:700;
+
+}
+
+.card-subtitulo{
+
+  font-size:13px;
+
+  color:#666;
+
+}
+
+.resumo{
+
+  display:flex;
+
+  gap:10px;
+
+  margin-top:15px;
+
+}
+
+.resumo-card{
+
+  flex:1;
+
+  background:white;
+
+  padding:15px;
+
+  border-radius:16px;
+
+  text-align:center;
+
+  box-shadow:
+    0 2px 10px
+    rgba(0,0,0,.05);
+
+}
+
+.resumo-numero{
+
+  font-size:24px;
+
+  font-weight:700;
+
+}
+
+.resumo-label{
+
+  font-size:12px;
+
+  color:#666;
+
+}
+
+.lista-funcionarios{
+
+  margin-top:15px;
+
+}
+
+.funcionario{
+
+  background:white;
+
+  border-radius:14px;
+
+  padding:16px;
+
+  margin-bottom:10px;
+
+  cursor:pointer;
+
+  box-shadow:
+    0 2px 8px
+    rgba(0,0,0,.05);
+
+  transition:.2s;
+}
+
+.funcionario:hover{
+
+  transform:
+    translateY(-2px);
+
+}
+
+.funcionario-nome{
+
+  font-weight:600;
+
+  font-size:16px;
+
+}
+
+.funcionario-info{
+
+  font-size:13px;
+
+  color:#666;
+
+  margin-top:4px;
+
+}
+
+#formularioPonto{
+
+  background:white;
+
+  border-radius:16px;
+
+  padding:20px;
+
+  margin-top:20px;
+
+  box-shadow:
+    0 2px 10px
+    rgba(0,0,0,.05);
+
 }
