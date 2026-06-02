@@ -590,3 +590,14 @@ document.addEventListener(
 
   }
 );
+
+function fecharFormulario() {
+
+  document
+    .getElementById(
+      'overlay'
+    )
+    .style.display =
+      'none';
+
+}
