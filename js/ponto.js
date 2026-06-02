@@ -164,13 +164,23 @@ function renderizar(dados) {
 
       htmlLancados += `
 
-        <div>
+<div class="funcionario">
 
-          ${item.funcionario.nome} - ${item.ponto.horas}h
+  <div class="funcionario-nome">
 
-        </div>
+    ${item.funcionario.nome}
 
-      `;
+  </div>
+
+  <div class="funcionario-info">
+
+    ${item.ponto.horas} horas
+
+  </div>
+
+</div>
+
+`;
 
     });
 
