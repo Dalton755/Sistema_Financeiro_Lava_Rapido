@@ -177,6 +177,11 @@ document
     )
     .value = '';
 
+  botao.disabled = false;
+
+botao.innerText =
+  textoOriginal;
+  
 }
 
 
