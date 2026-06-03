@@ -327,7 +327,26 @@ function editarPonto(index) {
 
 }
 
+function converterHora(valor) {
 
+  if (!valor) return '';
+
+  const data =
+    new Date(valor);
+
+  const hora =
+    String(
+      data.getUTCHours()
+    ).padStart(2, '0');
+
+  const minuto =
+    String(
+      data.getUTCMinutes()
+    ).padStart(2, '0');
+
+  return `${hora}:${minuto}`;
+
+}
 
 
 document.addEventListener(
