@@ -131,16 +131,21 @@ botao.innerText =
 
     });
 
-  if (!resultado.sucesso) {
+ if (!resultado.sucesso) {
 
-    alert(
-      resultado.mensagem ||
-      'Erro ao salvar.'
-    );
+  botao.disabled = false;
 
-    return;
+  botao.innerText =
+    textoOriginal;
 
-  }
+  alert(
+    resultado.mensagem ||
+    'Erro ao salvar.'
+  );
+
+  return;
+
+}
 
   alert(
   '✅ Adiantamento salvo com sucesso.'
