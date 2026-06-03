@@ -300,28 +300,22 @@ function editarPonto(index) {
   document.getElementById(
     'entrada'
   ).value =
-    converterHora(item.ponto.entrada);
+    item.ponto.entrada;
 
   document.getElementById(
     'saidaAlmoco'
   ).value =
-    converterHora(
-      item.ponto.saidaAlmoco
-    );
+      item.ponto.saidaAlmoco;
 
   document.getElementById(
     'retornoAlmoco'
   ).value =
-    converterHora(
-      item.ponto.retornoAlmoco
-    );
+      item.ponto.retornoAlmoco;
 
   document.getElementById(
     'saida'
   ).value =
-    converterHora(
-      item.ponto.saida
-    );
+      item.ponto.saida;
 
   calcularHorasTela();
 
