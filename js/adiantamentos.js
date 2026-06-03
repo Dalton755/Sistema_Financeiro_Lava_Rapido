@@ -71,7 +71,13 @@ document
   .getElementById('loja')
   .addEventListener(
     'change',
-    carregarFuncionarios
+    async () => {
+
+      await carregarFuncionarios();
+
+      await carregarAdiantamentos();
+
+    }
   );
 
 async function salvarAdiantamento() {
@@ -221,3 +227,10 @@ console.log(
       html;
 
 }
+
+    document
+  .getElementById('data')
+  .addEventListener(
+    'change',
+    carregarAdiantamentos
+  );
