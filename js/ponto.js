@@ -273,14 +273,9 @@ function abrirFormulario(
 
 function editarPonto(index) {
 
-  console.log(
-    'INDEX',
+  alert(
+    'Clique recebido. Índice: ' +
     index
-  );
-
-  console.log(
-    'ITEM',
-    window.lancadosCache[index]
   );
 
 }
