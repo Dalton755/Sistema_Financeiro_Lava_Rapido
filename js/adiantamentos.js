@@ -132,6 +132,19 @@ async function salvarAdiantamento() {
   alert(
     'Adiantamento salvo com sucesso.'
   );
+
+ document
+  .getElementById(
+    'valor'
+  )
+  .value = '';
+
+document
+  .getElementById(
+    'observacao'
+  )
+  .value = '';
+  
   await carregarAdiantamentos();
 
   document
