@@ -205,6 +205,10 @@ function renderizar(dados) {
     '<h3>Lançados</h3>';
 
   window.lancadosCache = dados.lancados;
+  console.log(
+  'LANCADOS',
+  dados.lancados
+);
  dados.lancados.forEach((item, index) => {
 
   htmlLancados += `
@@ -268,50 +272,19 @@ function abrirFormulario(
 }
 
 function editarPonto(index) {
+
   console.log(
-    'editarPonto',
-    index,
-    window.lancadosCache
-  );
-  const item =
-    window.lancadosCache[index];
-
-  abrirFormulario(
-    item.funcionario.id,
-    item.funcionario.nome
+    'INDEX',
+    index
   );
 
-  document.getElementById(
-    'escala'
-  ).value =
-    item.ponto.escala;
-
-  document.getElementById(
-    'entrada'
-  ).value =
-    item.ponto.entrada;
-
-  document.getElementById(
-    'saidaAlmoco'
-  ).value =
-    item.ponto.saidaAlmoco;
-
-  document.getElementById(
-    'retornoAlmoco'
-  ).value =
-    item.ponto.retornoAlmoco;
-
-  document.getElementById(
-    'saida'
-  ).value =
-    item.ponto.saida;
-
-  document.getElementById(
-    'horas'
-  ).value =
-    item.ponto.horas;
+  console.log(
+    'ITEM',
+    window.lancadosCache[index]
+  );
 
 }
+
 
 function editarPonto(item) {
 
