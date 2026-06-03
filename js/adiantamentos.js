@@ -64,6 +64,8 @@ window.onload = async () => {
 
   await carregarFuncionarios();
 
+await carregarAdiantamentos();
+
 };
 
 document
