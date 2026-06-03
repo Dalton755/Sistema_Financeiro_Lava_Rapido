@@ -83,105 +83,105 @@ document
 async function salvarAdiantamento() {
 
   const botao =
-  document.getElementById(
-    'btnSalvarAdiantamento'
-  );
+    document.getElementById(
+      'btnSalvarAdiantamento'
+    );
 
-const textoOriginal =
-  botao.innerText;
+  const textoOriginal =
+    botao.innerText;
 
-botao.disabled = true;
-
-botao.innerText =
-  'Salvando...';
-
-  const resultado =
-    await apiPost({
-
-      acao:
-        'salvarAdiantamento',
-
-      data:
-        document
-          .getElementById(
-            'data'
-          )
-          .value,
-
-      funcionarioId:
-        document
-          .getElementById(
-            'funcionario'
-          )
-          .value,
-
-      valor:
-        document
-          .getElementById(
-            'valor'
-          )
-          .value,
-
-      observacao:
-        document
-          .getElementById(
-            'observacao'
-          )
-          .value
-
-    });
-
-if (!resultado.sucesso) {
-
-  botao.disabled = false;
+  botao.disabled = true;
 
   botao.innerText =
-    textoOriginal;
+    'Salvando...';
 
-  alert(
-    resultado.mensagem ||
-    'Erro ao salvar.'
-  );
+  try {
 
-  return;
+    const resultado =
+      await apiPost({
 
-}
+        acao:
+          'salvarAdiantamento',
 
-  alert(
-  '✅ Adiantamento salvo com sucesso.'
-);
+        data:
+          document
+            .getElementById(
+              'data'
+            )
+            .value,
 
- document
-  .getElementById(
-    'valor'
-  )
-  .value = '';
+        funcionarioId:
+          document
+            .getElementById(
+              'funcionario'
+            )
+            .value,
 
-document
-  .getElementById(
-    'observacao'
-  )
-  .value = '';
-  
-  await carregarAdiantamentos();
+        valor:
+          document
+            .getElementById(
+              'valor'
+            )
+            .value,
 
-  document
-    .getElementById(
-      'valor'
-    )
-    .value = '';
+        observacao:
+          document
+            .getElementById(
+              'observacao'
+            )
+            .value
 
-  document
-    .getElementById(
-      'observacao'
-    )
-    .value = '';
+      });
 
-  botao.disabled = false;
+    if (!resultado.sucesso) {
 
-botao.innerText =
-  textoOriginal;
-  
+      alert(
+        resultado.mensagem ||
+        'Erro ao salvar.'
+      );
+
+      return;
+
+    }
+
+    alert(
+      '✅ Adiantamento salvo com sucesso.'
+    );
+
+    document
+      .getElementById(
+        'valor'
+      )
+      .value = '';
+
+    document
+      .getElementById(
+        'observacao'
+      )
+      .value = '';
+
+    await carregarAdiantamentos();
+
+  } catch (erro) {
+
+    console.error(
+      erro
+    );
+
+    alert(
+      'Erro ao salvar.'
+    );
+
+  } finally {
+
+    botao.disabled =
+      false;
+
+    botao.innerText =
+      textoOriginal;
+
+  }
+
 }
 
 
