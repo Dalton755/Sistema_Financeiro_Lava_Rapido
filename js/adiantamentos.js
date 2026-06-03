@@ -170,6 +170,11 @@ async function carregarAdiantamentos() {
 
     });
 
+  console.log(
+  'RETORNO ADIANTAMENTOS',
+  lista
+);
+
   let html = '';
 
   lista.forEach(item => {
