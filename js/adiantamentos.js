@@ -176,6 +176,9 @@ async function carregarAdiantamentos() {
 
     });
 
+  adiantamentosCache =
+  lista;
+
   console.log(
   'DATA ENVIADA',
   data
@@ -244,3 +247,69 @@ document
     'change',
     carregarAdiantamentos
   );
+
+let adiantamentosCache = [];
+
+function abrirDetalhesAdiantamentos() {
+
+  let html = '';
+
+  adiantamentosCache
+    .forEach(item => {
+
+      html += `
+
+        <div
+          class="funcionario">
+
+          <div
+            class="funcionario-nome">
+
+            ${item.nome || 'Funcionário'}
+
+          </div>
+
+          <div
+            class="funcionario-info">
+
+            ${item.data}
+
+          </div>
+
+          <div
+            class="funcionario-info">
+
+            R$ ${Number(
+              item.valor
+            ).toFixed(2)}
+
+          </div>
+
+          <div
+            class="funcionario-info">
+
+            ${item.observacao || ''}
+
+          </div>
+
+        </div>
+
+      `;
+
+    });
+
+  document
+    .getElementById(
+      'detalhesAdiantamentos'
+    )
+    .innerHTML =
+      html;
+
+  document
+    .getElementById(
+      'overlayAdiantamentos'
+    )
+    .style.display =
+      'block';
+
+}
