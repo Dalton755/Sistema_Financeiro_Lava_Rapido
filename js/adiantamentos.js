@@ -139,3 +139,68 @@ async function salvarAdiantamento() {
     .value = '';
 
 }
+
+async function carregarAdiantamentos() {
+
+  const loja =
+    document.getElementById(
+      'loja'
+    ).value;
+
+  const data =
+    document.getElementById(
+      'data'
+    ).value;
+
+  const lista =
+    await apiGet({
+
+      acao:
+        'listarAdiantamentos',
+
+      dataInicial:
+        data,
+
+      dataFinal:
+        data,
+
+      loja
+
+    });
+
+  let html = '';
+
+  lista.forEach(item => {
+
+    html += `
+
+      <div class="funcionario">
+
+        <div class="funcionario-nome">
+
+          R$ ${Number(
+            item.valor
+          ).toFixed(2)}
+
+        </div>
+
+        <div class="funcionario-info">
+
+          ${item.observacao}
+
+        </div>
+
+      </div>
+
+    `;
+
+  });
+
+  document
+    .getElementById(
+      'listaAdiantamentos'
+    )
+    .innerHTML =
+      html;
+
+}
