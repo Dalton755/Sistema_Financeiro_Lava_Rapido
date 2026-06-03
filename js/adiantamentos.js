@@ -270,12 +270,7 @@ document
 
 `;
 
-  document
-    .getElementById(
-      'listaAdiantamentos'
-    )
-    .innerHTML =
-      html;
+ 
 
 }
 
