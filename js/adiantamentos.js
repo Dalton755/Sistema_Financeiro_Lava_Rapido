@@ -191,33 +191,43 @@ console.log(
   lista
 );
 
-  let html = '';
+let total = 0;
 
-  lista.forEach(item => {
+lista.forEach(item => {
 
-    html += `
+  total += Number(
+    item.valor || 0
+  );
 
-      <div class="funcionario">
+});
 
-        <div class="funcionario-nome">
+document
+  .getElementById(
+    'listaAdiantamentos'
+  )
+  .innerHTML = `
 
-          R$ ${Number(
-            item.valor
-          ).toFixed(2)}
+  <div
+    class="funcionario"
+    onclick="abrirDetalhesAdiantamentos()">
 
-        </div>
+    <div
+      class="funcionario-nome">
 
-        <div class="funcionario-info">
+      Total de Adiantamentos
 
-          ${item.observacao}
+    </div>
 
-        </div>
+    <div
+      class="funcionario-info">
 
-      </div>
+      R$ ${total.toFixed(2)}
 
-    `;
+    </div>
 
-  });
+  </div>
+
+`;
 
   document
     .getElementById(
