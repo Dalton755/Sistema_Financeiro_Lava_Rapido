@@ -171,6 +171,16 @@ async function carregarAdiantamentos() {
     });
 
   console.log(
+  'DATA ENVIADA',
+  data
+);
+
+console.log(
+  'LOJA ENVIADA',
+  loja
+);
+
+  console.log(
   'RETORNO ADIANTAMENTOS',
   lista
 );
