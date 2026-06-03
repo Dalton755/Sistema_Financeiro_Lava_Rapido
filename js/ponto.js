@@ -331,20 +331,33 @@ function converterHora(valor) {
 
   if (!valor) return '';
 
-  const data =
-    new Date(valor);
+  try {
 
-  const hora =
-    String(
-      data.getUTCHours()
-    ).padStart(2, '0');
+    if (typeof valor === 'string') {
 
-  const minuto =
-    String(
-      data.getUTCMinutes()
-    ).padStart(2, '0');
+      const partes =
+        valor.match(/T(\d{2}):(\d{2})/);
 
-  return `${hora}:${minuto}`;
+      if (partes) {
+
+        return `${partes[1]}:${partes[2]}`;
+
+      }
+
+    }
+
+    return '';
+
+  } catch (erro) {
+
+    console.error(
+      'Erro ao converter hora',
+      valor
+    );
+
+    return '';
+
+  }
 
 }
 
