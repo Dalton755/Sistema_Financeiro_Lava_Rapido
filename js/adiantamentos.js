@@ -129,7 +129,7 @@ async function salvarAdiantamento() {
 
   }
 
-  mostrarMensagem(
+  alert(
   '✅ Adiantamento salvo com sucesso.'
 );
 
