@@ -63,8 +63,7 @@ window.onload = async () => {
       `${ano}-${mes}-${dia}`;
 
   await carregarFuncionarios();
-
-await carregarAdiantamentos();
+  await carregarAdiantamentos();
 
 };
 
@@ -127,6 +126,7 @@ async function salvarAdiantamento() {
   alert(
     'Adiantamento salvo com sucesso.'
   );
+  await carregarAdiantamentos();
 
   document
     .getElementById(
