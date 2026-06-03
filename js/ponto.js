@@ -276,28 +276,16 @@ function editarPonto(index) {
   const item =
     window.lancadosCache[index];
 
-  console.log(
-    'ITEM COMPLETO'
-  );
+  if (!item) {
 
-  console.log(item);
+    console.error(
+      'Item não encontrado',
+      index
+    );
 
-  console.log(
-    'FUNCIONARIO'
-  );
+    return;
 
-  console.log(item.funcionario);
-
-  console.log(
-    'PONTO'
-  );
-
-  console.log(item.ponto);
-
-}
-
-
-function editarPonto(item) {
+  }
 
   abrirFormulario(
     item.funcionario.id,
@@ -307,34 +295,40 @@ function editarPonto(item) {
   document.getElementById(
     'escala'
   ).value =
-    item.ponto.escala;
+    item.ponto.escala || '';
 
   document.getElementById(
     'entrada'
   ).value =
-    item.ponto.entrada;
+    converterHora(item.ponto.entrada);
 
   document.getElementById(
     'saidaAlmoco'
   ).value =
-    item.ponto.saidaAlmoco;
+    converterHora(
+      item.ponto.saidaAlmoco
+    );
 
   document.getElementById(
     'retornoAlmoco'
   ).value =
-    item.ponto.retornoAlmoco;
+    converterHora(
+      item.ponto.retornoAlmoco
+    );
 
   document.getElementById(
     'saida'
   ).value =
-    item.ponto.saida;
+    converterHora(
+      item.ponto.saida
+    );
 
-  document.getElementById(
-    'horas'
-  ).value =
-    item.ponto.horas;
+  calcularHorasTela();
 
 }
+
+
+
 
 document.addEventListener(
   'change',
