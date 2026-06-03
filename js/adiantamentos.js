@@ -82,6 +82,19 @@ document
 
 async function salvarAdiantamento() {
 
+  const botao =
+  document.getElementById(
+    'btnSalvarAdiantamento'
+  );
+
+const textoOriginal =
+  botao.innerText;
+
+botao.disabled = true;
+
+botao.innerText =
+  'Salvando...';
+
   const resultado =
     await apiPost({
 
