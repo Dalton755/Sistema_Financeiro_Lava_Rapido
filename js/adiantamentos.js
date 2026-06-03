@@ -161,26 +161,7 @@ document
 
 }
 
-function mostrarMensagem(texto) {
 
-  const div =
-    document.getElementById(
-      'mensagem'
-    );
-
-  div.innerText = texto;
-
-  div.style.display =
-    'block';
-
-  setTimeout(() => {
-
-    div.style.display =
-      'none';
-
-  }, 3000);
-
-}
 
 async function carregarAdiantamentos() {
 
