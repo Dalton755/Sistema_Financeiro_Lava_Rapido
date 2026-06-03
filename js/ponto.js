@@ -267,6 +267,48 @@ function abrirFormulario(
 
 }
 
+function editarPonto(index) {
+
+  const item =
+    window.lancadosCache[index];
+
+  abrirFormulario(
+    item.funcionario.id,
+    item.funcionario.nome
+  );
+
+  document.getElementById(
+    'escala'
+  ).value =
+    item.ponto.escala;
+
+  document.getElementById(
+    'entrada'
+  ).value =
+    item.ponto.entrada;
+
+  document.getElementById(
+    'saidaAlmoco'
+  ).value =
+    item.ponto.saidaAlmoco;
+
+  document.getElementById(
+    'retornoAlmoco'
+  ).value =
+    item.ponto.retornoAlmoco;
+
+  document.getElementById(
+    'saida'
+  ).value =
+    item.ponto.saida;
+
+  document.getElementById(
+    'horas'
+  ).value =
+    item.ponto.horas;
+
+}
+
 function editarPonto(item) {
 
   abrirFormulario(
