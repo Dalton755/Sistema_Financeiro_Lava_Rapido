@@ -1,34 +1,15 @@
-window.onload =
-async function() {
-
-  const hoje =
-    new Date();
-
-  document
-    .getElementById('data')
-    .value =
-      hoje
-        .toISOString()
-        .split('T')[0];
-
-  await carregarFuncionarios();
-
-};
-
 async function carregarFuncionarios() {
 
   const loja =
     document
-      .getElementById(
-        'loja'
-      )
+      .getElementById('loja')
       .value;
 
-  const resposta =
+  const funcionarios =
     await apiGet({
 
       acao:
-        'listarFuncionarios',
+        'funcionarios-loja',
 
       loja
 
@@ -42,14 +23,14 @@ async function carregarFuncionarios() {
 
   select.innerHTML = '';
 
-  resposta.forEach(f => {
+  funcionarios.forEach(f => {
 
     select.innerHTML += `
 
       <option
-      value="${f.id}">
+        value="${f.id}">
 
-      ${f.nome}
+        ${f.nome}
 
       </option>
 
@@ -59,12 +40,38 @@ async function carregarFuncionarios() {
 
 }
 
+window.onload = async () => {
+
+  const hoje = new Date();
+
+  const ano =
+    hoje.getFullYear();
+
+  const mes =
+    String(
+      hoje.getMonth() + 1
+    ).padStart(2, '0');
+
+  const dia =
+    String(
+      hoje.getDate()
+    ).padStart(2, '0');
+
+  document
+    .getElementById('data')
+    .value =
+      `${ano}-${mes}-${dia}`;
+
+  await carregarFuncionarios();
+
+};
+
 document
-.getElementById('loja')
-.addEventListener(
-  'change',
-  carregarFuncionarios
-);
+  .getElementById('loja')
+  .addEventListener(
+    'change',
+    carregarFuncionarios
+  );
 
 async function salvarAdiantamento() {
 
@@ -104,14 +111,31 @@ async function salvarAdiantamento() {
 
     });
 
-  if (
-    resultado.sucesso
-  ) {
+  if (!resultado.sucesso) {
 
     alert(
-      'Adiantamento salvo.'
+      resultado.mensagem ||
+      'Erro ao salvar.'
     );
 
+    return;
+
   }
+
+  alert(
+    'Adiantamento salvo com sucesso.'
+  );
+
+  document
+    .getElementById(
+      'valor'
+    )
+    .value = '';
+
+  document
+    .getElementById(
+      'observacao'
+    )
+    .value = '';
 
 }
