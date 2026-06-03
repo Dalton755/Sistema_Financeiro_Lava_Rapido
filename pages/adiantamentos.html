@@ -1,1 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
 
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1">
+
+<title>Adiantamentos</title>
+
+<link rel="stylesheet"
+href="../css/style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Adiantamentos</h2>
+
+<label>Data</label>
+
+<input
+type="date"
+id="data">
+
+<br><br>
+
+<label>Loja</label>
+
+<select id="loja">
+
+  <option value="Loja A">
+    Loja A
+  </option>
+
+  <option value="Loja B">
+    Loja B
+  </option>
+
+</select>
+
+<br><br>
+
+<label>Funcionário</label>
+
+<select id="funcionario">
+</select>
+
+<br><br>
+
+<label>Valor</label>
+
+<input
+type="number"
+step="0.01"
+id="valor">
+
+<br><br>
+
+<label>Observação</label>
+
+<input
+type="text"
+id="observacao">
+
+<br><br>
+
+<button
+onclick="salvarAdiantamento()">
+
+Salvar
+
+</button>
+
+<div id="mensagem"></div>
+
+</div>
+
+<script src="../js/config.js"></script>
+<script src="../js/api.js"></script>
+<script src="../js/adiantamentos.js"></script>
+
+</body>
+
+</html>
