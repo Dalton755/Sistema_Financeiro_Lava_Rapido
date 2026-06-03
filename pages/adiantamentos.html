@@ -83,6 +83,41 @@ Salvar
 <div id="listaAdiantamentos">
 </div>
 
+<div
+  id="overlayAdiantamentos"
+  class="overlay"
+  style="display:none;">
+
+  <div
+    class="bottom-sheet">
+
+    <button
+      class="btn-fechar"
+      onclick="
+        document
+          .getElementById(
+            'overlayAdiantamentos'
+          )
+          .style.display='none'
+      ">
+
+      ✕
+
+    </button>
+
+    <h3>
+      Detalhes dos Adiantamentos
+    </h3>
+
+    <div
+      id="detalhesAdiantamentos">
+
+    </div>
+
+  </div>
+
+</div>  
+
 <div id="mensagem"></div>
 
 </div>
