@@ -129,9 +129,9 @@ async function salvarAdiantamento() {
 
   }
 
-  alert(
-    'Adiantamento salvo com sucesso.'
-  );
+  mostrarMensagem(
+  '✅ Adiantamento salvo com sucesso.'
+);
 
  document
   .getElementById(
