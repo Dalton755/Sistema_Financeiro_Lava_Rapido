@@ -163,6 +163,10 @@ async function salvarAdiantamento() {
     await carregarAdiantamentos();
 
   } catch (erro) {
+      console.error(
+        'ERRO COMPLETO',
+        erro
+      );
 
     console.error(
       erro
@@ -187,7 +191,10 @@ async function salvarAdiantamento() {
 
 
 async function carregarAdiantamentos() {
-
+  console.log(
+  'carregarAdiantamentos iniciou'
+  );
+  
   const loja =
     document.getElementById(
       'loja'
