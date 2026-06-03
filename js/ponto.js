@@ -273,10 +273,26 @@ function abrirFormulario(
 
 function editarPonto(index) {
 
-  alert(
-    'Clique recebido. Índice: ' +
-    index
+  const item =
+    window.lancadosCache[index];
+
+  console.log(
+    'ITEM COMPLETO'
   );
+
+  console.log(item);
+
+  console.log(
+    'FUNCIONARIO'
+  );
+
+  console.log(item.funcionario);
+
+  console.log(
+    'PONTO'
+  );
+
+  console.log(item.ponto);
 
 }
 
