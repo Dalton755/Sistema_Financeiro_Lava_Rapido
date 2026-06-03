@@ -268,7 +268,11 @@ function abrirFormulario(
 }
 
 function editarPonto(index) {
-
+  console.log(
+    'editarPonto',
+    index,
+    window.lancadosCache
+  );
   const item =
     window.lancadosCache[index];
 
