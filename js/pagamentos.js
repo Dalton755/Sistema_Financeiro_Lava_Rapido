@@ -194,16 +194,22 @@ async function pagar(
     });
 
   if (
-    !resultado.sucesso
-  ) {
+  !resultado.sucesso
+) {
 
-    alert(
-      resultado.mensagem
-    );
+  console.log(
+    'RETORNO PAGAMENTO',
+    resultado
+  );
 
-    return;
+  alert(
+    resultado.mensagem ||
+    'Erro ao registrar pagamento.'
+  );
 
-  }
+  return;
+
+}
 
   alert(
     'Pagamento registrado.'
