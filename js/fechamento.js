@@ -170,3 +170,5 @@ async function gerarPrevia() {
     textoOriginal;
 
 }
+
+}  
