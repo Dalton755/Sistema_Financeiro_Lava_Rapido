@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1">
+
+<title>Pagamentos</title>
+
+<link rel="stylesheet"
+href="../css/style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Pagamentos</h2>
+
+<label>Loja</label>
+
+<select id="loja">
+
+  <option value="Loja A">
+    Loja A
+  </option>
+
+  <option value="Loja B">
+    Loja B
+  </option>
+
+</select>
+
+<br><br>
+
+<label>Data Inicial</label>
+
+<input
+type="date"
+id="dataInicio">
+
+<br><br>
+
+<label>Data Final</label>
+
+<input
+type="date"
+id="dataFim">
+
+<br><br>
+
+<button
+id="btnBuscar"
+onclick="carregarPagamentos()">
+
+Buscar
+
+</button>
+
+<hr>
+
+<div id="resumo"></div>
+
+<div id="listaPagamentos"></div>
+
+</div>
+
+<script src="../js/config.js"></script>
+<script src="../js/api.js"></script>
+<script src="../js/pagamentos.js"></script>
+
+</body>
+
+</html>
