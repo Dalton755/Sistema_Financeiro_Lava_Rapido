@@ -191,10 +191,11 @@ let html = `
 
 });
 
-    html += `
+html += `
 
   <button
-    id="btnConfirmar">
+    id="btnConfirmar"
+    onclick="confirmarFechamento()">
 
     Confirmar Fechamento
 
