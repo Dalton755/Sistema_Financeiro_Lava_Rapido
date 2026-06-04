@@ -1,1 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
 
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1">
+
+<title>Fechamento</title>
+
+<link rel="stylesheet"
+href="../css/style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Fechamento Quinzenal</h2>
+
+<label>Loja</label>
+
+<select id="loja">
+
+  <option value="Loja A">
+    Loja A
+  </option>
+
+  <option value="Loja B">
+    Loja B
+  </option>
+
+</select>
+
+<br><br>
+
+<label>Data Inicial</label>
+
+<input
+type="date"
+id="dataInicio">
+
+<br><br>
+
+<label>Data Final</label>
+
+<input
+type="date"
+id="dataFim">
+
+<br><br>
+
+<button
+id="btnGerar"
+onclick="gerarPrevia()">
+
+Gerar Prévia
+
+</button>
+
+<hr>
+
+<div id="resultado"></div>
+
+</div>
+
+<script src="../js/config.js"></script>
+<script src="../js/api.js"></script>
+<script src="../js/fechamento.js"></script>
+
+</body>
+
+</html>
