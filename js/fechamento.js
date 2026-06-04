@@ -163,4 +163,10 @@ async function gerarPrevia() {
 
 } finally {
 
+  botao.disabled =
+    false;
+
+  botao.innerText =
+    textoOriginal;
+
 }
