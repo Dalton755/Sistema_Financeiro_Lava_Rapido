@@ -71,6 +71,11 @@ async function gerarPrevia() {
             )
             .value
 
+              console.log(
+                'PREVIA',
+                resultado
+              );
+        
       });
 
     let html = '';
