@@ -322,3 +322,82 @@ button:disabled{
   }
 
 }
+
+.topo {
+
+  text-align: center;
+
+  padding: 20px;
+
+  margin-bottom: 20px;
+
+}
+
+.topo h1 {
+
+  margin: 0;
+
+  font-size: 32px;
+
+}
+
+.topo p {
+
+  margin-top: 5px;
+
+  color: #666;
+
+}
+
+.menu-cards {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      auto-fit,
+      minmax(140px,1fr)
+    );
+
+  gap: 15px;
+
+}
+
+.menu-card {
+
+  background: white;
+
+  border-radius: 16px;
+
+  padding: 20px;
+
+  text-align: center;
+
+  text-decoration: none;
+
+  color: #222;
+
+  font-weight: 600;
+
+  box-shadow:
+    0 2px 8px
+    rgba(0,0,0,.08);
+
+  transition: .2s;
+
+}
+
+.menu-card:hover {
+
+  transform:
+    translateY(-3px);
+
+}
+
+.menu-card span {
+
+  display: block;
+
+  margin-top: 10px;
+
+}
