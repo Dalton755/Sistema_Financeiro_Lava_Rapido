@@ -275,3 +275,92 @@ R$ ${item.valorLiquido.toFixed(2)}`
   );
 
 }
+
+async function confirmarFechamento() {
+
+  const botao =
+    document.getElementById(
+      'btnConfirmar'
+    );
+
+  const textoOriginal =
+    botao.innerText;
+
+  botao.disabled = true;
+
+  botao.innerText =
+    'Confirmando...';
+
+  try {
+
+    const resultado =
+      await apiPost({
+
+        acao:
+          'confirmarFechamento',
+
+        loja:
+          document
+            .getElementById(
+              'loja'
+            )
+            .value,
+
+        dataInicio:
+          document
+            .getElementById(
+              'dataInicio'
+            )
+            .value,
+
+        dataFim:
+          document
+            .getElementById(
+              'dataFim'
+            )
+            .value
+
+      });
+
+    if (
+      !resultado.sucesso
+    ) {
+
+      alert(
+        resultado.mensagem
+      );
+
+      return;
+
+    }
+
+    alert(
+
+      `✅ Fechamento confirmado.
+
+Funcionários processados:
+${resultado.quantidade}`
+
+    );
+
+  } catch (erro) {
+
+    console.error(
+      erro
+    );
+
+    alert(
+      'Erro ao confirmar fechamento.'
+    );
+
+  } finally {
+
+    botao.disabled =
+      false;
+
+    botao.innerText =
+      textoOriginal;
+
+  }
+
+}
