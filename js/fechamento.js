@@ -76,79 +76,138 @@ async function gerarPrevia() {
                    
       });
 
+    fechamentoCache =
+  resultado;
+
      console.log(
                 'PREVIA',
                 resultado
               );
 
-    let html = '';
+    let totalBruto = 0;
+
+let totalAdiantamentos = 0;
+
+let totalLiquido = 0;
+
+resultado.forEach(item => {
+
+  totalBruto +=
+    Number(
+      item.valorBruto
+    );
+
+  totalAdiantamentos +=
+    Number(
+      item.adiantamentos
+    );
+
+  totalLiquido +=
+    Number(
+      item.valorLiquido
+    );
+
+});
+
+let html = `
+
+  <div class="funcionario">
+
+    <div
+      class="funcionario-nome">
+
+      Resumo do Fechamento
+
+    </div>
+
+    <div
+      class="funcionario-info">
+
+      Funcionários:
+      ${resultado.length}
+
+    </div>
+
+    <div
+      class="funcionario-info">
+
+      Bruto Total:
+      R$ ${totalBruto.toFixed(2)}
+
+    </div>
+
+    <div
+      class="funcionario-info">
+
+      Adiantamentos:
+      R$ ${totalAdiantamentos.toFixed(2)}
+
+    </div>
+
+    <div
+      class="funcionario-info">
+
+      Líquido Total:
+      R$ ${totalLiquido.toFixed(2)}
+
+    </div>
+
+  </div>
+
+  <h3>
+    Funcionários
+  </h3>
+
+`;
 
     resultado.forEach(item => {
 
-      html += `
+  html += `
 
-        <div
-          class="funcionario">
+    <div
+      class="funcionario"
+      onclick="abrirDetalhesFechamento(
+        '${item.funcionarioId}'
+      )">
 
-          <div
-            class="funcionario-nome">
+      <div
+        class="funcionario-nome">
 
-            ${item.nome}
+        ${item.nome}
 
-          </div>
+      </div>
 
-          <div
-            class="funcionario-info">
+      <div
+        class="funcionario-info">
 
-            Horas:
-            ${item.horas}
+        Líquido:
+        R$ ${item.valorLiquido.toFixed(2)}
 
-          </div>
+      </div>
 
-          <div
-            class="funcionario-info">
+    </div>
 
-            Valor Hora:
-            R$ ${item.valorHora.toFixed(2)}
+  `;
 
-          </div>
+});
 
-          <div
-            class="funcionario-info">
+    html += `
 
-            Bruto:
-            R$ ${item.valorBruto.toFixed(2)}
+  <button
+    id="btnConfirmar">
 
-          </div>
+    Confirmar Fechamento
 
-          <div
-            class="funcionario-info">
+  </button>
 
-            Adiantamentos:
-            R$ ${item.adiantamentos.toFixed(2)}
-
-          </div>
-
-          <div
-            class="funcionario-info">
-
-            Líquido:
-            R$ ${item.valorLiquido.toFixed(2)}
-
-          </div>
-
-        </div>
-
-      `;
-
-    });
+`;
 
     document
-      .getElementById(
-        'resultado'
-      )
-      .innerHTML =
-      html;
+  .getElementById(
+    'resultado'
+  )
+  .innerHTML =
+  html;
 
    } catch (erro) {
 
@@ -172,3 +231,46 @@ async function gerarPrevia() {
 }
 
 }  
+
+let fechamentoCache = [];
+
+function abrirDetalhesFechamento(
+  funcionarioId
+) {
+
+  const item =
+    fechamentoCache.find(
+      x =>
+      String(
+        x.funcionarioId
+      ) ===
+      String(
+        funcionarioId
+      )
+    );
+
+  if (!item) return;
+
+  alert(
+
+`Funcionário:
+${item.nome}
+
+Horas:
+${item.horas}
+
+Valor Hora:
+R$ ${item.valorHora.toFixed(2)}
+
+Bruto:
+R$ ${item.valorBruto.toFixed(2)}
+
+Adiantamentos:
+R$ ${item.adiantamentos.toFixed(2)}
+
+Líquido:
+R$ ${item.valorLiquido.toFixed(2)}`
+
+  );
+
+}
