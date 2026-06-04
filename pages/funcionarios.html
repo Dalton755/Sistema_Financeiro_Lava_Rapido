@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1">
+
+<title>Funcionários</title>
+
+<link rel="stylesheet"
+href="../css/style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Funcionários</h2>
+
+<button
+  onclick="novoFuncionario()">
+
+  + Novo Funcionário
+
+</button>
+
+<hr>
+
+<div id="listaFuncionarios">
+</div>
+
+</div>
+
+<div
+  id="overlay"
+  class="overlay">
+
+  <div
+    id="formFuncionario"
+    class="bottom-sheet">
+
+    <button
+      class="btn-fechar"
+      onclick="fecharFormulario()">
+
+      ✕
+
+    </button>
+
+    <h3>
+      Funcionário
+    </h3>
+
+    <input
+      type="hidden"
+      id="funcionarioId">
+
+    <label>Nome</label>
+
+    <input
+      type="text"
+      id="nome">
+
+    <br><br>
+
+    <label>Cargo</label>
+
+    <input
+      type="text"
+      id="cargo">
+
+    <br><br>
+
+    <label>Valor Hora</label>
+
+    <input
+      type="number"
+      step="0.01"
+      id="valorHora">
+
+    <br><br>
+
+    <label>Loja</label>
+
+    <select id="loja">
+
+      <option value="Loja A">
+        Loja A
+      </option>
+
+      <option value="Loja B">
+        Loja B
+      </option>
+
+    </select>
+
+    <br><br>
+
+    <label>Status</label>
+
+    <select id="status">
+
+      <option value="Ativo">
+        Ativo
+      </option>
+
+      <option value="Inativo">
+        Inativo
+      </option>
+
+    </select>
+
+    <br><br>
+
+    <button
+      onclick="salvarFuncionario()">
+
+      Salvar
+
+    </button>
+
+  </div>
+
+</div>
+
+<nav class="bottom-nav">
+
+  <a href="../index.html">
+
+    <span class="icon">
+      🏠
+    </span>
+
+    Home
+
+  </a>
+
+  <a href="ponto.html">
+
+    <span class="icon">
+      ⏱️
+    </span>
+
+    Ponto
+
+  </a>
+
+  <a href="adiantamentos.html">
+
+    <span class="icon">
+      💵
+    </span>
+
+    Adiant.
+
+  </a>
+
+  <a href="fechamento.html">
+
+    <span class="icon">
+      📋
+    </span>
+
+    Fech.
+
+  </a>
+
+  <a href="pagamentos.html">
+
+    <span class="icon">
+      💰
+    </span>
+
+    Pagto
+
+  </a>
+
+  <a
+    href="funcionarios.html"
+    class="active">
+
+    <span class="icon">
+      👥
+    </span>
+
+    Func.
+
+  </a>
+
+</nav>
+
+<script src="../js/config.js"></script>
+<script src="../js/api.js"></script>
+<script src="../js/funcionarios.js"></script>
+
+</body>
+
+</html>
