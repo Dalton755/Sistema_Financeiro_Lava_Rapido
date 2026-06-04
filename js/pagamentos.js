@@ -193,6 +193,11 @@ async function pagar(
 
     });
 
+  console.log(
+  'PAGAMENTO',
+  resultado
+);
+
   if (
   !resultado.sucesso
 ) {
