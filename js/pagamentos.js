@@ -175,3 +175,40 @@ async function carregarPagamentos() {
       html;
 
 }
+
+async function pagar(
+  fechamentoId,
+  funcionarioId
+) {
+
+  const resultado =
+    await apiPost({
+
+      acao:
+        'marcarPagamento',
+
+      fechamentoId,
+
+      funcionarioId
+
+    });
+
+  if (
+    !resultado.sucesso
+  ) {
+
+    alert(
+      resultado.mensagem
+    );
+
+    return;
+
+  }
+
+  alert(
+    'Pagamento registrado.'
+  );
+
+  await carregarPagamentos();
+
+}
