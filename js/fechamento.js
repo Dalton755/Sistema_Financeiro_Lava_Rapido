@@ -149,14 +149,17 @@ async function gerarPrevia() {
       .innerHTML =
       html;
 
-  } finally {
+   } catch (erro) {
 
-    botao.disabled =
-      false;
+  console.error(
+    'ERRO FECHAMENTO',
+    erro
+  );
 
-    botao.innerText =
-      textoOriginal;
+  alert(
+    'Erro ao gerar prévia.'
+  );
 
-  }
+} finally {
 
 }
