@@ -43,7 +43,9 @@ async function gerarPrevia() {
     'Calculando...';
 
   try {
-
+    console.log(
+      'Gerando prévia...'
+    );
     const resultado =
       await apiGet({
 
