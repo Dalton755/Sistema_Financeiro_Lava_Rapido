@@ -512,3 +512,49 @@ body {
     );
 
 }
+
+    .card-aberto {
+
+  border-left:
+    6px solid #16a34a;
+
+  background:
+    #f0fdf4;
+
+}
+
+.card-fechado {
+
+  border-left:
+    6px solid #dc2626;
+
+  background:
+    #fef2f2;
+
+}
+
+.card-resumo {
+
+  border-left:
+    6px solid #2563eb;
+
+  background:
+    #eff6ff;
+
+}
+
+.card-resumo
+.funcionario-nome {
+
+  font-size: 20px;
+
+  font-weight: 700;
+
+}
+
+.card-resumo
+.funcionario-info {
+
+  font-size: 16px;
+
+}
