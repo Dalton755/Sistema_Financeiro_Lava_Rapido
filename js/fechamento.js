@@ -107,40 +107,16 @@ document
 
 async function carregarResumo() {
 
-  const periodo =
-  document
-    .getElementById(
-      'periodo'
-    )
-    .value;
+ const periodo =
+  obterPeriodoSelecionado();
 
-const partes =
-  periodo.split(' → ');
+if (!periodo)
+  return;
 
-if (
-  partes.length < 2
-) return;
-
-function converterData(
-  dataBr
-) {
-
-  const partes =
-    dataBr.split('/');
-
-  return `${partes[2]}-${partes[1]}-${partes[0]}`;
-
-}
-
-const dataInicio =
-  converterData(
-    partes[0]
-  );
-
-const dataFim =
-  converterData(
-    partes[1]
-  );
+const {
+  dataInicio,
+  dataFim
+} = periodo;
 
   document
   .getElementById(
@@ -387,33 +363,16 @@ async function abrirLoja(
   loja
 ) {
 
-  const partes =
-  document
-    .getElementById(
-      'periodo'
-    )
-    .value
-    .split(' → ');
-function converterData(
-  dataBr
-) {
+const periodo =
+  obterPeriodoSelecionado();
 
-  const partes =
-    dataBr.split('/');
+if (!periodo)
+  return;
 
-  return `${partes[2]}-${partes[1]}-${partes[0]}`;
-
-}
-
-const dataInicio =
-  converterData(
-    partes[0]
-  );
-
-const dataFim =
-  converterData(
-    partes[1]
-  );
+const {
+  dataInicio,
+  dataFim
+} = periodo;
 
   const resultado =
     await apiGet({
@@ -598,34 +557,16 @@ function fecharFuncionario() {
 
 async function confirmarFechamentoGeral() {
 
-  const partes =
-    document
-      .getElementById(
-        'periodo'
-      )
-      .value
-      .split(' → ');
+ const periodo =
+  obterPeriodoSelecionado();
 
-function converterData(
-  dataBr
-) {
+if (!periodo)
+  return;
 
-  const partes =
-    dataBr.split('/');
-
-  return `${partes[2]}-${partes[1]}-${partes[0]}`;
-
-}
-
-const dataInicio =
-  converterData(
-    partes[0]
-  );
-
-const dataFim =
-  converterData(
-    partes[1]
-  );
+const {
+  dataInicio,
+  dataFim
+} = periodo;
 
   const botao =
     document.getElementById(
