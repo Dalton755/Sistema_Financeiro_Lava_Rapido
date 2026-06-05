@@ -129,8 +129,8 @@ function renderizarResumoGeral(
     )
     .innerHTML = `
 
-      <div
-        class="funcionario">
+        <div
+          class="funcionario card-resumo">
 
         <div
           class="funcionario-nome">
@@ -231,10 +231,18 @@ function renderizarCards(
 
         : '🟢 ABERTO';
 
+    const classeCard =
+
+    loja.fechado
+
+    ? 'card-fechado'
+
+    : 'card-aberto';
+
     html += `
 
       <div
-        class="funcionario"
+        class="funcionario ${classeCard}"
         onclick="abrirLoja(
           '${loja.loja}'
         )">
@@ -247,20 +255,36 @@ function renderizarCards(
         </div>
 
         <div
-          class="funcionario-info">
+  class="funcionario-info">
 
-          Funcionários:
-          ${loja.funcionarios}
+  Funcionários:
+  ${loja.funcionarios}
 
-        </div>
+</div>
 
-        <div
-          class="funcionario-info">
+<div
+  class="funcionario-info">
 
-          Líquido:
-          R$ ${loja.liquido.toFixed(2)}
+  Bruto:
+  R$ ${loja.bruto.toFixed(2)}
 
-        </div>
+</div>
+
+<div
+  class="funcionario-info">
+
+  Adiantamentos:
+  R$ ${loja.adiantamentos.toFixed(2)}
+
+</div>
+
+<div
+  class="funcionario-info">
+
+  Líquido:
+  R$ ${loja.liquido.toFixed(2)}
+
+</div>
 
         <div
           class="funcionario-info">
