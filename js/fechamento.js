@@ -574,16 +574,8 @@ ${resultado.quantidadeLojas}`
 
     await carregarResumo();
 
-  } finally {
-
-    botao.disabled =
-      false;
-
-    botao.innerText =
-      'Confirmar Fechamento Geral';
-
+  
   }
-
 } finally {
 
     botao.disabled =
