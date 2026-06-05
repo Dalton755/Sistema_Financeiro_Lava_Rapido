@@ -2,6 +2,51 @@ let resumoCache = [];
 
 let detalhesLojaCache = [];
 
+function converterData(
+  dataBr
+) {
+
+  const partes =
+    dataBr.split('/');
+
+  return `${partes[2]}-${partes[1]}-${partes[0]}`;
+
+}
+
+function obterPeriodoSelecionado() {
+
+  const partes =
+    document
+      .getElementById(
+        'periodo'
+      )
+      .value
+      .split(' → ');
+
+  if (
+    partes.length < 2
+  ) {
+
+    return null;
+
+  }
+
+  return {
+
+    dataInicio:
+      converterData(
+        partes[0]
+      ),
+
+    dataFim:
+      converterData(
+        partes[1]
+      )
+
+  };
+
+}
+
 window.onload = async () => {
 
   const hoje =
