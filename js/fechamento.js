@@ -397,12 +397,26 @@ async function abrirLoja(
     )
     .value
     .split(' → ')
+function converterData(
+  dataBr
+) {
+
+  const partes =
+    dataBr.split('/');
+
+  return `${partes[2]}-${partes[1]}-${partes[0]}`;
+
+}
 
 const dataInicio =
-  partes[0];
+  converterData(
+    partes[0]
+  );
 
 const dataFim =
-  partes[1];
+  converterData(
+    partes[1]
+  );
 
   const resultado =
     await apiGet({
@@ -595,11 +609,26 @@ async function confirmarFechamentoGeral() {
       .value
       .split(' → ')
 
-  const dataInicio =
-    partes[0];
+function converterData(
+  dataBr
+) {
 
-  const dataFim =
-    partes[1];
+  const partes =
+    dataBr.split('/');
+
+  return `${partes[2]}-${partes[1]}-${partes[0]}`;
+
+}
+
+const dataInicio =
+  converterData(
+    partes[0]
+  );
+
+const dataFim =
+  converterData(
+    partes[1]
+  );
 
   const botao =
     document.getElementById(
