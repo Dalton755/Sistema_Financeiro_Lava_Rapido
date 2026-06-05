@@ -124,11 +124,26 @@ if (
   partes.length < 2
 ) return;
 
+function converterData(
+  dataBr
+) {
+
+  const partes =
+    dataBr.split('/');
+
+  return `${partes[2]}-${partes[1]}-${partes[0]}`;
+
+}
+
 const dataInicio =
-  partes[0];
+  converterData(
+    partes[0]
+  );
 
 const dataFim =
-  partes[1];
+  converterData(
+    partes[1]
+  );
 
   document
   .getElementById(
