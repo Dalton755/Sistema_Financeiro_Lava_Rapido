@@ -1,4 +1,8 @@
-window.onload = () => {
+let resumoCache = [];
+
+let detalhesLojaCache = [];
+
+window.onload = async () => {
 
   const hoje =
     new Date();
@@ -25,225 +29,352 @@ window.onload = () => {
     .value =
     `${ano}-${mes}-15`;
 
+  await carregarResumo();
+
 };
 
-async function gerarPrevia() {
-
-  const botao =
-    document.getElementById(
-      'btnGerar'
-    );
-
-  const textoOriginal =
-    botao.innerText;
-
-  botao.disabled = true;
-
-  botao.innerText =
-    'Calculando...';
-
-  try {
-    console.log(
-      'Gerando prévia...'
-    );
-    const resultado =
-      await apiGet({
-
-        acao:
-          'previaFechamento',
-
-        loja:
-          document
-            .getElementById(
-              'loja'
-            )
-            .value,
-
-        dataInicio:
-          document
-            .getElementById(
-              'dataInicio'
-            )
-            .value,
-
-        dataFim:
-          document
-            .getElementById(
-              'dataFim'
-            )
-            .value
-
-                   
-      });
-
-    fechamentoCache =
-  resultado;
-
-     console.log(
-                'PREVIA',
-                resultado
-              );
-
-    let totalBruto = 0;
-
-let totalAdiantamentos = 0;
-
-let totalLiquido = 0;
-
-resultado.forEach(item => {
-
-  totalBruto +=
-    Number(
-      item.valorBruto
-    );
-
-  totalAdiantamentos +=
-    Number(
-      item.adiantamentos
-    );
-
-  totalLiquido +=
-    Number(
-      item.valorLiquido
-    );
-
-});
-
-let html = `
-
-  <div class="funcionario">
-
-    <div
-      class="funcionario-nome">
-
-      Resumo do Fechamento
-
-    </div>
-
-    <div
-      class="funcionario-info">
-
-      Funcionários:
-      ${resultado.length}
-
-    </div>
-
-    <div
-      class="funcionario-info">
-
-      Bruto Total:
-      R$ ${totalBruto.toFixed(2)}
-
-    </div>
-
-    <div
-      class="funcionario-info">
-
-      Adiantamentos:
-      R$ ${totalAdiantamentos.toFixed(2)}
-
-    </div>
-
-    <div
-      class="funcionario-info">
-
-      Líquido Total:
-      R$ ${totalLiquido.toFixed(2)}
-
-    </div>
-
-  </div>
-
-  <h3>
-    Funcionários
-  </h3>
-
-`;
-
-    resultado.forEach(item => {
-
-  html += `
-
-    <div
-      class="funcionario"
-      onclick="abrirDetalhesFechamento(
-        '${item.funcionarioId}'
-      )">
-
-      <div
-        class="funcionario-nome">
-
-        ${item.nome}
-
-      </div>
-
-      <div
-        class="funcionario-info">
-
-        Líquido:
-        R$ ${item.valorLiquido.toFixed(2)}
-
-      </div>
-
-    </div>
-
-  `;
-
-});
-
-html += `
-
-  <button
-    id="btnConfirmar"
-    onclick="confirmarFechamento()">
-
-    Confirmar Fechamento
-
-  </button>
-
-`;
-
-    document
+document
   .getElementById(
-    'resultado'
+    'dataInicio'
   )
-  .innerHTML =
-  html;
-
-   } catch (erro) {
-
-  console.error(
-    'ERRO FECHAMENTO',
-    erro
+  .addEventListener(
+    'change',
+    carregarResumo
   );
 
-  alert(
-    'Erro ao gerar prévia.'
+document
+  .getElementById(
+    'dataFim'
+  )
+  .addEventListener(
+    'change',
+    carregarResumo
   );
 
-} finally {
+async function carregarResumo() {
 
-  botao.disabled =
-    false;
+  const dataInicio =
+    document
+      .getElementById(
+        'dataInicio'
+      )
+      .value;
 
-  botao.innerText =
-    textoOriginal;
+  const dataFim =
+    document
+      .getElementById(
+        'dataFim'
+      )
+      .value;
+
+  const resumoGeral =
+    await apiGet({
+
+      acao:
+        'resumoGeralFechamento',
+
+      dataInicio,
+
+      dataFim
+
+    });
+
+  const lojas =
+    await apiGet({
+
+      acao:
+        'resumoFechamentos',
+
+      dataInicio,
+
+      dataFim
+
+    });
+
+  resumoCache = lojas;
+
+  renderizarResumoGeral(
+    resumoGeral
+  );
+
+  renderizarCards(
+    lojas
+  );
 
 }
 
-}  
+function renderizarResumoGeral(
+  resumo
+) {
 
-let fechamentoCache = [];
+  const status =
+    resumo.fechado
 
-function abrirDetalhesFechamento(
+      ? '🔴 FECHADO'
+
+      : '🟢 ABERTO';
+
+  document
+    .getElementById(
+      'resumoGeral'
+    )
+    .innerHTML = `
+
+      <div
+        class="funcionario">
+
+        <div
+          class="funcionario-nome">
+
+          📊 Resumo Geral
+
+        </div>
+
+        <div
+          class="funcionario-info">
+
+          Funcionários:
+          ${resumo.funcionarios}
+
+        </div>
+
+        <div
+          class="funcionario-info">
+
+          Bruto:
+          R$ ${resumo.bruto.toFixed(2)}
+
+        </div>
+
+        <div
+          class="funcionario-info">
+
+          Adiantamentos:
+          R$ ${resumo.adiantamentos.toFixed(2)}
+
+        </div>
+
+        <div
+          class="funcionario-info">
+
+          Líquido:
+          R$ ${resumo.liquido.toFixed(2)}
+
+        </div>
+
+        <div
+          class="funcionario-info">
+
+          ${status}
+
+        </div>
+
+      </div>
+
+    `;
+
+  if (
+    resumo.fechado
+  ) {
+
+    document
+      .getElementById(
+        'acoesFechamento'
+      )
+      .innerHTML = '';
+
+    return;
+
+  }
+
+  document
+    .getElementById(
+      'acoesFechamento'
+    )
+    .innerHTML = `
+
+      <br>
+
+      <button
+        id="btnConfirmarGeral"
+        onclick="confirmarFechamentoGeral()">
+
+        Confirmar Fechamento Geral
+
+      </button>
+
+    `;
+
+}
+
+function renderizarCards(
+  lojas
+) {
+
+  let html = '';
+
+  lojas.forEach(loja => {
+
+    const status =
+      loja.fechado
+
+        ? '🔴 FECHADO'
+
+        : '🟢 ABERTO';
+
+    html += `
+
+      <div
+        class="funcionario"
+        onclick="abrirLoja(
+          '${loja.loja}'
+        )">
+
+        <div
+          class="funcionario-nome">
+
+          🏢 ${loja.loja}
+
+        </div>
+
+        <div
+          class="funcionario-info">
+
+          Funcionários:
+          ${loja.funcionarios}
+
+        </div>
+
+        <div
+          class="funcionario-info">
+
+          Líquido:
+          R$ ${loja.liquido.toFixed(2)}
+
+        </div>
+
+        <div
+          class="funcionario-info">
+
+          ${status}
+
+        </div>
+
+      </div>
+
+    `;
+
+  });
+
+  document
+    .getElementById(
+      'cardsLojas'
+    )
+    .innerHTML =
+    html;
+
+}
+
+async function abrirLoja(
+  loja
+) {
+
+  const dataInicio =
+    document
+      .getElementById(
+        'dataInicio'
+      )
+      .value;
+
+  const dataFim =
+    document
+      .getElementById(
+        'dataFim'
+      )
+      .value;
+
+  const resultado =
+    await apiGet({
+
+      acao:
+        'detalhesFechamentoLoja',
+
+      loja,
+
+      dataInicio,
+
+      dataFim
+
+    });
+
+  detalhesLojaCache =
+    resultado.funcionarios;
+
+  document
+    .getElementById(
+      'tituloLoja'
+    )
+    .innerText =
+    resultado.loja;
+
+  let html = '';
+
+  resultado.funcionarios
+    .forEach(item => {
+
+      html += `
+
+        <div
+          class="funcionario"
+          onclick="abrirFuncionario(
+            '${item.funcionarioId}'
+          )">
+
+          <div
+            class="funcionario-nome">
+
+            ${item.nome}
+
+          </div>
+
+          <div
+            class="funcionario-info">
+
+            R$ ${item.valorLiquido.toFixed(2)}
+
+          </div>
+
+        </div>
+
+      `;
+
+    });
+
+  document
+    .getElementById(
+      'detalhesLoja'
+    )
+    .innerHTML =
+    html;
+
+  document
+    .getElementById(
+      'overlayLoja'
+    )
+    .style.display =
+    'block';
+
+}
+
+function abrirFuncionario(
   funcionarioId
 ) {
 
   const item =
-    fechamentoCache.find(
-      x =>
+    detalhesLojaCache.find(
+      f =>
       String(
-        x.funcionarioId
+        f.funcionarioId
       ) ===
       String(
         funcionarioId
@@ -252,39 +383,103 @@ function abrirDetalhesFechamento(
 
   if (!item) return;
 
-  alert(
+  document
+    .getElementById(
+      'detalhesFuncionario'
+    )
+    .innerHTML = `
 
-`Funcionário:
-${item.nome}
+      <div
+        class="funcionario">
 
-Horas:
-${item.horas}
+        <div
+          class="funcionario-nome">
 
-Valor Hora:
-R$ ${item.valorHora.toFixed(2)}
+          ${item.nome}
 
-Bruto:
-R$ ${item.valorBruto.toFixed(2)}
+        </div>
 
-Adiantamentos:
-R$ ${item.adiantamentos.toFixed(2)}
+        <div
+          class="funcionario-info">
 
-Líquido:
-R$ ${item.valorLiquido.toFixed(2)}`
+          Horas:
+          ${item.horas}
 
-  );
+        </div>
+
+        <div
+          class="funcionario-info">
+
+          Valor Hora:
+          R$ ${item.valorHora.toFixed(2)}
+
+        </div>
+
+        <div
+          class="funcionario-info">
+
+          Bruto:
+          R$ ${item.valorBruto.toFixed(2)}
+
+        </div>
+
+        <div
+          class="funcionario-info">
+
+          Adiantamentos:
+          R$ ${item.adiantamentos.toFixed(2)}
+
+        </div>
+
+        <div
+          class="funcionario-info">
+
+          Líquido:
+          R$ ${item.valorLiquido.toFixed(2)}
+
+        </div>
+
+      </div>
+
+    `;
+
+  document
+    .getElementById(
+      'overlayFuncionario'
+    )
+    .style.display =
+    'block';
 
 }
 
-async function confirmarFechamento() {
+function fecharLoja() {
+
+  document
+    .getElementById(
+      'overlayLoja'
+    )
+    .style.display =
+    'none';
+
+}
+
+function fecharFuncionario() {
+
+  document
+    .getElementById(
+      'overlayFuncionario'
+    )
+    .style.display =
+    'none';
+
+}
+
+async function confirmarFechamentoGeral() {
 
   const botao =
     document.getElementById(
-      'btnConfirmar'
+      'btnConfirmarGeral'
     );
-
-  const textoOriginal =
-    botao.innerText;
 
   botao.disabled = true;
 
@@ -297,14 +492,7 @@ async function confirmarFechamento() {
       await apiPost({
 
         acao:
-          'confirmarFechamento',
-
-        loja:
-          document
-            .getElementById(
-              'loja'
-            )
-            .value,
+          'confirmarFechamentoGeral',
 
         dataInicio:
           document
@@ -327,7 +515,8 @@ async function confirmarFechamento() {
     ) {
 
       alert(
-        resultado.mensagem
+        resultado.mensagem ||
+        'Erro.'
       );
 
       return;
@@ -336,22 +525,14 @@ async function confirmarFechamento() {
 
     alert(
 
-      `✅ Fechamento confirmado.
+      `✅ Fechamento concluído.
 
-Funcionários processados:
-${resultado.quantidade}`
+Lojas processadas:
+${resultado.quantidadeLojas}`
 
     );
 
-  } catch (erro) {
-
-    console.error(
-      erro
-    );
-
-    alert(
-      'Erro ao confirmar fechamento.'
-    );
+    await carregarResumo();
 
   } finally {
 
@@ -359,7 +540,7 @@ ${resultado.quantidade}`
       false;
 
     botao.innerText =
-      textoOriginal;
+      'Confirmar Fechamento Geral';
 
   }
 
