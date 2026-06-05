@@ -67,6 +67,26 @@ async function carregarResumo() {
       )
       .value;
 
+  document
+  .getElementById(
+    'cardsLojas'
+  )
+  .innerHTML = `
+
+    <div
+      class="funcionario">
+
+      <div
+        class="funcionario-nome">
+
+        ⏳ Carregando...
+
+      </div>
+
+    </div>
+
+  `;
+
   const resumoGeral =
     await apiGet({
 
