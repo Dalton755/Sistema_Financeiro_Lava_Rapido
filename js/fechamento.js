@@ -4,6 +4,19 @@ let detalhesLojaCache = [];
 
 window.onload = async () => {
 
+  flatpickr(
+    '#periodo',
+    {
+
+      mode:
+        'range',
+
+      dateFormat:
+        'Y-m-d'
+
+    }
+  );
+
   const hoje =
     new Date();
 
@@ -17,17 +30,10 @@ window.onload = async () => {
 
   document
     .getElementById(
-      'dataInicio'
+      'periodo'
     )
     .value =
-    `${ano}-${mes}-01`;
-
-  document
-    .getElementById(
-      'dataFim'
-    )
-    .value =
-    `${ano}-${mes}-15`;
+      `${ano}-${mes}-01 to ${ano}-${mes}-15`;
 
   await carregarResumo();
 
@@ -35,16 +41,7 @@ window.onload = async () => {
 
 document
   .getElementById(
-    'dataInicio'
-  )
-  .addEventListener(
-    'change',
-    carregarResumo
-  );
-
-document
-  .getElementById(
-    'dataFim'
+    'periodo'
   )
   .addEventListener(
     'change',
@@ -53,19 +50,27 @@ document
 
 async function carregarResumo() {
 
-  const dataInicio =
-    document
-      .getElementById(
-        'dataInicio'
-      )
-      .value;
+  const periodo =
+  document
+    .getElementById(
+      'periodo'
+    )
+    .value;
 
-  const dataFim =
-    document
-      .getElementById(
-        'dataFim'
-      )
-      .value;
+const partes =
+  periodo.split(
+    ' to '
+  );
+
+if (
+  partes.length < 2
+) return;
+
+const dataInicio =
+  partes[0];
+
+const dataFim =
+  partes[1];
 
   document
   .getElementById(
@@ -527,19 +532,19 @@ async function confirmarFechamentoGeral() {
         acao:
           'confirmarFechamentoGeral',
 
-        dataInicio:
-          document
-            .getElementById(
-              'dataInicio'
-            )
-            .value,
+        const partes =
+        document
+        .getElementById(
+          'periodo'
+        )
+          .value
+          .split(' to ');
 
-        dataFim:
-          document
-            .getElementById(
-              'dataFim'
-            )
-            .value
+        const dataInicio =
+        partes[0];
+
+        const dataFim =
+        partes[1];
 
       });
 
