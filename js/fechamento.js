@@ -4,18 +4,44 @@ let detalhesLojaCache = [];
 
 window.onload = async () => {
 
-  flatpickr(
-    '#periodo',
-    {
+flatpickr(
+  '#periodo',
+  {
 
-      mode:
-        'range',
+    mode:
+      'range',
 
-      dateFormat:
-        'Y-m-d'
+    dateFormat:
+      'Y-m-d',
+
+    locale: {
+
+      firstDayOfWeek: 1,
+
+      weekdays: {
+
+        shorthand:
+          ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'],
+
+        longhand:
+          ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado']
+
+      },
+
+      months: {
+
+        shorthand:
+          ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],
+
+        longhand:
+          ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro']
+
+      }
 
     }
-  );
+
+  }
+);
 
   const hoje =
     new Date();
