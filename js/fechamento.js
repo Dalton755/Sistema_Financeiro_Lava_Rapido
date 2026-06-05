@@ -4,79 +4,6 @@ let detalhesLojaCache = [];
 
 window.onload = async () => {
 
-flatpickr(
-  '#periodo',
-  {
-
-    mode:
-      'range',
-
-    dateFormat:
-      'd/m/Y',
-
-    locale: {
-
-      firstDayOfWeek: 1,
-
-      weekdays: {
-
-        shorthand:
-          ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'],
-
-        longhand:
-          ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado']
-
-      },
-
-      months: {
-
-        shorthand:
-          ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],
-
-        longhand:
-          ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro']
-
-      }
-
-    },
-
-    onChange:
-      function(
-        selectedDates
-      ) {
-
-        if (
-          selectedDates.length === 2
-        ) {
-
-          const inicio =
-            selectedDates[0]
-              .toLocaleDateString(
-                'pt-BR'
-              );
-
-          const fim =
-            selectedDates[1]
-              .toLocaleDateString(
-                'pt-BR'
-              );
-
-          document
-            .getElementById(
-              'periodo'
-            )
-            .value =
-              `${inicio} → ${fim}`;
-
-          carregarResumo();
-
-        }
-
-      }
-
-  }
-);
-
   const hoje =
     new Date();
 
@@ -84,16 +11,41 @@ flatpickr(
     hoje.getFullYear();
 
   const mes =
-    String(
-      hoje.getMonth() + 1
-    ).padStart(2, '0');
+    hoje.getMonth();
+
+  flatpickr(
+    '#periodo',
+    {
+
+      mode: 'range',
+
+      dateFormat: 'd/m/Y',
+
+      defaultDate: [
+
+        new Date(
+          ano,
+          mes,
+          1
+        ),
+
+        new Date(
+          ano,
+          mes,
+          15
+        )
+
+      ]
+
+    }
+  );
 
   document
     .getElementById(
       'periodo'
     )
     .value =
-      `${ano}-${mes}-01 to ${ano}-${mes}-15`;
+      `01/${String(mes + 1).padStart(2,'0')}/${ano} → 15/${String(mes + 1).padStart(2,'0')}/${ano}`;
 
   await carregarResumo();
 
@@ -396,7 +348,7 @@ async function abrirLoja(
       'periodo'
     )
     .value
-    .split(' → ')
+    .split(' → ');
 function converterData(
   dataBr
 ) {
@@ -607,7 +559,7 @@ async function confirmarFechamentoGeral() {
         'periodo'
       )
       .value
-      .split(' → ')
+      .split(' → ');
 
 function converterData(
   dataBr
