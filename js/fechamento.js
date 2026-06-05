@@ -12,7 +12,7 @@ flatpickr(
       'range',
 
     dateFormat:
-      'Y-m-d',
+      'd/m/Y',
 
     locale: {
 
@@ -38,7 +38,41 @@ flatpickr(
 
       }
 
-    }
+    },
+
+    onChange:
+      function(
+        selectedDates
+      ) {
+
+        if (
+          selectedDates.length === 2
+        ) {
+
+          const inicio =
+            selectedDates[0]
+              .toLocaleDateString(
+                'pt-BR'
+              );
+
+          const fim =
+            selectedDates[1]
+              .toLocaleDateString(
+                'pt-BR'
+              );
+
+          document
+            .getElementById(
+              'periodo'
+            )
+            .value =
+              `${inicio} → ${fim}`;
+
+          carregarResumo();
+
+        }
+
+      }
 
   }
 );
