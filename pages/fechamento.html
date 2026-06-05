@@ -8,92 +8,24 @@
 <meta name="viewport"
 content="width=device-width, initial-scale=1">
 
-<title>Fechamento</title>
+<title>Fechamentos</title>
 
 <link rel="stylesheet"
 href="../css/style.css">
 
 </head>
 
-<nav class="bottom-nav">
-
-  <a href="../index.html">
-
-    <span class="icon">
-      🏠
-    </span>
-
-    Home
-
-  </a>
-
-  <a
-    href="fechamento.html"
-    class="active">
-
-    <span class="icon">
-      ⏱️
-    </span>
-
-    Ponto
-
-  </a>
-
-  <a href="adiantamentos.html">
-
-    <span class="icon">
-      💵
-    </span>
-
-    Adiant.
-
-  </a>
-
-  <a href="fechamento.html">
-
-    <span class="icon">
-      📋
-    </span>
-
-    Fech.
-
-  </a>
-
-  <a href="pagamentos.html">
-
-    <span class="icon">
-      💰
-    </span>
-
-    Pagto
-
-  </a>
-
-</nav>
-  
 <body>
 
 <div class="container">
 
-<h2>Fechamento Quinzenal</h2>
+<h2>
+📋 Fechamento Quinzenal
+</h2>
 
-<label>Loja</label>
-
-<select id="loja">
-
-  <option value="Loja A">
-    Loja A
-  </option>
-
-  <option value="Loja B">
-    Loja B
-  </option>
-
-</select>
-
-<br><br>
-
-<label>Data Inicial</label>
+<label>
+Data Inicial
+</label>
 
 <input
 type="date"
@@ -101,7 +33,9 @@ id="dataInicio">
 
 <br><br>
 
-<label>Data Final</label>
+<label>
+Data Final
+</label>
 
 <input
 type="date"
@@ -109,19 +43,127 @@ id="dataFim">
 
 <br><br>
 
-<button
-id="btnGerar"
-onclick="gerarPrevia()">
+<div id="resumoGeral">
+</div>
 
-Gerar Prévia
+<div id="cardsLojas">
+</div>
+
+<div id="acoesFechamento">
+</div>
+
+</div>
+
+<!-- DETALHE LOJA -->
+
+<div
+id="overlayLoja"
+class="overlay">
+
+<div
+class="bottom-sheet">
+
+<button
+class="btn-fechar"
+onclick="fecharLoja()">
+
+✕
 
 </button>
 
-<hr>
+<h3 id="tituloLoja">
+</h3>
 
-<div id="resultado"></div>
+<div id="detalhesLoja">
+</div>
 
 </div>
+
+</div>
+
+<!-- DETALHE FUNCIONARIO -->
+
+<div
+id="overlayFuncionario"
+class="overlay">
+
+<div
+class="bottom-sheet">
+
+<button
+class="btn-fechar"
+onclick="fecharFuncionario()">
+
+✕
+
+</button>
+
+<h3>
+Funcionário
+</h3>
+
+<div id="detalhesFuncionario">
+</div>
+
+</div>
+
+</div>
+
+<nav class="bottom-nav">
+
+<a href="../index.html">
+
+<span class="icon">
+🏠
+</span>
+
+Home
+
+</a>
+
+<a href="ponto.html">
+
+<span class="icon">
+⏱️
+</span>
+
+Ponto
+
+</a>
+
+<a href="adiantamentos.html">
+
+<span class="icon">
+💵
+</span>
+
+Adiant.
+
+</a>
+
+<a
+href="fechamento.html"
+class="active">
+
+<span class="icon">
+📋
+</span>
+
+Fech.
+
+</a>
+
+<a href="pagamentos.html">
+
+<span class="icon">
+💰
+</span>
+
+Pagto
+
+</a>
+
+</nav>
 
 <script src="../js/config.js"></script>
 <script src="../js/api.js"></script>
