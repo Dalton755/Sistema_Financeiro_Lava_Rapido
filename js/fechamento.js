@@ -574,9 +574,7 @@ ${resultado.quantidadeLojas}`
 
     await carregarResumo();
 
-  
-  }
-} finally {
+  } finally {
 
     botao.disabled =
       false;
