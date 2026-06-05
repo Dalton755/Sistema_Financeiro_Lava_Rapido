@@ -87,39 +87,28 @@ async function carregarResumo() {
 
   `;
 
-  const resumoGeral =
-    await apiGet({
+  const painel =
+  await apiGet({
 
-      acao:
-        'resumoGeralFechamento',
+    acao:
+      'painelFechamento',
 
-      dataInicio,
+    dataInicio,
 
-      dataFim
+    dataFim
 
-    });
+  });
 
-  const lojas =
-    await apiGet({
+resumoCache =
+  painel.lojas;
 
-      acao:
-        'resumoFechamentos',
+renderizarResumoGeral(
+  painel.resumoGeral
+);
 
-      dataInicio,
-
-      dataFim
-
-    });
-
-  resumoCache = lojas;
-
-  renderizarResumoGeral(
-    resumoGeral
-  );
-
-  renderizarCards(
-    lojas
-  );
+renderizarCards(
+  painel.lojas
+);
 
 }
 
