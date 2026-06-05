@@ -317,19 +317,19 @@ async function abrirLoja(
   loja
 ) {
 
-  const dataInicio =
-    document
-      .getElementById(
-        'dataInicio'
-      )
-      .value;
+  const partes =
+  document
+    .getElementById(
+      'periodo'
+    )
+    .value
+    .split(' to ');
 
-  const dataFim =
-    document
-      .getElementById(
-        'dataFim'
-      )
-      .value;
+const dataInicio =
+  partes[0];
+
+const dataFim =
+  partes[1];
 
   const resultado =
     await apiGet({
@@ -514,6 +514,20 @@ function fecharFuncionario() {
 
 async function confirmarFechamentoGeral() {
 
+  const partes =
+    document
+      .getElementById(
+        'periodo'
+      )
+      .value
+      .split(' to ');
+
+  const dataInicio =
+    partes[0];
+
+  const dataFim =
+    partes[1];
+
   const botao =
     document.getElementById(
       'btnConfirmarGeral'
@@ -532,25 +546,13 @@ async function confirmarFechamentoGeral() {
         acao:
           'confirmarFechamentoGeral',
 
-        const partes =
-        document
-        .getElementById(
-          'periodo'
-        )
-          .value
-          .split(' to ');
+        dataInicio,
 
-        const dataInicio =
-        partes[0];
-
-        const dataFim =
-        partes[1];
+        dataFim
 
       });
 
-    if (
-      !resultado.sucesso
-    ) {
+    if (!resultado.sucesso) {
 
       alert(
         resultado.mensagem ||
@@ -563,7 +565,7 @@ async function confirmarFechamentoGeral() {
 
     alert(
 
-      `✅ Fechamento concluído.
+`✅ Fechamento concluído.
 
 Lojas processadas:
 ${resultado.quantidadeLojas}`
@@ -573,6 +575,16 @@ ${resultado.quantidadeLojas}`
     await carregarResumo();
 
   } finally {
+
+    botao.disabled =
+      false;
+
+    botao.innerText =
+      'Confirmar Fechamento Geral';
+
+  }
+
+} finally {
 
     botao.disabled =
       false;
