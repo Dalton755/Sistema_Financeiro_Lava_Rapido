@@ -118,9 +118,7 @@ async function carregarResumo() {
     .value;
 
 const partes =
-  periodo.split(
-    ' to '
-  );
+  periodo.split(' → ');
 
 if (
   partes.length < 2
@@ -383,7 +381,7 @@ async function abrirLoja(
       'periodo'
     )
     .value
-    .split(' to ');
+    .split(' → ')
 
 const dataInicio =
   partes[0];
@@ -580,7 +578,7 @@ async function confirmarFechamentoGeral() {
         'periodo'
       )
       .value
-      .split(' to ');
+      .split(' → ')
 
   const dataInicio =
     partes[0];
