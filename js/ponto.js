@@ -201,43 +201,8 @@ function renderizar(dados) {
 `;
 
 
-  let htmlPendentes =
-    '<h3>Pendentes</h3>';
 
-  dados.pendentes
-    .forEach(item => {
 
-     htmlPendentes += `
-
-<div
-  class="funcionario"
-  onclick="abrirFormulario(
-    '${item.funcionario.id}',
-    '${item.funcionario.nome}'
-  )">
-
-  <div class="funcionario-nome">
-
-    ${item.funcionario.nome}
-
-  </div>
-
-  <div class="funcionario-info">
-
-    Pendente
-
-  </div>
-
-</div>
-
-`;
-
-    });
-
-  document
-    .getElementById('pendentes')
-    .innerHTML =
-      htmlPendentes;
 
   let htmlLancados =
     '<h3>Lançados</h3>';
