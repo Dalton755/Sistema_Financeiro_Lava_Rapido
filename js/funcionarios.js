@@ -1,7 +1,34 @@
 let funcionariosCache = [];
 
 window.onload =
-  carregarFuncionarios;
+  async () => {
+
+    const select =
+      document
+        .getElementById(
+          'loja'
+        );
+
+    select.innerHTML = '';
+
+    LOJAS.forEach(loja => {
+
+      select.innerHTML += `
+
+        <option
+          value="${loja}">
+
+          ${loja}
+
+        </option>
+
+      `;
+
+    });
+
+    await carregarFuncionarios();
+
+  };
 
 async function carregarFuncionarios() {
 
