@@ -42,7 +42,8 @@ async function carregarFuncionarios() {
 
 window.onload = async () => {
 
-  const hoje = new Date();
+  const hoje =
+    new Date();
 
   const ano =
     hoje.getFullYear();
@@ -58,11 +59,37 @@ window.onload = async () => {
     ).padStart(2, '0');
 
   document
-    .getElementById('data')
+    .getElementById(
+      'data'
+    )
     .value =
       `${ano}-${mes}-${dia}`;
 
+  const select =
+    document
+      .getElementById(
+        'loja'
+      );
+
+  select.innerHTML = '';
+
+  LOJAS.forEach(loja => {
+
+    select.innerHTML += `
+
+      <option
+        value="${loja}">
+
+        ${loja}
+
+      </option>
+
+    `;
+
+  });
+
   await carregarFuncionarios();
+
   await carregarAdiantamentos();
 
 };
