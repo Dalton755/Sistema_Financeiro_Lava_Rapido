@@ -726,3 +726,60 @@ async function carregarFuncionariosBusca() {
     });
 
 }
+
+function abrirPorBusca() {
+
+  const nome =
+    document
+      .getElementById(
+        'buscaFuncionario'
+      )
+      .value
+      .trim();
+
+  if (!nome) {
+
+    alert(
+      'Digite o nome do funcionário.'
+    );
+
+    return;
+
+  }
+
+  const funcionario =
+    funcionariosAtivos.find(
+
+      f =>
+
+        f.nome
+          .toLowerCase()
+          .trim()
+
+        ===
+
+        nome
+          .toLowerCase()
+          .trim()
+
+    );
+
+  if (!funcionario) {
+
+    alert(
+      'Funcionário não encontrado.'
+    );
+
+    return;
+
+  }
+
+  abrirFormulario(
+
+    funcionario.id,
+
+    funcionario.nome
+
+  );
+
+}
