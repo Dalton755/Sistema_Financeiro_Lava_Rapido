@@ -1,31 +1,272 @@
-window.onload = () => {
 
-  const hoje =
-    new Date();
+let quinzenasCache = [];
 
-  const ano =
-    hoje.getFullYear();
+let pagamentosCache = [];
 
-  const mes =
-    String(
-      hoje.getMonth() + 1
-    ).padStart(2, '0');
+let pagamentosLojaCache = [];
 
-  document
-    .getElementById(
-      'dataInicio'
-    )
-    .value =
-    `${ano}-${mes}-01`;
 
-  document
-    .getElementById(
-      'dataFim'
-    )
-    .value =
-    `${ano}-${mes}-15`;
+window.onload = async () => {
+
+  const quinzenas =
+    await apiGet({
+
+      acao:
+        'listarQuinzenas'
+
+    });
+
+  quinzenasCache =
+    quinzenas;
+
+  const select =
+    document.getElementById(
+      'fechamento'
+    );
+
+  select.innerHTML = '';
+
+  quinzenas.forEach(q => {
+
+    select.innerHTML += `
+
+      <option
+        value="${q.id}">
+
+        ${q.descricao}
+
+      </option>
+
+    `;
+
+  });
+
+  if (
+    quinzenas.length === 0
+  ) {
+
+    document
+      .getElementById(
+        'resumoGeral'
+      )
+      .innerHTML = `
+
+        <div
+          class="funcionario">
+
+          Nenhum fechamento disponível.
+
+        </div>
+
+      `;
+
+    return;
+
+  }
+
+  select.addEventListener(
+    'change',
+    carregarPainelPagamentos
+  );
+
+  await carregarPainelPagamentos();
 
 };
+
+function obterQuinzenaSelecionada() {
+
+  const id =
+    document
+      .getElementById(
+        'fechamento'
+      )
+      .value;
+
+  return quinzenasCache.find(
+    q => q.id === id
+  );
+
+}
+
+async function carregarPainelPagamentos() {
+
+  const quinzena =
+    obterQuinzenaSelecionada();
+
+  if (!quinzena)
+    return;
+
+  const resumo =
+    await apiGet({
+
+      acao:
+        'resumoPagamentos',
+
+      dataInicio:
+        quinzena.dataInicio,
+
+      dataFim:
+        quinzena.dataFim
+
+    });
+
+  const lojas =
+    await apiGet({
+
+      acao:
+        'resumoPagamentosPorLoja',
+
+      dataInicio:
+        quinzena.dataInicio,
+
+      dataFim:
+        quinzena.dataFim
+
+    });
+
+  renderizarResumo(
+    resumo
+  );
+
+  renderizarCardsLojas(
+    lojas
+  );
+
+}
+
+function renderizarResumo(
+  resumo
+) {
+
+  document
+    .getElementById(
+      'resumoGeral'
+    )
+    .innerHTML = `
+
+      <div
+        class="funcionario card-resumo">
+
+        <div
+          class="funcionario-nome">
+
+          📊 Resumo Geral
+
+        </div>
+
+        <div
+          class="funcionario-info">
+
+          Funcionários:
+          ${resumo.funcionarios}
+
+        </div>
+
+        <div
+          class="funcionario-info">
+
+          Folha:
+          R$ ${resumo.totalFolha.toFixed(2)}
+
+        </div>
+
+        <div
+          class="funcionario-info">
+
+          Pago:
+          R$ ${resumo.totalPago.toFixed(2)}
+
+        </div>
+
+        <div
+          class="funcionario-info">
+
+          Pendente:
+          R$ ${resumo.totalPendente.toFixed(2)}
+
+        </div>
+
+      </div>
+
+    `;
+
+}
+
+function renderizarCardsLojas(
+  lojas
+) {
+
+  let html = '';
+
+  lojas.forEach(loja => {
+
+    const status =
+      loja.quitado
+
+        ? '🟢 QUITADO'
+
+        : '🔴 PENDENTE';
+
+    html += `
+
+      <div
+        class="funcionario"
+        onclick="abrirLojaPagamento(
+          '${loja.loja}'
+        )">
+
+        <div
+          class="funcionario-nome">
+
+          🏢 ${loja.loja}
+
+        </div>
+
+        <div
+          class="funcionario-info">
+
+          Funcionários:
+          ${loja.funcionarios}
+
+        </div>
+
+        <div
+          class="funcionario-info">
+
+          Pago:
+          R$ ${loja.pago.toFixed(2)}
+
+        </div>
+
+        <div
+          class="funcionario-info">
+
+          Pendente:
+          R$ ${loja.pendente.toFixed(2)}
+
+        </div>
+
+        <div
+          class="funcionario-info">
+
+          ${status}
+
+        </div>
+
+      </div>
+
+    `;
+
+  });
+
+  document
+    .getElementById(
+      'cardsLojas'
+    )
+    .innerHTML =
+    html;
+
+}
 
 async function carregarPagamentos() {
 
