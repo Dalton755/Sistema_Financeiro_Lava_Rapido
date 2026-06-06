@@ -38,8 +38,34 @@ window.onload = async () => {
       .split('T')[0];
 
   document
-    .getElementById('data')
-    .value = hoje;
+    .getElementById(
+      'data'
+    )
+    .value =
+    hoje;
+
+  const select =
+    document
+      .getElementById(
+        'loja'
+      );
+
+  select.innerHTML = '';
+
+  LOJAS.forEach(loja => {
+
+    select.innerHTML += `
+
+      <option
+        value="${loja}">
+
+        ${loja}
+
+      </option>
+
+    `;
+
+  });
 
   await carregarDados();
 
