@@ -268,6 +268,200 @@ function renderizarCardsLojas(
 
 }
 
+async function abrirLojaPagamento(
+  loja
+) {
+
+  const quinzena =
+    obterQuinzenaSelecionada();
+
+  const resultado =
+    await apiGet({
+
+      acao:
+        'listarPagamentos',
+
+      loja,
+
+      dataInicio:
+        quinzena.dataInicio,
+
+      dataFim:
+        quinzena.dataFim
+
+    });
+
+  pagamentosCache =
+    resultado;
+
+  document
+    .getElementById(
+      'tituloLoja'
+    )
+    .innerText =
+    loja;
+
+  let html = '';
+
+  resultado.forEach(item => {
+
+    const status =
+
+      item.status === 'Pago'
+
+        ? '🟢 Pago'
+
+        : '🔴 Pendente';
+
+    html += `
+
+      <div
+        class="funcionario"
+        onclick="abrirFuncionarioPagamento(
+          '${item.fechamentoId}',
+          '${item.funcionarioId}'
+        )">
+
+        <div
+          class="funcionario-nome">
+
+          ${item.nome}
+
+        </div>
+
+        <div
+          class="funcionario-info">
+
+          R$ ${item.valorLiquido.toFixed(2)}
+
+        </div>
+
+        <div
+          class="funcionario-info">
+
+          ${status}
+
+        </div>
+
+      </div>
+
+    `;
+
+  });
+
+  document
+    .getElementById(
+      'detalhesLoja'
+    )
+    .innerHTML =
+    html;
+
+  document
+    .getElementById(
+      'overlayLoja'
+    )
+    .style.display =
+    'block';
+
+}
+
+function abrirFuncionarioPagamento(
+  fechamentoId,
+  funcionarioId
+) {
+
+  const item =
+    pagamentosCache.find(
+
+      p =>
+
+        String(
+          p.fechamentoId
+        ) ===
+        String(
+          fechamentoId
+        )
+
+    );
+
+  if (!item)
+    return;
+
+  const botaoPagamento =
+
+    item.status === 'Pendente'
+
+      ? `
+
+      <button
+        onclick="pagar(
+          '${item.fechamentoId}',
+          '${item.funcionarioId}'
+        )">
+
+        Marcar como Pago
+
+      </button>
+
+      `
+
+      : '';
+
+  document
+    .getElementById(
+      'detalhesFuncionario'
+    )
+    .innerHTML = `
+
+      <div
+        class="funcionario">
+
+        <div
+          class="funcionario-nome">
+
+          ${item.nome}
+
+        </div>
+
+        <div
+          class="funcionario-info">
+
+          Valor:
+          R$ ${item.valorLiquido.toFixed(2)}
+
+        </div>
+
+        <div
+          class="funcionario-info">
+
+          Status:
+          ${item.status}
+
+        </div>
+
+        <div
+          class="funcionario-info">
+
+          Data:
+          ${item.dataPagamento || '-'}
+
+        </div>
+
+        ${botaoPagamento}
+
+      </div>
+
+    `;
+
+  document
+    .getElementById(
+      'overlayFuncionario'
+    )
+    .style.display =
+    'block';
+
+}
+
 async function carregarPagamentos() {
 
   const resultado =
@@ -462,5 +656,27 @@ async function pagar(
   );
 
   await carregarPagamentos();
+
+}
+
+function fecharLoja() {
+
+  document
+    .getElementById(
+      'overlayLoja'
+    )
+    .style.display =
+    'none';
+
+}
+
+function fecharFuncionario() {
+
+  document
+    .getElementById(
+      'overlayFuncionario'
+    )
+    .style.display =
+    'none';
 
 }
