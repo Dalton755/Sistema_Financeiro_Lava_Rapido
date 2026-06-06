@@ -1,3 +1,5 @@
+let funcionariosAtivos = [];
+
 const ESCALAS = {
 
   '07-16': {
@@ -68,6 +70,7 @@ window.onload = async () => {
   });
 
   await carregarDados();
+  await carregarFuncionariosBusca();
 
 };
 
@@ -681,5 +684,45 @@ function fecharFormulario() {
     )
     .style.display =
       'none';
+
+}
+
+async function carregarFuncionariosBusca() {
+
+  const lista =
+    await apiGet({
+
+      acao:
+        'todos-funcionarios'
+
+    });
+
+  funcionariosAtivos =
+    lista.filter(
+
+      f =>
+        f.status === 'Ativo'
+
+    );
+
+  const datalist =
+    document.getElementById(
+      'listaFuncionarios'
+    );
+
+  datalist.innerHTML = '';
+
+  funcionariosAtivos
+    .forEach(f => {
+
+      datalist.innerHTML += `
+
+        <option
+          value="${f.nome}">
+        </option>
+
+      `;
+
+    });
 
 }
