@@ -71,6 +71,15 @@ window.onload = async () => {
 
 };
 
+document
+  .getElementById(
+    'loja'
+  )
+  .addEventListener(
+    'change',
+    carregarDados
+  );
+
 async function carregarDados() {
 
  const botao =
