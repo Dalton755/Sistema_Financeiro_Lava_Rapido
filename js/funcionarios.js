@@ -124,11 +124,12 @@ function novoFuncionario() {
     )
     .value = '';
 
-  document
-    .getElementById(
-      'loja'
-    )
-    .value = 'Loja A';
+ document
+  .getElementById(
+    'loja'
+  )
+  .value =
+  LOJAS[0];
 
   document
     .getElementById(
