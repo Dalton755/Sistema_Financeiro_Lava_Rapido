@@ -52,6 +52,27 @@ window.onload = async () => {
         'loja'
       );
 
+  const filtroLoja =
+  document
+    .getElementById(
+      'filtroLoja'
+    );
+
+LOJAS.forEach(loja => {
+
+  filtroLoja.innerHTML += `
+
+    <option
+      value="${loja}">
+
+      ${loja}
+
+    </option>
+
+  `;
+
+});
+
   select.innerHTML = '';
 
   LOJAS.forEach(loja => {
@@ -208,6 +229,43 @@ function renderizar(dados) {
     '<h3>Lançados</h3>';
 
   window.lancadosCache = dados.lancados;
+
+  window.lancadosCache =
+  dados.lancados.sort(
+
+    (a, b) => {
+
+      const lojaA =
+        String(
+          a.ponto.loja || ''
+        );
+
+      const lojaB =
+        String(
+          b.ponto.loja || ''
+        );
+
+      if (
+        lojaA !== lojaB
+      ) {
+
+        return lojaA.localeCompare(
+          lojaB,
+          'pt-BR'
+        );
+
+      }
+
+      return a.funcionario.nome
+        .localeCompare(
+          b.funcionario.nome,
+          'pt-BR'
+        );
+
+    }
+
+  );
+  
   console.log(
   'LANCADOS',
   dados.lancados
@@ -745,6 +803,71 @@ function abrirPorBusca() {
 
     funcionario.nome
 
+  );
+
+}
+
+document
+  .getElementById(
+    'filtroFuncionario'
+  )
+  .addEventListener(
+    'input',
+    aplicarFiltros
+  );
+
+document
+  .getElementById(
+    'filtroLoja'
+  )
+  .addEventListener(
+    'change',
+    aplicarFiltros
+  );
+
+function aplicarFiltros() {
+
+  const nome =
+    document
+      .getElementById(
+        'filtroFuncionario'
+      )
+      .value
+      .toLowerCase();
+
+  const loja =
+    document
+      .getElementById(
+        'filtroLoja'
+      )
+      .value;
+
+  const filtrados =
+    window.lancadosCache.filter(
+      item => {
+
+        const nomeOk =
+          item.funcionario.nome
+            .toLowerCase()
+            .includes(nome);
+
+        const lojaOk =
+
+          !loja ||
+
+          item.ponto.loja ===
+          loja;
+
+        return (
+          nomeOk &&
+          lojaOk
+        );
+
+      }
+    );
+
+  renderizarLancados(
+    filtrados
   );
 
 }
