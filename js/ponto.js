@@ -1,5 +1,6 @@
 let funcionariosAtivos = [];
 
+
 const ESCALAS = {
 
   '07-16': {
@@ -748,6 +749,26 @@ async function carregarFuncionariosBusca() {
 
     });
 
+  const listaModal =
+  document.getElementById(
+    'listaFuncionariosModal'
+  );
+
+listaModal.innerHTML = '';
+
+funcionariosAtivos
+  .forEach(f => {
+
+    listaModal.innerHTML += `
+
+      <option
+        value="${f.nome}">
+      </option>
+
+    `;
+
+  });
+
 }
 
 function abrirPorBusca() {
@@ -869,5 +890,51 @@ function aplicarFiltros() {
   renderizarLancados(
     filtrados
   );
+
+}
+
+document
+  .getElementById(
+    'nomeFuncionarioBusca'
+  )
+  .addEventListener(
+    'change',
+    selecionarFuncionario
+  );
+
+function selecionarFuncionario() {
+
+  const nome =
+    document
+      .getElementById(
+        'nomeFuncionarioBusca'
+      )
+      .value
+      .trim();
+
+  const funcionario =
+    funcionariosAtivos.find(
+
+      f =>
+
+        f.nome
+          .toLowerCase()
+
+        ===
+
+        nome
+          .toLowerCase()
+
+    );
+
+  if (!funcionario)
+    return;
+
+  document
+    .getElementById(
+      'funcionarioId'
+    )
+    .value =
+    funcionario.id;
 
 }
