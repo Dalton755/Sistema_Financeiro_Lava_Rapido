@@ -1027,3 +1027,29 @@ function renderizarCardsLojas(
     html;
 
 }
+
+
+let lojaSelecionada = '';
+
+function abrirNovaMarcacao(
+  loja
+) {
+
+  lojaSelecionada =
+    loja;
+
+  document
+    .getElementById(
+      'lojaTrabalho'
+    )
+    .value =
+    loja;
+
+  document
+    .getElementById(
+      'overlay'
+    )
+    .style.display =
+    'block';
+
+}
