@@ -578,7 +578,7 @@ async function salvarPonto() {
   '✅ Ponto salvo com sucesso.'
 );
 
-    carregarDados();
+    await carregarPainelPonto();
 
     fecharFormulario();
 
@@ -925,11 +925,22 @@ function renderizarCardsLojas(
 
   lojas.forEach(loja => {
 
-    const nomes =
+    let nomes = '';
 
-      loja.funcionarios
-        .slice(0, 5)
-        .join('<br>');
+    loja.funcionarios
+      .slice(0, 5)
+      .forEach(nome => {
+
+        nomes += `
+          <div
+            class="funcionario-info">
+
+            ${nome}
+
+          </div>
+        `;
+
+      });
 
     html += `
 
@@ -946,12 +957,16 @@ function renderizarCardsLojas(
 
         </div>
 
-        <div
-          class="funcionario-info">
+        <br>
 
-          ${nomes || '-'}
+        ${nomes || `
+          <div
+            class="funcionario-info">
 
-        </div>
+            Nenhum registro
+
+          </div>
+        `}
 
         <br>
 
@@ -974,7 +989,7 @@ function renderizarCardsLojas(
       'cardsLojas'
     )
     .innerHTML =
-    html;
+      html;
 
 }
 
