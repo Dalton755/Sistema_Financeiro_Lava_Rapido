@@ -326,6 +326,13 @@ async function salvarPonto() {
           )
           .value,
 
+       loja:
+        document
+          .getElementById(
+            'lojaTrabalho'
+          )
+          .value,
+
       escala:
         document
           .getElementById(
