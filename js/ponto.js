@@ -43,6 +43,11 @@ window.onload = async () => {
 
     });
 
+  console.log(
+  'ULTIMA DATA',
+  ultimaData
+);
+
   document
     .getElementById(
       'data'
