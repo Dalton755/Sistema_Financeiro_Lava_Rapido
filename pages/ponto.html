@@ -172,23 +172,23 @@ Loja
   class="overlay">
 
   <div
-    id="formularioPonto"
-    class="bottom-sheet">
+  <label>
+Funcionário
+</label>
 
-  <h3 id="nomeFuncionario"></h3>
+<input
+  type="text"
+  id="nomeFuncionarioBusca"
+  list="listaFuncionariosModal"
+  placeholder="Digite o nome">
 
-    <button
-  type="button"
-  class="btn-fechar"
-  onclick="fecharFormulario()">
+<datalist
+  id="listaFuncionariosModal">
+</datalist>
 
-  ✕
-
-</button>
-
-  <input
-    type="hidden"
-    id="funcionarioId">
+<input
+  type="hidden"
+  id="funcionarioId">
 
   <label>Escala</label>
 
