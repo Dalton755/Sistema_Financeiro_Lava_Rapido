@@ -938,3 +938,92 @@ function selecionarFuncionario() {
     funcionario.id;
 
 }
+
+
+async function carregarPainelPonto() {
+
+  const data =
+
+    document
+      .getElementById(
+        'data'
+      )
+      .value;
+
+  const resultado =
+
+    await apiGet({
+
+      acao:
+        'painelPonto',
+
+      data
+
+    });
+
+  renderizarCardsLojas(
+    resultado.lojas
+  );
+
+}
+
+function renderizarCardsLojas(
+  lojas
+) {
+
+  let html = '';
+
+  lojas.forEach(loja => {
+
+    const nomes =
+
+      loja.funcionarios
+        .slice(0, 5)
+        .join('<br>');
+
+    html += `
+
+      <div
+        class="card-loja"
+        onclick="abrirNovaMarcacao(
+          '${loja.loja}'
+        )">
+
+        <div
+          class="funcionario-nome">
+
+          🏢 ${loja.loja}
+
+        </div>
+
+        <div
+          class="funcionario-info">
+
+          ${nomes || '-'}
+
+        </div>
+
+        <br>
+
+        <div
+          class="funcionario-info">
+
+          ${loja.quantidade}
+          registros
+
+        </div>
+
+      </div>
+
+    `;
+
+  });
+
+  document
+    .getElementById(
+      'cardsLojas'
+    )
+    .innerHTML =
+    html;
+
+}
