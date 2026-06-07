@@ -264,7 +264,7 @@ button:disabled{
 
   position: fixed;
 
-  bottom: 0;
+  bottom: 70px;
 
   left: 0;
 
@@ -276,7 +276,7 @@ button:disabled{
 
   padding: 20px;
 
-  max-height: 85vh;
+  max-height: calc(100vh - 90px);
 
   overflow-y: auto;
 
