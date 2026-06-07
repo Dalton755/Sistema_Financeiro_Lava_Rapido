@@ -795,3 +795,97 @@ function abrirNovaMarcacao(
     'block';
 
 }
+
+
+async function verPontosLoja(
+  loja
+) {
+
+  const data =
+    document
+      .getElementById(
+        'data'
+      )
+      .value;
+
+  const lista =
+    await apiGet({
+
+      acao:
+        'detalhesPontoLoja',
+
+      data,
+
+      loja
+
+    });
+
+  document
+    .getElementById(
+      'tituloPontosLoja'
+    )
+    .innerText =
+      loja;
+
+  let html = '';
+
+  lista.forEach(item => {
+
+    html += `
+
+      <div
+        class="funcionario">
+
+        <div
+          class="funcionario-nome">
+
+          ${item.nome}
+
+        </div>
+
+        <div
+          class="funcionario-info">
+
+          Escala:
+          ${item.escala}
+
+        </div>
+
+        <div
+          class="funcionario-info">
+
+          ${item.entrada}
+          →
+          ${item.saida}
+
+        </div>
+
+        <div
+          class="funcionario-info">
+
+          ${item.horas}
+          horas
+
+        </div>
+
+      </div>
+
+    `;
+
+  });
+
+  document
+    .getElementById(
+      'listaPontosLoja'
+    )
+    .innerHTML =
+      html;
+
+  document
+    .getElementById(
+      'overlayPontosLoja'
+    )
+    .style.display =
+      'block';
+
+}
