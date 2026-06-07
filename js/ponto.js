@@ -881,6 +881,10 @@ function selecionarFuncionario() {
 
 async function carregarPainelPonto() {
 
+console.log(
+  'CARREGANDO PAINEL'
+);
+  
   const data =
     document
       .getElementById(
