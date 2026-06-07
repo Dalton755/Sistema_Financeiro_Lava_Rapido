@@ -908,7 +908,11 @@ async function carregarPainelPonto() {
         'painelPonto',
 
       data
-
+        
+      console.log(
+        'PAINEL',
+        resultado
+      );
     });
 
   renderizarCardsLojas(
