@@ -35,64 +35,24 @@ const ESCALAS = {
 
 window.onload = async () => {
 
-  const hoje =
-    new Date()
-      .toISOString()
-      .split('T')[0];
+  const ultimaData =
+    await apiGet({
+
+      acao:
+        'ultimaDataPonto'
+
+    });
 
   document
     .getElementById(
       'data'
     )
     .value =
-    hoje;
+    ultimaData.data;
 
-  const select =
-    document
-      .getElementById(
-        'loja'
-      );
-
-  const filtroLoja =
-  document
-    .getElementById(
-      'filtroLoja'
-    );
-
-LOJAS.forEach(loja => {
-
-  filtroLoja.innerHTML += `
-
-    <option
-      value="${loja}">
-
-      ${loja}
-
-    </option>
-
-  `;
-
-});
-
-  select.innerHTML = '';
-
-  LOJAS.forEach(loja => {
-
-    select.innerHTML += `
-
-      <option
-        value="${loja}">
-
-        ${loja}
-
-      </option>
-
-    `;
-
-  });
-
-  await carregarDados();
   await carregarFuncionariosBusca();
+
+  await carregarPainelPonto();
 
 };
 
@@ -684,21 +644,14 @@ function mostrarMensagem(texto) {
 
 }
 
-document.addEventListener(
-  'change',
-  async function(e) {
-
-    if (
-      e.target.id === 'loja' ||
-      e.target.id === 'data'
-    ) {
-
-      await carregarDados();
-
-    }
-
-  }
-);
+document
+  .getElementById(
+    'data'
+  )
+  .addEventListener(
+    'change',
+    carregarPainelPonto
+  );
 
 function fecharFormulario() {
 
