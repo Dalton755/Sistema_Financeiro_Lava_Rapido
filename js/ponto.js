@@ -883,6 +883,11 @@ async function carregarPainelPonto() {
       )
       .value;
 
+  console.log(
+    'DATA ENVIADA',
+    data
+  );
+
   const resultado =
     await apiGet({
 
