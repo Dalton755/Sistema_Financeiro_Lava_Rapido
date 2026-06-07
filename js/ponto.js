@@ -606,6 +606,82 @@ const data =
 
 }
 
+function detalhesPontoLoja(
+  data,
+  loja
+) {
+
+  const sheet =
+    getSpreadsheet()
+      .getSheetByName(
+        CONFIG.ABA_PONTO
+      );
+
+  const dados =
+    sheet
+      .getDataRange()
+      .getValues();
+
+  const funcionarios =
+    listarTodosFuncionarios();
+
+  const resultado = [];
+
+  dados
+    .slice(1)
+    .forEach(linha => {
+
+      const dataLinha =
+        Utilities.formatDate(
+          new Date(
+            linha[1]
+          ),
+          Session.getScriptTimeZone(),
+          'yyyy-MM-dd'
+        );
+
+      if (
+        dataLinha !== data
+      ) return;
+
+      if (
+        linha[3] !== loja
+      ) return;
+
+      const funcionario =
+        funcionarios.find(
+          f =>
+          String(f.id) ===
+          String(linha[2])
+        );
+
+      resultado.push({
+
+        nome:
+          funcionario
+            ? funcionario.nome
+            : 'Funcionário',
+
+        escala:
+          linha[4],
+
+        entrada:
+          linha[5],
+
+        saida:
+          linha[8],
+
+        horas:
+          linha[9]
+
+      });
+
+    });
+
+  return resultado;
+
+}
+
 function renderizarCardsLojas(
   lojas
 ) {
@@ -664,6 +740,18 @@ function renderizarCardsLojas(
 
           ${loja.quantidade}
           registros
+
+          <br><br>
+
+<button
+  onclick="event.stopPropagation();
+           verPontosLoja(
+             '${loja.loja}'
+           )">
+
+  Ver Pontos
+
+</button>
 
         </div>
 
