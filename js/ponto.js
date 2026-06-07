@@ -654,6 +654,15 @@ document
     'data'
   )
   .addEventListener(
+    'input',
+    carregarPainelPonto
+  );
+
+document
+  .getElementById(
+    'data'
+  )
+  .addEventListener(
     'change',
     carregarPainelPonto
   );
