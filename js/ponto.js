@@ -881,12 +881,18 @@ function selecionarFuncionario() {
 
 async function carregarPainelPonto() {
 
-  const data =
-    document
-      .getElementById(
-        'data'
-      )
-      .value;
+ const campoData =
+  document.getElementById(
+    'data'
+  );
+
+console.log(
+  'VALOR INPUT',
+  campoData.value
+);
+
+const data =
+  campoData.value;
 
   console.log(
     'DATA ENVIADA',
