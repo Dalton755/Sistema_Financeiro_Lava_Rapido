@@ -892,11 +892,9 @@ function selecionarFuncionario() {
 
 }
 
-
 async function carregarPainelPonto() {
 
   const data =
-
     document
       .getElementById(
         'data'
@@ -904,7 +902,6 @@ async function carregarPainelPonto() {
       .value;
 
   const resultado =
-
     await apiGet({
 
       acao:
