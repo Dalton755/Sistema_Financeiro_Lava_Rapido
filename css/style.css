@@ -284,6 +284,12 @@ button:disabled{
 
 }
 
+.bottom-sheet {
+
+  padding-bottom: 120px;
+
+}
+
 .btn-fechar{
 
   position:absolute;
