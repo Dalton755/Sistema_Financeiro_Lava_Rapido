@@ -682,25 +682,7 @@ async function carregarFuncionariosBusca() {
 
     );
 
-  const datalist =
-    document.getElementById(
-      'listaFuncionarios'
-    );
-
-  datalist.innerHTML = '';
-
-  funcionariosAtivos
-    .forEach(f => {
-
-      datalist.innerHTML += `
-
-        <option
-          value="${f.nome}">
-        </option>
-
-      `;
-
-    });
+  
 
   const listaModal =
   document.getElementById(
