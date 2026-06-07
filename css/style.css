@@ -259,29 +259,27 @@ button:disabled{
 
 }
 
-.bottom-sheet{
+.bottom-sheet {
 
-  position:absolute;
+  position: fixed;
 
-  bottom:0;
+  bottom: 0;
 
-  left:0;
+  left: 0;
 
-  width:100%;
+  right: 0;
 
-  background:white;
+  background: #fff;
 
-  border-radius:
-    24px 24px 0 0;
+  border-radius: 20px 20px 0 0;
 
-  padding:20px;
+  padding: 20px;
 
-  max-height:90vh;
+  max-height: 85vh;
 
-  overflow:auto;
+  overflow-y: auto;
 
-  animation:
-    subir .25s ease;
+  box-sizing: border-box;
 
 }
 
