@@ -15,7 +15,9 @@ href="../css/style.css">
 
 </head>
 
-  <nav class="bottom-nav">
+<body>
+
+<nav class="bottom-nav">
 
   <a href="../index.html">
 
@@ -71,37 +73,37 @@ href="../css/style.css">
 
 </nav>
 
-<body>
-
 <div class="container">
 
-<h2>Lançamento Diário</h2>
+  <h2>Lançamento Diário</h2>
 
-<label>Data</label>
+  <label>Data</label>
 
-<input
-type="date"
-id="data">
+  <input
+    type="date"
+    id="data">
 
-<br><br>
-
+  <br><br>
 
   <div
-  id="mensagem"
-  style="
-    display:none;
-    padding:10px;
-    margin:10px 0;
-    border-radius:6px;
-    background:#d4edda;
-    color:#155724;
-  ">
+    id="mensagem"
+    style="
+      display:none;
+      padding:10px;
+      margin:10px 0;
+      border-radius:6px;
+      background:#d4edda;
+      color:#155724;
+    ">
+  </div>
+
+  <div
+    id="cardsLojas"
+    class="cards-lojas">
+
+  </div>
+
 </div>
-
-
-
-  
-  <hr>
 
 <div
   id="overlay"
@@ -120,102 +122,131 @@ id="data">
 
     </button>
 
+    <h3>
+      Novo Lançamento
+    </h3>
+
     <label>
       Funcionário
     </label>
 
-<input
-  type="text"
-  id="nomeFuncionarioBusca"
-  list="listaFuncionariosModal"
-  placeholder="Digite o nome">
+    <input
+      type="text"
+      id="nomeFuncionarioBusca"
+      list="listaFuncionariosModal"
+      placeholder="Digite o nome">
 
-<datalist
-  id="listaFuncionariosModal">
-</datalist>
+    <datalist
+      id="listaFuncionariosModal">
+    </datalist>
 
-<input
-  type="hidden"
-  id="funcionarioId">
+    <input
+      type="hidden"
+      id="funcionarioId">
 
-<br><br>
+    <br><br>
 
-<label>
-Loja
-</label>
+    <label>
+      Loja
+    </label>
 
-<select
-  id="lojaTrabalho">
+    <input
+      type="text"
+      id="lojaTrabalho"
+      readonly>
 
-</select>
+    <br><br>
 
-<br><br>    
+    <label>
+      Escala
+    </label>
 
-  <label>Escala</label>
+    <select id="escala">
 
-  <select id="escala">
+      <option value="">
+        Selecione
+      </option>
 
-    <option value="">
-      Selecione
-    </option>
+      <option value="07-16">
+        07-16
+      </option>
 
-    <option value="07-16">
-      07-16
-    </option>
+      <option value="08-17">
+        08-17
+      </option>
 
-    <option value="08-17">
-      08-17
-    </option>
+      <option value="12-20">
+        12-20
+      </option>
 
-    <option value="12-20">
-      12-20
-    </option>
+      <option value="14-21">
+        14-21
+      </option>
 
-    <option value="14-21">
-      14-21
-    </option>
+    </select>
 
-  </select>
+    <br><br>
 
-  <br><br>
+    <label>
+      Entrada
+    </label>
 
-  <label>Entrada</label>
-  <input type="time" id="entrada">
+    <input
+      type="time"
+      id="entrada">
 
-  <br><br>
+    <br><br>
 
-  <label>Saída Almoço</label>
-  <input type="time" id="saidaAlmoco">
+    <label>
+      Saída Almoço
+    </label>
 
-  <br><br>
+    <input
+      type="time"
+      id="saidaAlmoco">
 
-  <label>Retorno Almoço</label>
-  <input type="time" id="retornoAlmoco">
+    <br><br>
 
-  <br><br>
+    <label>
+      Retorno Almoço
+    </label>
 
-  <label>Saída</label>
-  <input type="time" id="saida">
+    <input
+      type="time"
+      id="retornoAlmoco">
 
-  <br><br>
+    <br><br>
 
-  <label>Horas</label>
-  <input
-    type="number"
-    id="horas"
-    readonly>
+    <label>
+      Saída
+    </label>
 
-  <br><br>
+    <input
+      type="time"
+      id="saida">
 
-  <button
-    id="btnSalvarPonto"
-    onclick="salvarPonto()">
+    <br><br>
 
-    Salvar
+    <label>
+      Horas
+    </label>
 
-  </button>
+    <input
+      type="number"
+      id="horas"
+      readonly>
 
-</div>
+    <br><br>
+
+    <button
+      id="btnSalvarPonto"
+      onclick="salvarPonto()">
+
+      💾 Salvar
+
+    </button>
+
+  </div>
 
 </div>
 
