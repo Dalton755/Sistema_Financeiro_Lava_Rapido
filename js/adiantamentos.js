@@ -153,23 +153,18 @@ async function salvarAdiantamento() {
       )
       .value = '';
 
-    await carregarAdiantamentos();
+try {
 
-  } catch (erro) {
-      console.error(
-        'ERRO COMPLETO',
-        erro
-      );
+  await carregarAdiantamentos();
 
-    console.error(
-      erro
-    );
+} catch(erro) {
 
-    alert(
-      'Erro ao salvar.'
-    );
+  console.error(
+    'ERRO CARREGAR ADIANTAMENTOS',
+    erro
+  );
 
-  } finally {
+} finally {
 
     botao.disabled =
       false;
