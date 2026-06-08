@@ -1,1 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
 
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1">
+
+<title>Dashboard</title>
+
+<link rel="stylesheet"
+href="../css/style.css">
+
+</head>
+
+<body>
+
+<nav class="bottom-nav">
+
+  <a
+    href="dashboard.html"
+    class="active">
+
+    <span class="icon">
+      📊
+    </span>
+
+    Dash
+
+  </a>
+
+  <a href="ponto.html">
+
+    <span class="icon">
+      ⏱️
+    </span>
+
+    Ponto
+
+  </a>
+
+  <a href="adiantamentos.html">
+
+    <span class="icon">
+      💵
+    </span>
+
+    Adiant.
+
+  </a>
+
+  <a href="fechamento.html">
+
+    <span class="icon">
+      📋
+    </span>
+
+    Fech.
+
+  </a>
+
+  <a href="pagamentos.html">
+
+    <span class="icon">
+      💰
+    </span>
+
+    Pagto
+
+  </a>
+
+</nav>
+
+<div class="container">
+
+  <h2>
+    Dashboard Gerencial
+  </h2>
+
+  <label>
+    Data
+  </label>
+
+  <input
+    type="date"
+    id="data">
+
+  <br><br>
+
+  <div
+    id="cardsResumo"
+    class="cards-dashboard">
+
+  </div>
+
+  <br>
+
+  <h3>
+    Lojas
+  </h3>
+
+  <div
+    id="cardsLojas"
+    class="cards-lojas">
+
+  </div>
+
+</div>
+
+<script
+src="../js/config.js">
+</script>
+
+<script
+src="../js/api.js">
+</script>
+
+<script
+src="../js/dashboard.js">
+</script>
+
+</body>
+
+</html>
