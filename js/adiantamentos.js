@@ -94,18 +94,7 @@ window.onload = async () => {
 
 };
 
-document
-  .getElementById('loja')
-  .addEventListener(
-    'change',
-    async () => {
 
-      await carregarFuncionarios();
-
-      await carregarAdiantamentos();
-
-    }
-  );
 
 async function salvarAdiantamento() {
 
