@@ -323,3 +323,85 @@ function alterarPeriodo(
   carregarDashboard();
 
 }
+
+function atualizarInfoQuinzena() {
+
+  const hoje =
+    new Date();
+
+  const dia =
+    hoje.getDate();
+
+  let inicio;
+  let fim;
+  let titulo;
+
+  if (dia <= 15) {
+
+    titulo =
+      '1ª Quinzena';
+
+    inicio =
+      '01/' +
+      String(
+        hoje.getMonth() + 1
+      ).padStart(2,'0') +
+      '/' +
+      hoje.getFullYear();
+
+    fim =
+      '15/' +
+      String(
+        hoje.getMonth() + 1
+      ).padStart(2,'0') +
+      '/' +
+      hoje.getFullYear();
+
+  } else {
+
+    titulo =
+      '2ª Quinzena';
+
+    const ultimoDia =
+      new Date(
+        hoje.getFullYear(),
+        hoje.getMonth() + 1,
+        0
+      ).getDate();
+
+    inicio =
+      '16/' +
+      String(
+        hoje.getMonth() + 1
+      ).padStart(2,'0') +
+      '/' +
+      hoje.getFullYear();
+
+    fim =
+      ultimoDia +
+      '/' +
+      String(
+        hoje.getMonth() + 1
+      ).padStart(2,'0') +
+      '/' +
+      hoje.getFullYear();
+
+  }
+
+  document
+    .getElementById(
+      'tituloPeriodo'
+    )
+    .innerText =
+      titulo;
+
+  document
+    .getElementById(
+      'datasPeriodo'
+    )
+    .innerText =
+      inicio +
+      ' até ' +
+      fim;
+
+}
