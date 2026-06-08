@@ -36,14 +36,19 @@ async function carregarDashboard() {
       .value;
 
   const dados =
-    await apiGet({
+  await apiGet({
 
-      acao:
-        'dashboard',
+    acao:
+      'dashboard',
 
-      data
+    data
 
-    });
+  });
+
+console.log(
+  'DASHBOARD',
+  dados
+);
 
   renderizarResumo(
     dados.resumo
