@@ -784,6 +784,11 @@ function abrirNovaMarcacao(
   loja
 ) {
 
+  console.log(
+    'LOJA CARD',
+    loja
+  );
+
   lojaSelecionada =
     loja;
 
@@ -793,6 +798,15 @@ function abrirNovaMarcacao(
     )
     .value =
     loja;
+
+  console.log(
+    'LOJA SELECT',
+    document
+      .getElementById(
+        'lojaTrabalho'
+      )
+      .value
+  );
 
   document
     .getElementById(
