@@ -83,19 +83,27 @@ href="../css/style.css">
 type="date"
 id="data">
 
-<br><br>
 
-<label>Loja</label>
-
-<select id="loja">
-</select>
 
 <br><br>
 
-<label>Funcionário</label>
+<label>
+  Funcionário
+</label>
 
-<select id="funcionario">
-</select>
+<input
+  type="text"
+  id="buscaFuncionario"
+  list="listaFuncionarios"
+  placeholder="Digite o nome">
+
+  <datalist
+    id="listaFuncionarios">
+  </datalist>
+
+<input
+  type="hidden"
+  id="funcionario">
 
 <br><br>
 
