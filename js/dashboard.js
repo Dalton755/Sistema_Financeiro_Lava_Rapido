@@ -38,13 +38,16 @@ async function carregarDashboard() {
       )
       .value;
 
-  const dados =
+ const dados =
   await apiGet({
 
     acao:
       'dashboard',
 
-    data
+    data,
+
+    periodo:
+      periodoAtual
 
   });
 
