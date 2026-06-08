@@ -1,3 +1,6 @@
+let periodoAtual =
+  'dia';
+
 window.onload =
   async () => {
 
@@ -223,5 +226,60 @@ function abrirDetalhesLoja(
     'Detalhes: ' +
     loja
   );
+
+}
+
+function alterarPeriodo(
+  periodo
+) {
+
+  periodoAtual =
+    periodo;
+
+  document
+    .getElementById(
+      'btnDia'
+    )
+    .classList
+    .remove(
+      'ativo'
+    );
+
+  document
+    .getElementById(
+      'btnQuinzena'
+    )
+    .classList
+    .remove(
+      'ativo'
+    );
+
+  if (
+    periodo === 'dia'
+  ) {
+
+    document
+      .getElementById(
+        'btnDia'
+      )
+      .classList
+      .add(
+        'ativo'
+      );
+
+  } else {
+
+    document
+      .getElementById(
+        'btnQuinzena'
+      )
+      .classList
+      .add(
+        'ativo'
+      );
+
+  }
+
+  carregarDashboard();
 
 }
