@@ -1,1 +1,222 @@
+window.onload =
+  async () => {
 
+    const hoje =
+      new Date()
+        .toISOString()
+        .split('T')[0];
+
+    document
+      .getElementById(
+        'data'
+      )
+      .value =
+      hoje;
+
+    await carregarDashboard();
+
+};
+
+document
+  .getElementById(
+    'data'
+  )
+  .addEventListener(
+    'change',
+    carregarDashboard
+  );
+
+async function carregarDashboard() {
+
+  const data =
+    document
+      .getElementById(
+        'data'
+      )
+      .value;
+
+  const dados =
+    await apiGet({
+
+      acao:
+        'dashboard',
+
+      data
+
+    });
+
+  renderizarResumo(
+    dados.resumo
+  );
+
+  renderizarLojas(
+    dados.lojas
+  );
+
+}
+
+function renderizarResumo(
+  resumo
+) {
+
+  document
+    .getElementById(
+      'cardsResumo'
+    )
+    .innerHTML = `
+
+      <div class="resumo">
+
+        <div class="resumo-card">
+
+          <div class="resumo-numero">
+
+            ${resumo.funcionariosHoje || 0}
+
+          </div>
+
+          <div class="resumo-label">
+
+            Funcionários
+
+          </div>
+
+        </div>
+
+        <div class="resumo-card">
+
+          <div class="resumo-numero">
+
+            ${resumo.horasHoje || 0}
+
+          </div>
+
+          <div class="resumo-label">
+
+            Horas
+
+          </div>
+
+        </div>
+
+        <div class="resumo-card">
+
+          <div class="resumo-numero">
+
+            R$ ${Number(
+              resumo.adiantamentosHoje || 0
+            ).toFixed(0)}
+
+          </div>
+
+          <div class="resumo-label">
+
+            Adiantamentos
+
+          </div>
+
+        </div>
+
+        <div class="resumo-card">
+
+          <div class="resumo-numero">
+
+            R$ ${Number(
+              resumo.folhaPrevista || 0
+            ).toFixed(0)}
+
+          </div>
+
+          <div class="resumo-label">
+
+            Folha
+
+          </div>
+
+        </div>
+
+      </div>
+
+    `;
+
+}
+
+function renderizarLojas(
+  lojas
+) {
+
+  let html = '';
+
+  lojas.forEach(loja => {
+
+    html += `
+
+      <div
+        class="card-loja"
+        onclick="
+          abrirDetalhesLoja(
+            '${loja.loja}'
+          )
+        ">
+
+        <div
+          class="funcionario-nome">
+
+          🏢 ${loja.loja}
+
+        </div>
+
+        <br>
+
+        <div
+          class="funcionario-info">
+
+          👥 ${loja.funcionarios || 0}
+
+          funcionários
+
+        </div>
+
+        <div
+          class="funcionario-info">
+
+          ⏱ ${loja.horas || 0}
+
+          horas
+
+        </div>
+
+        <div
+          class="funcionario-info">
+
+          💰 R$ ${Number(
+            loja.folhaPrevista || 0
+          ).toFixed(2)}
+
+        </div>
+
+      </div>
+
+    `;
+
+  });
+
+  document
+    .getElementById(
+      'cardsLojas'
+    )
+    .innerHTML =
+      html;
+
+}
+
+function abrirDetalhesLoja(
+  loja
+) {
+
+  alert(
+    'Detalhes: ' +
+    loja
+  );
+
+}
