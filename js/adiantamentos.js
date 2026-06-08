@@ -210,10 +210,7 @@ async function carregarAdiantamentos() {
   data
 );
 
-console.log(
-  'LOJA ENVIADA',
-  loja
-);
+
 
   console.log(
   'RETORNO ADIANTAMENTOS',
