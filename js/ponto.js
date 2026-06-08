@@ -742,25 +742,29 @@ function renderizarCardsLojas(
 
         <br>
 
-        <div
-          class="funcionario-info">
+       <div
+  class="funcionario-info">
 
-          ${loja.quantidade}
-          registros
+  ${loja.quantidade}
+  registros
 
-          <br><br>
+  ·
 
-<button
-  onclick="event.stopPropagation();
-           verPontosLoja(
-             '${loja.loja}'
-           )">
+  <a
+    href="#"
+    onclick="
+      event.stopPropagation();
+      verPontosLoja(
+        '${loja.loja}'
+      );
+      return false;
+    ">
 
-  Ver Pontos
+    ver
 
-</button>
+  </a>
 
-        </div>
+</div>
 
       </div>
 
