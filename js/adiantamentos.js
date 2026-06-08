@@ -65,29 +65,6 @@ window.onload = async () => {
     .value =
       `${ano}-${mes}-${dia}`;
 
-  const select =
-    document
-      .getElementById(
-        'loja'
-      );
-
-  select.innerHTML = '';
-
-  LOJAS.forEach(loja => {
-
-    select.innerHTML += `
-
-      <option
-        value="${loja}">
-
-        ${loja}
-
-      </option>
-
-    `;
-
-  });
-
   await carregarFuncionarios();
 
   await carregarAdiantamentos();
