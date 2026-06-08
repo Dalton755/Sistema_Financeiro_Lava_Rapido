@@ -607,3 +607,39 @@ body {
   min-height: 180px;
 
 }
+
+  .filtros-dashboard {
+
+  display: flex;
+
+  gap: 8px;
+
+  margin-bottom: 20px;
+
+}
+
+.btn-dashboard {
+
+  flex: 1;
+
+  padding: 10px;
+
+  border: 1px solid #ddd;
+
+  border-radius: 12px;
+
+  background: #fff;
+
+  color: #333;
+
+  font-weight: 600;
+
+}
+
+.btn-dashboard.ativo {
+
+  background: #2563eb;
+
+  color: white;
+
+}
