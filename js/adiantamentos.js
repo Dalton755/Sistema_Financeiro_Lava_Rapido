@@ -152,31 +152,29 @@ async function salvarAdiantamento() {
         'observacao'
       )
       .value = '';
+await carregarAdiantamentos();
 
-try {
-
-  await carregarAdiantamentos();
-
-} catch(erro) {
+} catch (erro) {
 
   console.error(
-    'ERRO CARREGAR ADIANTAMENTOS',
     erro
+  );
+
+  alert(
+    'Erro ao salvar.'
   );
 
 } finally {
 
-    botao.disabled =
-      false;
+  botao.disabled =
+    false;
 
-    botao.innerText =
-      textoOriginal;
-
-  }
+  botao.innerText =
+    textoOriginal;
 
 }
 
-
+}
 
 async function carregarAdiantamentos() {
   console.log(
