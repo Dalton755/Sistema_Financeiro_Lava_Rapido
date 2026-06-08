@@ -222,10 +222,7 @@ async function carregarAdiantamentos() {
   'carregarAdiantamentos iniciou'
   );
   
-  const loja =
-    document.getElementById(
-      'loja'
-    ).value;
+  
 
   const data =
     document.getElementById(
@@ -233,20 +230,18 @@ async function carregarAdiantamentos() {
     ).value;
 
   const lista =
-    await apiGet({
+      await apiGet({
 
-      acao:
+        acao:
         'listarAdiantamentos',
 
-      dataInicial:
-        data,
+        dataInicial:
+          data,
 
-      dataFinal:
-        data,
+        dataFinal:
+          data
 
-      loja
-
-    });
+      });
 
   adiantamentosCache =
   lista;
@@ -380,3 +375,47 @@ function abrirDetalhesAdiantamentos() {
       'block';
 
 }
+
+document
+  .getElementById(
+    'buscaFuncionario'
+  )
+  .addEventListener(
+    'change',
+    () => {
+
+      const nome =
+        document
+          .getElementById(
+            'buscaFuncionario'
+          )
+          .value
+          .trim();
+
+      const funcionario =
+        funcionariosAtivos.find(
+
+          f =>
+
+            f.nome
+              .toLowerCase()
+
+            ===
+
+            nome
+              .toLowerCase()
+
+        );
+
+      if (!funcionario)
+        return;
+
+      document
+        .getElementById(
+          'funcionario'
+        )
+        .value =
+        funcionario.id;
+
+    }
+  );
