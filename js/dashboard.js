@@ -282,6 +282,43 @@ function alterarPeriodo(
       );
 
   }
+  if (
+  periodo === 'quinzena'
+) {
+
+  document
+    .getElementById(
+      'blocoData'
+    )
+    .style.display =
+      'none';
+
+  document
+    .getElementById(
+      'infoPeriodo'
+    )
+    .style.display =
+      'block';
+
+  atualizarInfoQuinzena();
+
+} else {
+
+  document
+    .getElementById(
+      'blocoData'
+    )
+    .style.display =
+      'block';
+
+  document
+    .getElementById(
+      'infoPeriodo'
+    )
+    .style.display =
+      'none';
+
+}
 
   carregarDashboard();
 
