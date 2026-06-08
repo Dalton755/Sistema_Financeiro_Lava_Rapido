@@ -1,5 +1,5 @@
 const API_URL =
-'https://script.google.com/macros/s/AKfycbzAEp7bamjBfUkoqrx7vjJhJ1Kti-0SpJvxEbh8uNxJCtXfm2aZ_ZTO4yDlCmst_9Fe0A/exec';
+'https://script.google.com/macros/s/AKfycbwzltBFBzZPqOgu0RHE0mc-ZNRGkUAoTViowlWI4ZzDcpYwoqM9ZBLd1jG12Zf5telXmQ/exec';
 
 const LOJAS = [
 
