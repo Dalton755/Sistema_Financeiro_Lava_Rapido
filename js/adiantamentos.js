@@ -1,42 +1,42 @@
+let funcionariosAtivos = [];
+
 async function carregarFuncionarios() {
 
-  const loja =
-    document
-      .getElementById('loja')
-      .value;
-
-  const funcionarios =
+  const lista =
     await apiGet({
 
       acao:
-        'funcionarios-loja',
-
-      loja
+        'todos-funcionarios'
 
     });
 
-  const select =
-    document
-      .getElementById(
-        'funcionario'
-      );
+  funcionariosAtivos =
+    lista.filter(
 
-  select.innerHTML = '';
+      f =>
+        f.status === 'Ativo'
 
-  funcionarios.forEach(f => {
+    );
 
-    select.innerHTML += `
+  const datalist =
+    document.getElementById(
+      'listaFuncionarios'
+    );
 
-      <option
-        value="${f.id}">
+  datalist.innerHTML = '';
 
-        ${f.nome}
+  funcionariosAtivos
+    .forEach(f => {
 
-      </option>
+      datalist.innerHTML += `
 
-    `;
+        <option
+          value="${f.nome}">
+        </option>
 
-  });
+      `;
+
+    });
 
 }
 
