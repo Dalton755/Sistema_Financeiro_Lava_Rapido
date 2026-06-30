@@ -606,45 +606,26 @@ export async function confirmarFechamento(
 
 ) {
 
-    const {
-
-        data: fechamentoExistente,
-
-        error: erroConsulta
-
-    } = await supabase
-
+    let consulta = supabase
         .schema('financeiro')
-
         .from('fechamentos')
-
         .select('id')
+        .eq('tipo', previa.tipo)
+        .eq('competencia', previa.competencia)
+        .eq('quinzena', previa.quinzena)
 
-        .eq(
+    if (previa.tipo === 'LOJA') {
+        consulta = consulta.eq('loja_id', previa.lojaId)
+    }
 
-            'tipo',
+    if (previa.tipo === 'FUNCIONARIO') {
+        consulta = consulta.eq('funcionario_id', previa.funcionarioId)
+    }
 
-            previa.tipo
-
-        )
-
-        .eq(
-
-            'competencia',
-
-            previa.competencia
-
-        )
-
-        .eq(
-
-            'quinzena',
-
-            previa.quinzena
-
-        )
-
-        .maybeSingle()
+    const {
+        data: fechamentoExistente,
+        error: erroConsulta
+    } = await consulta.maybeSingle()
 
     if (
 
