@@ -1,0 +1,220 @@
+@import url(
+'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap'
+);
+
+:root {
+
+  --primary: #2563EB;
+
+  --primary-hover: #1D4ED8;
+
+  --bg: #F8FAFC;
+
+  --sidebar: #FFFFFF;
+
+  --card: #FFFFFF;
+
+  --border: #E2E8F0;
+
+  --text: #0F172A;
+
+  --text-secondary: #64748B;
+
+  --radius: 16px;
+
+  --shadow:
+    0 1px 3px rgba(0,0,0,.08);
+
+}
+
+body {
+
+  background: var(--bg);
+
+  color: var(--text);
+
+  font-family:
+
+    Inter,
+    system-ui,
+    sans-serif;
+
+}
+
+.page-title {
+
+  font-size: 28px;
+
+  font-weight: 700;
+
+}
+
+.page-subtitle {
+
+  color: var(--text-secondary);
+
+}
+
+.card-app{
+  border:none;
+  border-radius:24px;
+
+  background:
+  linear-gradient(
+    180deg,
+    #ffffff,
+    #f8fafc
+  );
+
+  box-shadow:
+    0 8px 24px rgba(
+      15,
+      23,
+      42,
+      .08
+    );
+
+  transition:.25s;
+}
+
+.card-app:hover{
+  transform:
+    translateY(-4px);
+
+  box-shadow:
+    0 16px 32px rgba(
+      15,
+      23,
+      42,
+      .12
+    );
+}
+
+.btn-app {
+
+  background: var(--primary);
+
+  color: white;
+
+  border: none;
+
+  border-radius: 12px;
+
+  padding: 10px 18px;
+
+  font-weight: 600;
+
+}
+
+.btn-app:hover {
+
+  background:
+
+    var(--primary-hover);
+
+}
+
+.sidebar {
+
+  width: 260px;
+
+  min-height: 100vh;
+
+  background: white;
+
+  border-right:
+    1px solid var(--border);
+
+  padding: 24px;
+
+}
+
+.sidebar a {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  text-decoration: none;
+
+  color: var(--text-secondary);
+
+  padding: 12px 14px;
+
+  border-radius: 12px;
+
+  margin-bottom: 6px;
+
+  transition: .2s;
+
+}
+
+.sidebar a:hover {
+
+  background: #EFF6FF;
+
+  color: var(--primary);
+
+}
+
+.content-app {
+
+  flex: 1;
+
+  padding: 30px;
+
+}
+
+.brand {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  margin-bottom: 24px;
+
+}
+
+.brand-logo {
+
+  width: 42px;
+
+  height: 42px;
+
+  border-radius: 12px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #3B82F6,
+      #2563EB
+    );
+
+  color: white;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-weight: 700;
+
+  box-shadow:
+    0 8px 20px
+    rgba(37,99,235,.25);
+
+}
+
+.brand-subtitle {
+
+  font-size: 12px;
+
+  color:
+    var(--text-secondary);
+
+}
