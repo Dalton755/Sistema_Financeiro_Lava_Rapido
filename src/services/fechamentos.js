@@ -439,6 +439,20 @@ export async function gerarPreviaFechamento({
 
         )
 
+    let lojaNome = null
+
+    if (tipo === 'LOJA') {
+
+        const { data: loja } = await supabase
+            .schema('financeiro')
+            .from('lojas')
+            .select('nome')
+            .eq('id', lojaId)
+            .single()
+
+        lojaNome = loja?.nome ?? null
+    }
+
     return {
 
         tipo,
@@ -448,6 +462,8 @@ export async function gerarPreviaFechamento({
         quinzena,
 
         lojaId,
+
+        lojaNome,
 
         funcionarioId,
 
@@ -674,6 +690,14 @@ export async function confirmarFechamento(
             previa.tipo === 'LOJA'
 
                 ? previa.lojaId
+
+                : null,
+
+        loja_nome:
+
+            previa.tipo === 'LOJA'
+
+                ? previa.lojaNome
 
                 : null,
 

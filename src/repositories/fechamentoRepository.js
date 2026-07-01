@@ -148,3 +148,33 @@ export async function listarItensFechamento(fechamentoId) {
         .order('created_at')
 
 }
+
+export async function atualizarStatusFechamento(
+
+    fechamentoId,
+
+    status
+
+) {
+
+    return await supabase
+
+        .schema('financeiro')
+
+        .from('fechamentos')
+
+        .update({
+
+            status
+
+        })
+
+        .eq(
+
+            'id',
+
+            fechamentoId
+
+        )
+
+}

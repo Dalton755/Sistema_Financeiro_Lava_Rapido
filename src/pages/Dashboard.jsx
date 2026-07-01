@@ -1,7 +1,54 @@
 import Layout from '../components/Layout'
+import { useEffect, useState } from 'react'
+
+import { carregarDashboard }
+  from '../services/dashboard'
 
 export default function Dashboard() {
+  const [
 
+    dashboard,
+
+    setDashboard
+
+  ] = useState(null)
+
+  useEffect(() => {
+
+    async function carregar() {
+
+      const dados =
+
+        await carregarDashboard()
+
+      setDashboard(
+
+        dados
+
+      )
+
+    }
+
+    carregar()
+
+  }, [])
+  if (!dashboard) {
+
+    return (
+
+      <Layout>
+
+        <div className="text-center p-5">
+
+          Carregando...
+
+        </div>
+
+      </Layout>
+
+    )
+
+  }
   return (
 
     <Layout>
@@ -34,7 +81,11 @@ export default function Dashboard() {
 
           <div className="kpi-value">
 
-            1
+            {
+
+              dashboard.totalFuncionarios
+
+            }
 
           </div>
 
@@ -44,13 +95,37 @@ export default function Dashboard() {
 
           <div className="kpi-label">
 
-            Horas Hoje
+            Lojas
 
           </div>
 
           <div className="kpi-value">
 
-            0h
+            {
+
+              dashboard.totalLojas
+
+            }
+
+          </div>
+
+        </div>
+
+        <div className="kpi-card">
+
+          <div className="kpi-label">
+
+            Pontos
+
+          </div>
+
+          <div className="kpi-value">
+
+            {
+
+              dashboard.totalPontos
+
+            }
 
           </div>
 
@@ -66,7 +141,15 @@ export default function Dashboard() {
 
           <div className="kpi-value">
 
-            R$ 0
+            R$
+
+            {
+
+              dashboard.totalAdiantamentos
+
+                .toFixed(2)
+
+            }
 
           </div>
 
@@ -76,13 +159,37 @@ export default function Dashboard() {
 
           <div className="kpi-label">
 
-            Folha Prevista
+            Fechamentos
 
           </div>
 
           <div className="kpi-value">
 
-            R$ 0
+            {
+
+              dashboard.fechamentos.length
+
+            }
+
+          </div>
+
+        </div>
+
+        <div className="kpi-card">
+
+          <div className="kpi-label">
+
+            Pagamentos
+
+          </div>
+
+          <div className="kpi-value">
+
+            {
+
+              dashboard.totalPagamentos
+
+            }
 
           </div>
 
@@ -92,11 +199,82 @@ export default function Dashboard() {
 
       <div className="card-app mt-4 p-4">
 
-        <h5>
+        <div className="card-app mt-4 p-4">
 
-          Atividade Recente
+          <h5>
 
-        </h5>
+            Últimos Fechamentos
+
+          </h5>
+
+          <hr />
+
+          {
+
+            dashboard.fechamentos
+
+              .slice(0, 5)
+
+              .map(
+
+                fechamento => (
+
+                  <div
+
+                    key={fechamento.id}
+
+                    className="mb-3"
+
+                  >
+
+                    <strong>
+
+                      {
+
+                        fechamento.lojas?.nome ||
+
+                        'Funcionário'
+
+                      }
+
+                    </strong>
+
+                    <br />
+
+                    {fechamento.competencia}
+
+                    {' • '}
+
+                    {fechamento.quinzena}ª Quinzena
+
+                    <br />
+
+                    <span
+                      className={`badge bg-${fechamento.status === 'Pago'
+                          ? 'success'
+                          : fechamento.status === 'Parcial'
+                            ? 'warning'
+                            : 'secondary'
+                        }`}
+                    >
+
+                      {
+
+                        fechamento.status
+
+                      }
+
+                    </span>
+
+                  </div>
+
+                )
+
+              )
+
+          }
+
+        </div>
 
         <p className="text-muted">
 

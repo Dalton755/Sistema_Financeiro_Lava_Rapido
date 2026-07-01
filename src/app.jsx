@@ -39,6 +39,9 @@ import DetalhePonto
 import TesteFechamento
   from './pages/TesteFechamento'
 
+import Historico
+  from './pages/Historico'
+
 import HistoricoFechamentos
   from './pages/HistoricoFechamentos'
 
@@ -116,6 +119,11 @@ export function App() {
         <Route
           path="/historico-fechamentos"
           element={<HistoricoFechamentos />}
+        />
+
+        <Route
+          path="/historico"
+          element={<Historico />}
         />
 
         <Route

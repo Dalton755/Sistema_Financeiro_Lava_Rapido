@@ -110,7 +110,7 @@ export default function Layout({
                         Pagamentos
                     </Link>
 
-                    <Link to="/historico-fechamentos">
+                    <Link to="/historico">
                         <ClipboardCheck size={18} />
                         Histórico
                     </Link>
@@ -154,7 +154,7 @@ export default function Layout({
                 </div>
 
                 <div
-                    className="offcanvas-body"
+                    className="offcanvas-body mobile-menu"
                 >
 
                     <Link to="/">
@@ -181,7 +181,7 @@ export default function Layout({
                         💵 Pagamentos
                     </Link>
 
-                    <Link to="/historico-fechamentos">
+                    <Link to="/historico">
                         📚 Histórico
                     </Link>
 

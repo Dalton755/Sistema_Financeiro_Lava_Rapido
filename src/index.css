@@ -109,3 +109,51 @@ code {
   padding: 4px 8px;
   background: var(--code-bg);
 }
+
+/* MENU MOBILE */
+
+.mobile-menu{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:10px;
+
+}
+
+.mobile-menu a{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:12px 14px;
+
+    border-radius:10px;
+
+    text-decoration:none;
+
+    color:#334155;
+
+    font-weight:500;
+
+    transition:.2s;
+
+}
+
+.mobile-menu a:hover{
+
+    background:#EEF4FF;
+
+    color:#2563EB;
+
+}
+
+.mobile-menu svg{
+
+    flex-shrink:0;
+
+}
