@@ -355,23 +355,169 @@ export default function DetalheFechamento() {
 
                             <br />
 
-                            Horas: {item.horas}
+                            {(() => {
 
-                            <br />
+                                const pontosFuncionario =
 
-                            Valor Hora: R$ {item.valor_hora}
+                                    pontos.filter(
 
-                            <br />
+                                        ponto =>
 
-                            Bruto: R$ {item.valor_bruto}
+                                            ponto.funcionario_id ===
 
-                            <br />
+                                            item.funcionario_id
 
-                            Adiantamentos: R$ {item.valor_adiantamentos}
+                                    )
 
-                            <br />
+                                const diasTrabalhados =
 
-                            Líquido: R$ {item.valor_liquido}
+                                    new Set(
+
+                                        pontosFuncionario.map(
+
+                                            ponto => ponto.data
+
+                                        )
+
+                                    ).size
+
+                                const horasTrabalhadas =
+
+                                    pontosFuncionario.reduce(
+
+                                        (total, ponto) =>
+
+                                            total +
+
+                                            Number(ponto.horas),
+
+                                        0
+
+                                    )
+
+                                const horasExtras =
+
+                                    pontosFuncionario.reduce(
+
+                                        (total, ponto) =>
+
+                                            total +
+
+                                            Math.max(
+
+                                                0,
+
+                                                Number(ponto.horas) - 8
+
+                                            ),
+
+                                        0
+
+                                    )
+
+                                return (
+
+                                    <>
+
+                                        <br />
+
+                                        Escala:
+
+                                        {' '}
+
+                                        {
+
+                                            pontosFuncionario[0]?.escala ||
+
+                                            '-'
+
+                                        }
+
+                                        <br />
+
+                                        Dias Trabalhados:
+
+                                        {' '}
+
+                                        {diasTrabalhados}
+
+                                        <br />
+
+                                        Horas Trabalhadas:
+
+                                        {' '}
+
+                                        {
+
+                                            horasTrabalhadas.toFixed(2)
+
+                                        }
+
+                                        <br />
+
+                                        Horas Extras:
+
+                                        {' '}
+
+                                        {
+
+                                            horasExtras.toFixed(2)
+
+                                        }
+
+                                        <br />
+
+                                        Valor Hora:
+
+                                        {' '}
+
+                                        R$
+
+                                        {' '}
+
+                                        {item.valor_hora}
+
+                                        <br />
+
+                                        Bruto:
+
+                                        {' '}
+
+                                        R$
+
+                                        {' '}
+
+                                        {item.valor_bruto}
+
+                                        <br />
+
+                                        Adiantamentos:
+
+                                        {' '}
+
+                                        R$
+
+                                        {' '}
+
+                                        {item.valor_adiantamentos}
+
+                                        <br />
+
+                                        Líquido:
+
+                                        {' '}
+
+                                        R$
+
+                                        {' '}
+
+                                        {item.valor_liquido}
+
+                                    </>
+
+                                )
+
+                            })()}
 
                             <div className="mt-3">
 

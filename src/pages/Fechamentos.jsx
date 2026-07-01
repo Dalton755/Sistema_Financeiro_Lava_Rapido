@@ -662,117 +662,207 @@ export default function Fechamentos() {
 
             <div className="card-app mt-3">
 
-              <div className="row text-center">
+              <h5 className="mb-4">
 
-                <div className="col">
+                Resumo do Fechamento
 
-                  <small>
+              </h5>
 
-                    Funcionários
+              <div className="row g-3">
 
-                  </small>
+                <div className="col-md-3 col-6">
 
-                  <h5>
+                  <div className="border rounded p-3 text-center h-100">
 
-                    {
+                    <small className="text-muted">
 
-                      previa.funcionarios.length
+                      Funcionários
 
-                    }
+                    </small>
 
-                  </h5>
+                    <h3 className="mt-2">
+
+                      {previa.funcionarios.length}
+
+                    </h3>
+
+                  </div>
 
                 </div>
 
-                <div className="col">
+                <div className="col-md-3 col-6">
 
-                  <small>
+                  <div className="border rounded p-3 text-center h-100">
 
-                    Horas
+                    <small className="text-muted">
 
-                  </small>
+                      Dias Trabalhados
 
-                  <h5>
+                    </small>
 
-                    {
+                    <h3 className="mt-2">
 
-                      previa.totalHoras.toFixed(2)
+                      {
 
-                    }
+                        previa.funcionarios.reduce(
 
-                  </h5>
+                          (total, funcionario) =>
+
+                            total +
+
+                            funcionario.dias_trabalhados,
+
+                          0
+
+                        )
+
+                      }
+
+                    </h3>
+
+                  </div>
+
+                </div>
+
+                <div className="col-md-3 col-6">
+
+                  <div className="border rounded p-3 text-center h-100">
+
+                    <small className="text-muted">
+
+                      Horas Trabalhadas
+
+                    </small>
+
+                    <h3 className="mt-2">
+
+                      {previa.totalHoras.toFixed(2)}
+
+                    </h3>
+
+                  </div>
+
+                </div>
+
+                <div className="col-md-3 col-6">
+
+                  <div className="border rounded p-3 text-center h-100">
+
+                    <small className="text-muted">
+
+                      Horas Extras
+
+                    </small>
+
+                    <h3 className="mt-2 text-warning">
+
+                      {
+
+                        previa.funcionarios
+
+                          .reduce(
+
+                            (total, funcionario) =>
+
+                              total +
+
+                              funcionario.horas_extras,
+
+                            0
+
+                          )
+
+                          .toFixed(2)
+
+                      }
+
+                    </h3>
+
+                  </div>
 
                 </div>
 
               </div>
 
-              <hr />
+              <hr className="my-4" />
 
-              <div className="row text-center">
+              <div className="row g-3">
 
-                <div className="col">
+                <div className="col-md-4">
 
-                  <small>
+                  <div className="bg-primary-subtle rounded p-3 text-center">
 
-                    Bruto
+                    <small className="text-muted">
 
-                  </small>
+                      Valor Bruto
 
-                  <h5>
+                    </small>
 
-                    R$
+                    <h3 className="mt-2">
 
-                    {
+                      R$
 
-                      previa.totalBruto.toFixed(2)
+                      {
 
-                    }
+                        previa.totalBruto.toFixed(2)
 
-                  </h5>
+                      }
 
-                </div>
+                    </h3>
 
-                <div className="col">
-
-                  <small>
-
-                    Adiantamentos
-
-                  </small>
-
-                  <h5 className="text-danger">
-
-                    R$
-
-                    {
-
-                      previa.totalAdiantamentos.toFixed(2)
-
-                    }
-
-                  </h5>
+                  </div>
 
                 </div>
 
-                <div className="col">
+                <div className="col-md-4">
 
-                  <small>
+                  <div className="bg-danger-subtle rounded p-3 text-center">
 
-                    Líquido
+                    <small className="text-muted">
 
-                  </small>
+                      Adiantamentos
 
-                  <h5 className="text-success">
+                    </small>
 
-                    R$
+                    <h3 className="mt-2">
 
-                    {
+                      R$
 
-                      previa.totalLiquido.toFixed(2)
+                      {
 
-                    }
+                        previa.totalAdiantamentos.toFixed(2)
 
-                  </h5>
+                      }
+
+                    </h3>
+
+                  </div>
+
+                </div>
+
+                <div className="col-md-4">
+
+                  <div className="bg-success-subtle rounded p-3 text-center">
+
+                    <small className="text-muted">
+
+                      Valor Líquido
+
+                    </small>
+
+                    <h3 className="mt-2">
+
+                      R$
+
+                      {
+
+                        previa.totalLiquido.toFixed(2)
+
+                      }
+
+                    </h3>
+
+                  </div>
 
                 </div>
 

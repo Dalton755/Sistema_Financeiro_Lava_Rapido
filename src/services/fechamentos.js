@@ -243,11 +243,9 @@ export async function gerarPreviaFechamento({
 
         }
 
-        funcionarios[id].horas +=
+        const horas = Number(ponto.horas)
 
-            Number(
-                ponto.horas
-            )
+        funcionarios[id].horas += horas
 
         funcionarios[id].pontos.push({
 
@@ -257,8 +255,16 @@ export async function gerarPreviaFechamento({
 
             loja: ponto.loja,
 
-            horas: Number(
-                ponto.horas
+            escala: ponto.escala,
+
+            horas,
+
+            horas_extras: Math.max(
+
+                0,
+
+                horas - 8
+
             ),
 
             entrada: ponto.entrada,
@@ -288,6 +294,46 @@ export async function gerarPreviaFechamento({
         listaFuncionarios
 
     ) {
+
+        funcionario.dias_trabalhados =
+
+            new Set(
+
+                funcionario.pontos.map(
+
+                    ponto => ponto.data
+
+                )
+
+            ).size
+
+        funcionario.horas_extras =
+
+            funcionario.pontos.reduce(
+
+                (
+
+                    total,
+
+                    ponto
+
+                ) =>
+
+                    total +
+
+                    ponto.horas_extras,
+
+                0
+
+            )
+
+        funcionario.horas_trabalhadas =
+
+            funcionario.horas
+
+        funcionario.escala =
+
+            funcionario.pontos[0]?.escala ?? '-'
 
         funcionario.valor_bruto =
 

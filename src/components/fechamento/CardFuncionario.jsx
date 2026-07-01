@@ -54,7 +54,43 @@ export default function CardFuncionario({
 
             <div className="row text-center">
 
-                <div className="col">
+                <div className="col-6">
+
+                    <small className="text-muted">
+
+                        Dias Trabalhados
+
+                    </small>
+
+                    <h4 className="mt-2">
+
+                        {funcionario.dias_trabalhados}
+
+                    </h4>
+
+                </div>
+
+                <div className="col-6">
+
+                    <small className="text-muted">
+
+                        Escala
+
+                    </small>
+
+                    <h4 className="mt-2">
+
+                        {funcionario.escala}
+
+                    </h4>
+
+                </div>
+
+            </div>
+
+            <div className="row text-center mt-3">
+
+                <div className="col-4">
 
                     <small className="text-muted">
 
@@ -68,7 +104,7 @@ export default function CardFuncionario({
 
                             Number(
 
-                                funcionario.horas
+                                funcionario.horas_trabalhadas
 
                             ).toFixed(2)
 
@@ -78,7 +114,31 @@ export default function CardFuncionario({
 
                 </div>
 
-                <div className="col">
+                <div className="col-4">
+
+                    <small className="text-muted">
+
+                        Extras
+
+                    </small>
+
+                    <h4 className="mt-2 text-warning">
+
+                        {
+
+                            Number(
+
+                                funcionario.horas_extras
+
+                            ).toFixed(2)
+
+                        }
+
+                    </h4>
+
+                </div>
+
+                <div className="col-4">
 
                     <small className="text-muted">
 
