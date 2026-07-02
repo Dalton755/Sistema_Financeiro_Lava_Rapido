@@ -15,7 +15,19 @@ import {
 }
     from 'lucide-react'
 
-import { Link } from 'react-router-dom'
+import {
+
+    Link,
+
+    useLocation
+
+} from 'react-router-dom'
+
+import {
+
+    useEffect
+
+} from 'react'
 
 import {
     Settings
@@ -25,6 +37,52 @@ import {
 export default function Layout({
     children
 }) {
+
+    const location = useLocation()
+
+    useEffect(() => {
+
+        const offcanvas = document.getElementById(
+
+            'menuMobile'
+
+        )
+
+        if (!offcanvas) return
+
+        const backdrop = document.querySelector(
+
+            '.offcanvas-backdrop'
+
+        )
+
+        if (backdrop) {
+
+            backdrop.remove()
+
+        }
+
+        document.body.classList.remove(
+
+            'offcanvas-open',
+
+            'modal-open'
+
+        )
+
+        document.body.style.removeProperty(
+
+            'overflow'
+
+        )
+
+        document.body.style.removeProperty(
+
+            'padding-right'
+
+        )
+
+    }, [location])
 
     return (
 

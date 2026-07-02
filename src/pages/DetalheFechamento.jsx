@@ -548,58 +548,97 @@ export default function DetalheFechamento() {
                                         ponto => (
 
                                             <div
-
                                                 key={ponto.id}
-
-                                                className="mt-2 border rounded p-2"
-
+                                                className="card-app mt-3 p-3"
                                             >
 
-                                                <strong>
+                                                <div className="d-flex justify-content-between align-items-center mb-3">
 
-                                                    {ponto.data}
+                                                    <strong>
 
-                                                </strong>
+                                                        📅 {ponto.data}
 
-                                                <br />
+                                                    </strong>
 
-                                                Entrada:
+                                                    <span className="badge bg-primary">
 
-                                                {' '}
+                                                        {Number(ponto.horas).toFixed(2)} h
 
-                                                {ponto.entrada}
+                                                    </span>
 
-                                                <br />
+                                                </div>
 
-                                                Saída Almoço:
+                                                <div className="row">
 
-                                                {' '}
+                                                    <div className="col-6">
 
-                                                {ponto.saida_almoco || '-'}
+                                                        <small className="text-muted">
 
-                                                <br />
+                                                            Entrada
 
-                                                Retorno:
+                                                        </small>
 
-                                                {' '}
+                                                        <div>
 
-                                                {ponto.retorno_almoco || '-'}
+                                                            {ponto.entrada?.slice(0, 5) || '-'}
 
-                                                <br />
+                                                        </div>
 
-                                                Saída:
+                                                    </div>
 
-                                                {' '}
+                                                    <div className="col-6">
 
-                                                {ponto.saida}
+                                                        <small className="text-muted">
 
-                                                <br />
+                                                            Saída
 
-                                                Horas:
+                                                        </small>
 
-                                                {' '}
+                                                        <div>
 
-                                                {ponto.horas}
+                                                            {ponto.saida?.slice(0, 5) || '-'}
+
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+                                                <div className="row mt-3">
+
+                                                    <div className="col-6">
+
+                                                        <small className="text-muted">
+
+                                                            Saída Almoço
+
+                                                        </small>
+
+                                                        <div>
+
+                                                            {ponto.saida_almoco?.slice(0, 5) || '-'}
+
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div className="col-6">
+
+                                                        <small className="text-muted">
+
+                                                            Retorno
+
+                                                        </small>
+
+                                                        <div>
+
+                                                            {ponto.retorno_almoco?.slice(0, 5) || '-'}
+
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
 
                                             </div>
 

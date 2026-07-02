@@ -258,65 +258,241 @@ export default function ModalDetalhes({
 
                         </h5>
 
-                        <table className="table table-sm">
+                        <div className="d-none d-md-block">
 
-                            <thead>
+                            <table className="table table-sm">
 
-                                <tr>
+                                <thead>
 
-                                    <th>Data</th>
+                                    <tr>
 
-                                    <th>Loja</th>
+                                        <th>Data</th>
 
-                                    <th>Entrada</th>
+                                        <th>Loja</th>
 
-                                    <th>Saída Almoço</th>
+                                        <th>Entrada</th>
 
-                                    <th>Retorno</th>
+                                        <th>Saída Almoço</th>
 
-                                    <th>Saída</th>
+                                        <th>Retorno</th>
 
-                                    <th>Horas</th>
+                                        <th>Saída</th>
 
-                                </tr>
+                                        <th>Horas</th>
 
-                            </thead>
+                                    </tr>
 
-                            <tbody>
+                                </thead>
 
-                                {
+                                <tbody>
 
-                                    funcionario.pontos.map(
+                                    {
 
-                                        ponto => (
+                                        funcionario.pontos.map(
 
-                                            <tr key={ponto.id}>
+                                            ponto => (
 
-                                                <td>{ponto.data}</td>
+                                                <tr key={ponto.id}>
 
-                                                <td>{ponto.loja}</td>
+                                                    <td>{ponto.data}</td>
 
-                                                <td>{ponto.entrada}</td>
+                                                    <td>{ponto.loja}</td>
 
-                                                <td>{ponto.saida_almoco}</td>
+                                                    <td>{ponto.entrada?.slice(0, 5)}</td>
 
-                                                <td>{ponto.retorno_almoco}</td>
+                                                    <td>{ponto.saida_almoco?.slice(0, 5)}</td>
 
-                                                <td>{ponto.saida}</td>
+                                                    <td>{ponto.retorno_almoco?.slice(0, 5)}</td>
 
-                                                <td>{ponto.horas}</td>
+                                                    <td>{ponto.saida?.slice(0, 5)}</td>
 
-                                            </tr>
+                                                    <td>{Number(ponto.horas).toFixed(2)}</td>
+
+                                                </tr>
+
+                                            )
 
                                         )
 
+                                    }
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                        <div className="d-md-none">
+
+                            {
+
+                                funcionario.pontos.map(
+
+                                    ponto => (
+
+                                        <div
+
+                                            key={ponto.id}
+
+                                            className="card-app mt-3"
+
+                                        >
+
+                                            <div className="d-flex justify-content-between">
+
+                                                <strong>
+
+                                                    📅 {new Date(
+                                                        ponto.data + 'T00:00:00'
+                                                    ).toLocaleDateString('pt-BR')}
+
+                                                </strong>
+
+                                                {(() => {
+
+                                                    const horas = Number(ponto.horas)
+
+                                                    const extras = Math.max(0, horas - 8)
+
+                                                    return (
+
+                                                        <div className="text-end">
+
+                                                            <span
+
+                                                                className={
+
+                                                                    `badge ${extras > 0
+
+                                                                        ? 'bg-warning text-dark'
+
+                                                                        : 'bg-primary'
+
+                                                                    }`
+
+                                                                }
+
+                                                            >
+
+                                                                {horas.toFixed(2)} h
+
+                                                            </span>
+
+                                                            {
+
+                                                                extras > 0 &&
+
+                                                                <div
+                                                                    className="small text-warning fw-bold mt-1"
+                                                                >
+
+                                                                    +{extras.toFixed(2)} h extra
+
+                                                                </div>
+
+                                                            }
+
+                                                        </div>
+
+                                                    )
+
+                                                })()}
+
+                                            </div>
+
+                                            <hr />
+
+                                            <div className="row">
+
+                                                <div className="col-6">
+
+                                                    <small className="text-muted">
+
+                                                        Entrada
+
+                                                    </small>
+
+                                                    <div>
+
+                                                        {ponto.entrada?.slice(0, 5)}
+
+                                                    </div>
+
+                                                </div>
+
+                                                <div className="col-6">
+
+                                                    <small className="text-muted">
+
+                                                        Saída
+
+                                                    </small>
+
+                                                    <div>
+
+                                                        {ponto.saida?.slice(0, 5)}
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                            <div className="row mt-2">
+
+                                                <div className="col-6">
+
+                                                    <small className="text-muted small">
+
+                                                        Saída Almoço
+
+                                                    </small>
+
+                                                    <div>
+
+                                                        {ponto.saida_almoco?.slice(0, 5)}
+
+                                                    </div>
+
+                                                </div>
+
+                                                <div className="col-6">
+
+                                                    <small className="text-muted">
+
+                                                        Retorno
+
+                                                    </small>
+
+                                                    <div>
+
+                                                        {ponto.retorno_almoco?.slice(0, 5)}
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                            <div className="mt-3">
+
+                                                <div className="mt-3 fw-semibold">
+
+                                                    🏪 {ponto.loja}
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
                                     )
 
-                                }
+                                )
 
-                            </tbody>
+                            }
 
-                        </table>
+                        </div>
 
                     </div>
 
