@@ -762,59 +762,35 @@ export default function Fechamentos() {
 
                   </div>
 
-                  <div className="row g-3 mt-1">
-
-                    <div className="col-md-6">
-
-                      <div className="border rounded p-3 text-center h-100">
-
-                        <small className="text-muted">
-
-                          Total de Horas
-
-                        </small>
-
-                        <h3 className="mt-2">
-
-                          {previa.totalHoras.toFixed(2)} h
-
-                        </h3>
-
-                      </div>
-
-                    </div>
-
-                    <div className="col-md-6">
-
-                      <div className="border rounded p-3 text-center h-100">
-
-                        <small className="text-muted">
-
-                          Valor Médio por Hora
-
-                        </small>
-
-                        <h3 className="mt-2">
-
-                          R$
-
-                          {
-
-                            (previa.totalBruto / previa.totalHoras).toFixed(2)
-
-                          }
-
-                        </h3>
-
-                      </div>
-
-                    </div>
-
-                  </div>
+                  
 
                 </div>
 
               </div>
+
+              <div className="row g-3 mt-2">
+
+    <div className="col-12">
+
+        <div className="border rounded p-3 text-center">
+
+            <small className="text-muted">
+
+                Total de Horas
+
+            </small>
+
+            <h3 className="mt-2">
+
+                {previa.totalHoras.toFixed(2)} h
+
+            </h3>
+
+        </div>
+
+    </div>
+
+</div>
 
               <hr className="my-4" />
 
