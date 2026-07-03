@@ -43,6 +43,11 @@ export default function Configuracoes() {
     ] = useState('')
 
     const [
+        lojaEditando,
+        setLojaEditando
+    ] = useState(null)
+
+    const [
         verTodas,
         setVerTodas
     ] = useState(
@@ -102,6 +107,40 @@ export default function Configuracoes() {
 
         setNovaLoja('')
 
+        setLojaEditando(null)
+
+        setNovaLoja('')
+
+        setModalAberto(false)
+
+        await carregar()
+
+    }
+
+    async function editarLoja() {
+
+        if (!novaLoja.trim()) {
+
+            alert('Informe o nome da loja.')
+
+            return
+
+        }
+
+        await atualizarLoja(
+
+            lojaEditando.id,
+
+            {
+                nome: novaLoja
+            }
+
+        )
+
+        setLojaEditando(null)
+
+        setNovaLoja('')
+
         setModalAberto(false)
 
         await carregar()
@@ -121,6 +160,19 @@ export default function Configuracoes() {
             id,
             {
                 status: 'Inativa'
+            }
+        )
+
+        await carregar()
+
+    }
+
+    async function reativar(id) {
+
+        await atualizarLoja(
+            id,
+            {
+                status: 'Ativa'
             }
         )
 
@@ -244,24 +296,50 @@ export default function Configuracoes() {
 
                                         <button
                                             className="btn btn-outline-primary"
+                                            onClick={() => {
+
+                                                setLojaEditando(loja)
+
+                                                setNovaLoja(loja.nome)
+
+                                                setModalAberto(true)
+
+                                            }}
                                         >
 
                                             <Pencil size={16} />
 
                                         </button>
 
-                                        <button
-                                            className="btn btn-outline-danger"
-                                            onClick={() =>
-                                                desativar(
-                                                    loja.id
-                                                )
-                                            }
-                                        >
+                                        {
+                                            loja.status === 'Ativa' ? (
 
-                                            <Trash2 size={16} />
+                                                <button
+                                                    className="btn btn-outline-danger"
+                                                    onClick={() =>
+                                                        desativar(loja.id)
+                                                    }
+                                                >
 
-                                        </button>
+                                                    <Trash2 size={16} />
+
+                                                </button>
+
+                                            ) : (
+
+                                                <button
+                                                    className="btn btn-outline-success"
+                                                    onClick={() =>
+                                                        reativar(loja.id)
+                                                    }
+                                                >
+
+                                                    Ativar
+
+                                                </button>
+
+                                            )
+                                        }
 
                                     </div>
 
@@ -301,7 +379,17 @@ export default function Configuracoes() {
                                 >
 
                                     <h5>
-                                        Nova Loja
+
+                                        {
+
+                                            lojaEditando
+
+                                                ? 'Editar Loja'
+
+                                                : 'Nova Loja'
+
+                                        }
+
                                     </h5>
 
                                 </div>
@@ -343,7 +431,13 @@ export default function Configuracoes() {
                                     <button
                                         className="btn btn-app"
                                         onClick={
-                                            salvarLoja
+
+                                            lojaEditando
+
+                                                ? editarLoja
+
+                                                : salvarLoja
+
                                         }
                                     >
 

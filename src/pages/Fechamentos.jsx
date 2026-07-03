@@ -730,13 +730,13 @@ export default function Fechamentos() {
 
                     <small className="text-muted">
 
-                      Horas Trabalhadas
+                      Horas Normais
 
                     </small>
 
                     <h3 className="mt-2">
 
-                      {previa.totalHoras.toFixed(2)}
+                      {previa.totalHorasNormais.toFixed(2)} h
 
                     </h3>
 
@@ -756,27 +756,59 @@ export default function Fechamentos() {
 
                     <h3 className="mt-2 text-warning">
 
-                      {
-
-                        previa.funcionarios
-
-                          .reduce(
-
-                            (total, funcionario) =>
-
-                              total +
-
-                              funcionario.horas_extras,
-
-                            0
-
-                          )
-
-                          .toFixed(2)
-
-                      }
+                      {previa.totalHorasExtras.toFixed(2)} h
 
                     </h3>
+
+                  </div>
+
+                  <div className="row g-3 mt-1">
+
+                    <div className="col-md-6">
+
+                      <div className="border rounded p-3 text-center h-100">
+
+                        <small className="text-muted">
+
+                          Total de Horas
+
+                        </small>
+
+                        <h3 className="mt-2">
+
+                          {previa.totalHoras.toFixed(2)} h
+
+                        </h3>
+
+                      </div>
+
+                    </div>
+
+                    <div className="col-md-6">
+
+                      <div className="border rounded p-3 text-center h-100">
+
+                        <small className="text-muted">
+
+                          Valor Médio por Hora
+
+                        </small>
+
+                        <h3 className="mt-2">
+
+                          R$
+
+                          {
+
+                            (previa.totalBruto / previa.totalHoras).toFixed(2)
+
+                          }
+
+                        </h3>
+
+                      </div>
+
+                    </div>
 
                   </div>
 

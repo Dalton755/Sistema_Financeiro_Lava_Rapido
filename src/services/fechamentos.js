@@ -311,21 +311,23 @@ export async function gerarPreviaFechamento({
 
             funcionario.pontos.reduce(
 
-                (
+                (total, ponto) => {
 
-                    total,
+                    const horas = Number(ponto.horas)
 
-                    ponto
+                    return total + Math.max(horas - 8, 0)
 
-                ) =>
-
-                    total +
-
-                    ponto.horas_extras,
+                },
 
                 0
 
             )
+
+        funcionario.horas_normais =
+
+            funcionario.horas -
+
+            funcionario.horas_extras
 
         funcionario.horas_trabalhadas =
 
@@ -335,19 +337,29 @@ export async function gerarPreviaFechamento({
 
             funcionario.pontos[0]?.escala ?? '-'
 
-        funcionario.valor_bruto =
+        let valorBruto = 0
 
-            Number(
+        for (const ponto of funcionario.pontos) {
 
-                (
+            const horas = Number(ponto.horas)
 
-                    funcionario.horas *
+            const horasNormais = Math.min(horas, 8)
 
-                    funcionario.valor_hora
+            const horasExtras = Math.max(horas - 8, 0)
 
-                ).toFixed(2)
+            valorBruto +=
 
-            )
+                (horasNormais * funcionario.valor_hora) +
+
+                (horasExtras * 12)
+
+        }
+
+        funcionario.valor_bruto = Number(
+
+            valorBruto.toFixed(2)
+
+        )
 
         funcionario.valor_liquido =
 
@@ -380,6 +392,46 @@ export async function gerarPreviaFechamento({
                 total +
 
                 funcionario.horas,
+
+            0
+
+        )
+
+    const totalHorasNormais =
+
+        listaFuncionarios.reduce(
+
+            (
+
+                total,
+
+                funcionario
+
+            ) =>
+
+                total +
+
+                funcionario.horas_normais,
+
+            0
+
+        )
+
+    const totalHorasExtras =
+
+        listaFuncionarios.reduce(
+
+            (
+
+                total,
+
+                funcionario
+
+            ) =>
+
+                total +
+
+                funcionario.horas_extras,
 
             0
 
@@ -520,6 +572,10 @@ export async function gerarPreviaFechamento({
         funcionarios:
 
             listaFuncionarios,
+
+        totalHorasNormais,
+
+        totalHorasExtras,
 
         totalHoras,
 

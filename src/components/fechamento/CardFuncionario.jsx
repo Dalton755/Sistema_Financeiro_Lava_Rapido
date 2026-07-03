@@ -88,13 +88,13 @@ export default function CardFuncionario({
 
             </div>
 
-            <div className="row text-center mt-3">
+            <div className="row text-center">
 
-                <div className="col-4">
+                <div className="col">
 
                     <small className="text-muted">
 
-                        Horas
+                        Normais
 
                     </small>
 
@@ -104,17 +104,17 @@ export default function CardFuncionario({
 
                             Number(
 
-                                funcionario.horas_trabalhadas
+                                funcionario.horas_normais
 
                             ).toFixed(2)
 
-                        }
+                        } h
 
                     </h4>
 
                 </div>
 
-                <div className="col-4">
+                <div className="col">
 
                     <small className="text-muted">
 
@@ -132,13 +132,13 @@ export default function CardFuncionario({
 
                             ).toFixed(2)
 
-                        }
+                        } h
 
                     </h4>
 
                 </div>
 
-                <div className="col-4">
+                <div className="col">
 
                     <small className="text-muted">
 
@@ -163,6 +163,32 @@ export default function CardFuncionario({
                     </h4>
 
                 </div>
+
+            </div>
+
+            <hr />
+
+            <div className="text-center">
+
+                <small className="text-muted">
+
+                    Total de Horas
+
+                </small>
+
+                <h4 className="mt-2">
+
+                    {
+
+                        Number(
+
+                            funcionario.horas
+
+                        ).toFixed(2)
+
+                    } h
+
+                </h4>
 
             </div>
 
