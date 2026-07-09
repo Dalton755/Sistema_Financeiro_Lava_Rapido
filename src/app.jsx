@@ -27,6 +27,9 @@ import Fechamentos
 import Pagamentos
   from './pages/Pagamentos'
 
+import Financeiro
+  from './pages/Financeiro'
+
 import DetalheAdiantamento
   from './pages/DetalheAdiantamento'
 
@@ -104,6 +107,11 @@ export function App() {
         <Route
           path="/pagamentos"
           element={<Pagamentos />}
+        />
+
+        <Route
+          path="/financeiro"
+          element={<Financeiro />}
         />
 
         <Route

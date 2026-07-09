@@ -3,13 +3,9 @@
   display: grid;
 
   grid-template-columns:
-    repeat(
-      auto-fit,
-      minmax(
-        220px,
-        1fr
-      )
-    );
+    repeat(auto-fit,
+      minmax(220px,
+        1fr));
 
   gap: 20px;
 
@@ -18,20 +14,15 @@
 .kpi-card {
 
   background:
-    linear-gradient(
-      180deg,
+    linear-gradient(180deg,
       #ffffff,
-      #f8fafc
-    );
+      #f8fafc);
 
   border:
-    1px solid
-    rgba(
-      148,
+    1px solid rgba(148,
       163,
       184,
-      .15
-    );
+      .15);
 
   border-radius: 20px;
 
@@ -39,13 +30,10 @@
 
   box-shadow:
 
-    0 4px 12px
-    rgba(
-      15,
+    0 4px 12px rgba(15,
       23,
       42,
-      .05
-    );
+      .05);
 
   transition:
     all .25s ease;
@@ -55,28 +43,21 @@
 .kpi-card:hover {
 
   transform:
-    translateY(
-      -4px
-    );
+    translateY(-4px);
 
   box-shadow:
 
-    0 12px 24px
-    rgba(
-      15,
+    0 12px 24px rgba(15,
       23,
       42,
-      .08
-    );
+      .08);
 
 }
 
 .kpi-label {
 
   color:
-    var(
-      --text-secondary
-    );
+    var(--text-secondary);
 
   font-size: 14px;
 
@@ -101,9 +82,7 @@
 .page-subtitle {
 
   color:
-    var(
-      --text-secondary
-    );
+    var(--text-secondary);
 
 }
 
@@ -112,5 +91,111 @@
   opacity: .65;
 
   filter: grayscale(.4);
+
+}
+
+.table {
+
+  margin-bottom: 0;
+
+}
+
+.table thead th {
+
+  background: #F8FAFC;
+
+  font-weight: 600;
+
+  color: #475569;
+
+  border-bottom: 2px solid #E2E8F0;
+
+}
+
+.table tbody tr {
+
+  transition: .18s;
+
+}
+
+.table tbody tr:hover {
+
+  background: #F8FAFC;
+
+}
+
+.table td,
+
+.table th {
+
+  vertical-align: middle;
+
+  padding: 14px;
+
+}
+
+.table td:last-child,
+
+.table th:last-child {
+
+  width: 120px;
+
+  text-align: center;
+
+}
+
+.badge{
+
+    border-radius:8px;
+
+    font-weight:500;
+
+    padding:6px 10px;
+
+    font-size:.78rem;
+
+}
+
+.badge{
+
+    border-radius:8px;
+
+    font-weight:500;
+
+    padding:6px 10px;
+
+    font-size:.78rem;
+
+}
+
+.btn-primary{
+
+    background:#2563EB;
+
+    border-color:#2563EB;
+
+}
+
+.btn-primary:hover{
+
+    background:#1D4ED8;
+
+    border-color:#1D4ED8;
+
+}
+
+.btn-dark{
+
+    background:#334155;
+
+    border-color:#334155;
+
+}
+
+.btn-dark:hover{
+
+    background:#1E293B;
+
+    border-color:#1E293B;
 
 }

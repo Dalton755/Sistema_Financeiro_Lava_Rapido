@@ -10,7 +10,9 @@ import {
 
     ClipboardCheck,
 
-    Wallet
+    Wallet,
+
+    Landmark
 
 }
     from 'lucide-react'
@@ -168,6 +170,11 @@ export default function Layout({
                         Pagamentos
                     </Link>
 
+                    <Link to="/financeiro">
+                        <Landmark size={18} />
+                        Financeiro
+                    </Link>
+
                     <Link to="/historico">
                         <ClipboardCheck size={18} />
                         Histórico
@@ -237,6 +244,10 @@ export default function Layout({
 
                     <Link to="/pagamentos">
                         💵 Pagamentos
+                    </Link>
+
+                    <Link to="/financeiro">
+                        🏦 Financeiro
                     </Link>
 
                     <Link to="/historico">

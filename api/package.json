@@ -1,0 +1,24 @@
+{
+  "name": "financeiro-api",
+  "version": "1.0.0",
+  "description": "API de Integração Gmail - Sistema Financeiro Lava Rápido",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@google-cloud/local-auth": "^3.0.1",
+    "@supabase/supabase-js": "^2.56.1",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "google-auth-library": "^10.9.0",
+    "googleapis": "^154.1.0",
+    "pdf2json": "^4.0.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
