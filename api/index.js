@@ -5,6 +5,8 @@ import testeRoutes from "./routes/teste.js";
 import gmailRoutes from "./routes/gmail.js";
 import solicitacoesRoutes from "./routes/solicitacoes.js";
 import pagamentosLocalizaRoutes from "./routes/pagamentos-localiza.js";
+import contas from "./routes/contas.js";
+
 
 dotenv.config();
 
@@ -17,6 +19,24 @@ app.use(cors());
 
 app.use(express.json());
 
+app.use((req, res, next) => {
+
+    console.log("");
+
+    console.log("================================");
+
+    console.log("REQUISIÇÃO RECEBIDA");
+
+    console.log("================================");
+
+    console.log(req.method);
+
+    console.log(req.originalUrl);
+
+    next();
+
+});
+
 app.use("/teste", testeRoutes);
 
 app.use("/gmail", gmailRoutes);
@@ -24,6 +44,8 @@ app.use("/gmail", gmailRoutes);
 app.use("/importacoes/solicitacoes", solicitacoesRoutes);
 
 app.use("/importacoes/pagamentos-localiza", pagamentosLocalizaRoutes);
+
+app.use("/contas", contas);
 
 app.get("/", (req, res) => {
 

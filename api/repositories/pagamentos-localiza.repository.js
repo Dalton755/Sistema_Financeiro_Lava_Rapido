@@ -2,24 +2,7 @@ import { supabase } from "../services/supabase.js";
 
 export async function salvarPagamentos(payload) {
 
-    const { data: existente } = await supabase
-        .schema("financeiro")
-        .from("pagamentos_localiza")
-        .select("id")
-        .eq("message_id", payload.messageId)
-        .limit(1);
 
-    if (existente.length > 0) {
-
-        return {
-
-            duplicado: true,
-
-            quantidade: 0
-
-        };
-
-    }
 
     const registros = payload.itens.map(item => ({
 
@@ -63,7 +46,14 @@ export async function salvarPagamentos(payload) {
 
         .from("pagamentos_localiza")
 
-        .insert(registros)
+        .upsert(
+            registros,
+            {
+                onConflict:
+                    "fornecedor_codigo,numero_nf,data_pagamento",
+                ignoreDuplicates: true
+            }
+        )
 
         .select();
 
@@ -75,10 +65,124 @@ export async function salvarPagamentos(payload) {
 
     return {
 
-        duplicado: false,
+    sucesso: true,
 
-        quantidade: data.length
+    quantidade: data?.length ?? 0
 
-    };
+};
+
+}
+
+export async function buscarPagamentoPorId(id) {
+
+    const { data, error } = await supabase
+
+        .schema("financeiro")
+
+        .from("pagamentos_localiza")
+
+        .select("*")
+
+        .eq("id", id)
+
+        .single();
+
+    if (error) {
+
+        throw error;
+
+    }
+
+    return data;
+
+}
+
+export async function atualizarPagamento(id, dados) {
+
+    const { data, error } = await supabase
+
+        .schema("financeiro")
+
+        .from("pagamentos_localiza")
+
+        .update(dados)
+
+        .eq("id", id)
+
+        .select()
+
+        .single();
+
+    if (error) {
+
+        throw error;
+
+    }
+
+    return data;
+
+}
+
+export async function listarPagamentosPendentes() {
+
+    const { data, error } = await supabase
+
+        .schema("financeiro")
+
+        .from("pagamentos_localiza")
+
+        .select("*")
+
+        .eq("status", "IMPORTADO")
+
+        .order("data_pagamento", {
+
+            ascending: true
+
+        })
+
+        .order("message_id", {
+
+            ascending: true
+
+        });
+
+    if (error) {
+
+        throw error;
+
+    }
+
+    return data ?? [];
+
+}
+
+export async function listarPagamentosPorMessageId(messageId) {
+
+    const { data, error } = await supabase
+
+        .schema("financeiro")
+
+        .from("pagamentos_localiza")
+
+        .select("*")
+
+        .eq("message_id", messageId)
+
+        .eq("status", "IMPORTADO")
+
+        .order("numero_nf", {
+
+            ascending: true
+
+        });
+
+    if (error) {
+
+        throw error;
+
+    }
+
+    return data ?? [];
 
 }

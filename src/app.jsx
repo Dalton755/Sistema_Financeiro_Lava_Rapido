@@ -51,6 +51,11 @@ import HistoricoFechamentos
 import DetalheFechamento
   from './pages/DetalheFechamento'
 
+import Contas from "./pages/Contas";
+
+import Recebimentos
+  from "./pages/Recebimentos";
+
 
 
 
@@ -137,6 +142,16 @@ export function App() {
         <Route
           path="/historico-fechamentos/:id"
           element={<DetalheFechamento />}
+        />
+
+        <Route
+          path="/contas"
+          element={<Contas />}
+        />
+
+        <Route
+          path="/recebimentos"
+          element={<Recebimentos />}
         />
 
 

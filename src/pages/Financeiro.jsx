@@ -11,6 +11,7 @@ import {
     from "../services/movimentacoes";
 
 import { toast } from "react-toastify";
+import { listarContas } from "../services/contas";
 
 export default function Financeiro() {
 
@@ -20,6 +21,7 @@ export default function Financeiro() {
     const [idEdicao, setIdEdicao] = useState(null);
     const [pesquisa, setPesquisa] = useState("");
     const [filtroTipo, setFiltroTipo] = useState("TODOS");
+    const [contas, setContas] = useState([]);
 
     const [exibirFormulario, setExibirFormulario] = useState(false);
 
@@ -61,10 +63,12 @@ export default function Financeiro() {
 
             const [
                 dados,
-                resumoFinanceiro
+                resumoFinanceiro,
+                contas
             ] = await Promise.all([
                 listarMovimentacoes(),
-                carregarResumoFinanceiro()
+                carregarResumoFinanceiro(),
+                listarContas()
             ]);
 
             console.log("Movimentações:", dados);
@@ -72,6 +76,8 @@ export default function Financeiro() {
             setMovimentacoes(dados);
 
             setResumo(resumoFinanceiro);
+
+            setContas(contas);
 
         } catch (error) {
 
@@ -527,8 +533,8 @@ export default function Financeiro() {
                     <button
 
                         className={`btn ${filtroTipo === "TODOS"
-                                ? "btn-dark"
-                                : "btn-outline-secondary"
+                            ? "btn-dark"
+                            : "btn-outline-secondary"
                             }`}
 
                         onClick={() => setFiltroTipo("TODOS")}
@@ -860,6 +866,64 @@ export default function Financeiro() {
                                     }
 
                                 </select>
+
+                                <div className="col-md-4">
+
+                                    <label className="form-label">
+
+                                        Conta Financeira
+
+                                    </label>
+
+                                    <select
+
+                                        className="form-select"
+
+                                        value={formulario.conta_id}
+
+                                        onChange={(e) =>
+
+                                            setFormulario({
+
+                                                ...formulario,
+
+                                                conta_id: e.target.value
+
+                                            })
+
+                                        }
+
+                                    >
+
+                                        <option value="">
+
+                                            Selecione...
+
+                                        </option>
+
+                                        {
+
+                                            contas.map(conta => (
+
+                                                <option
+
+                                                    key={conta.id}
+
+                                                    value={conta.id}
+
+                                                >
+
+                                                    {conta.nome}
+
+                                                </option>
+
+                                            ))
+
+                                        }
+
+                                    </select>
+
+                                </div>
 
                             </div>
 
