@@ -1,291 +1,266 @@
-import Layout from '../components/Layout'
-import { useEffect, useState } from 'react'
+import ExecutiveTab from "../components/dashboard/tabs/ExecutiveTab";
+import FinanceiroTab from "../components/dashboard/tabs/FinanceiroTab";
+import OperacoesTab from "../components/dashboard/tabs/OperacoesTab";
+import CustosTab from "../components/dashboard/tabs/CustosTab";
+import EquipeTab from "../components/dashboard/tabs/EquipeTab";
+import ClientesTab from "../components/dashboard/tabs/ClientesTab";
+import AlertasTab from "../components/dashboard/tabs/AlertasTab";
 
-import { carregarDashboard }
-  from '../services/dashboard'
+
+import { useEffect, useState } from "react";
+
+import { listarDashboard } from "../services/dashboard";
+
+import PageContainer from "../components/ui/PageContainer";
+
+import PageHeader from "../components/ui/PageHeader";
+
+import SummaryCard from "../components/ui/SummaryCard";
+
+import DashboardChart from "../components/dashboard/charts/DashboardChart";
+
+import {
+
+    carregarGrafico,
+
+    buscarAlertas
+
+} from "../services/dashboard";
+
+
+
+import DashboardTabs from "../components/ui/tabs/DashboardTabs";
+
+import DashboardNavigation from "../components/dashboard/DashboardNavigation";
+
+import {
+
+  listarMovimentacoes
+
+} from "../services/movimentacoes";
+
+import {
+
+  formatarMoeda
+
+} from "../lib/formatadores";
 
 export default function Dashboard() {
+
+  const [dados, setDados] = useState(null);
+
   const [
 
-    dashboard,
+    grafico,
 
-    setDashboard
+    setGrafico
 
-  ] = useState(null)
+  ] = useState([]);
+
+  const [
+
+    alertas,
+
+    setAlertas
+
+  ] = useState([]);
+
+
+  const [
+
+    movimentacoes,
+
+    setMovimentacoes
+
+  ] = useState([]);
+
+  const [abaAtiva, setAbaAtiva] = useState(0);
 
   useEffect(() => {
 
-    async function carregar() {
+    carregar();
 
-      const dados =
+  }, []);
 
-        await carregarDashboard()
 
-      setDashboard(
 
-        dados
+  async function carregar() {
 
-      )
+    try {
+
+      const [
+
+    resultado,
+
+    serie,
+
+    movimentacoes,
+
+    alertas
+
+] = await Promise.all([
+
+    listarDashboard(),
+
+    carregarGrafico(),
+
+    listarMovimentacoes(),
+
+    buscarAlertas()
+
+
+
+      ]);
+
+      setDados(resultado);
+
+      setGrafico(serie);
+
+      setMovimentacoes(movimentacoes);
+
+      setAlertas(alertas);
 
     }
 
-    carregar()
+    catch (erro) {
 
-  }, [])
-  if (!dashboard) {
+      console.error(erro);
 
-    return (
-
-      <Layout>
-
-        <div className="text-center p-5">
-
-          Carregando...
-
-        </div>
-
-      </Layout>
-
-    )
+    }
 
   }
+
+
   return (
 
-    <Layout>
+    <PageContainer>
 
-      <div className="page-header">
+      <PageHeader
 
-        <h1 className="page-title">
+        title="Dashboard"
 
-          Dashboard
+        subtitle="Visão geral do financeiro."
 
-        </h1>
+      />
 
-        <p className="page-subtitle">
+      <DashboardNavigation
 
-          Visão geral da operação
+        ativa={abaAtiva}
 
-        </p>
+        onChange={setAbaAtiva}
 
-      </div>
+      />
 
-      <div className="kpi-grid">
+      {
 
-        <div className="kpi-card">
+        !dados
 
-          <div className="kpi-label">
+          ?
 
-            Funcionários
+          (
 
-          </div>
+            <div className="text-center py-5">
 
-          <div className="kpi-value">
+              Carregando...
 
-            {
+            </div>
 
-              dashboard.totalFuncionarios
+          )
 
-            }
+          :
 
-          </div>
+          (
 
-        </div>
+            <>
 
-        <div className="kpi-card">
+              {
 
-          <div className="kpi-label">
+                abaAtiva === 0 && (
 
-            Lojas
+                  <ExecutiveTab
 
-          </div>
+                    dados={dados}
 
-          <div className="kpi-value">
+                    grafico={grafico}
 
-            {
+                    movimentacoes={movimentacoes}
 
-              dashboard.totalLojas
+                    alertas={alertas}
 
-            }
-
-          </div>
-
-        </div>
-
-        <div className="kpi-card">
-
-          <div className="kpi-label">
-
-            Pontos
-
-          </div>
-
-          <div className="kpi-value">
-
-            {
-
-              dashboard.totalPontos
-
-            }
-
-          </div>
-
-        </div>
-
-        <div className="kpi-card">
-
-          <div className="kpi-label">
-
-            Adiantamentos
-
-          </div>
-
-          <div className="kpi-value">
-
-            R$
-
-            {
-
-              dashboard.totalAdiantamentos
-
-                .toFixed(2)
-
-            }
-
-          </div>
-
-        </div>
-
-        <div className="kpi-card">
-
-          <div className="kpi-label">
-
-            Fechamentos
-
-          </div>
-
-          <div className="kpi-value">
-
-            {
-
-              dashboard.fechamentos.length
-
-            }
-
-          </div>
-
-        </div>
-
-        <div className="kpi-card">
-
-          <div className="kpi-label">
-
-            Pagamentos
-
-          </div>
-
-          <div className="kpi-value">
-
-            {
-
-              dashboard.totalPagamentos
-
-            }
-
-          </div>
-
-        </div>
-
-      </div>
-
-      <div className="card-app mt-4 p-4">
-
-        <div className="card-app mt-4 p-4">
-
-          <h5>
-
-            Últimos Fechamentos
-
-          </h5>
-
-          <hr />
-
-          {
-
-            dashboard.fechamentos
-
-              .slice(0, 5)
-
-              .map(
-
-                fechamento => (
-
-                  <div
-
-                    key={fechamento.id}
-
-                    className="mb-3"
-
-                  >
-
-                    <strong>
-
-                      {
-
-                        fechamento.lojas?.nome ||
-
-                        'Funcionário'
-
-                      }
-
-                    </strong>
-
-                    <br />
-
-                    {fechamento.competencia}
-
-                    {' • '}
-
-                    {fechamento.quinzena}ª Quinzena
-
-                    <br />
-
-                    <span
-                      className={`badge bg-${fechamento.status === 'Pago'
-                          ? 'success'
-                          : fechamento.status === 'Parcial'
-                            ? 'warning'
-                            : 'secondary'
-                        }`}
-                    >
-
-                      {
-
-                        fechamento.status
-
-                      }
-
-                    </span>
-
-                  </div>
+                  />
 
                 )
 
-              )
+              }
 
-          }
+              {
 
-        </div>
+                abaAtiva === 1 && (
 
-        <p className="text-muted">
+                  <FinanceiroTab />
 
-          Nenhuma movimentação encontrada.
+                )
 
-        </p>
+              }
 
-      </div>
+              {
 
-    </Layout>
+                abaAtiva === 2 && (
+
+                  <OperacoesTab />
+
+                )
+
+              }
+
+              {
+
+                abaAtiva === 3 && (
+
+                  <CustosTab />
+
+                )
+
+              }
+
+              {
+
+                abaAtiva === 4 && (
+
+                  <EquipeTab />
+
+                )
+
+              }
+
+              {
+
+                abaAtiva === 5 && (
+
+                  <ClientesTab />
+
+                )
+
+              }
+
+              {
+
+                abaAtiva === 6 && (
+
+                  <AlertasTab />
+
+                )
+
+              }
+
+            </>
+
+          )
+
+      }
+
+    </PageContainer>
 
   )
-
+    ;
 }

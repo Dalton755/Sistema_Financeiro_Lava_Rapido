@@ -1,93 +1,126 @@
-import { supabase } from '../lib/supabase'
+import api from "./api";
 
-export async function carregarDashboard() {
+import {
 
-    const [
+    listarRecebimentos
 
-        funcionarios,
+} from "./recebimentos";
 
-        lojas,
+export async function listarDashboard(inicio, fim) {
 
-        pontos,
+    const params = {};
 
-        adiantamentos,
+    if (inicio) {
 
-        fechamentos,
-
-        pagamentos
-
-    ] = await Promise.all([
-
-        supabase
-            .schema('financeiro')
-            .from('funcionarios')
-            .select('id', { count: 'exact' }),
-
-        supabase
-            .schema('financeiro')
-            .from('lojas')
-            .select('id', { count: 'exact' }),
-
-        supabase
-            .schema('financeiro')
-            .from('pontos')
-            .select('id', { count: 'exact' }),
-
-        supabase
-            .schema('financeiro')
-            .from('adiantamentos')
-            .select('valor'),
-
-        supabase
-            .schema('financeiro')
-            .from('fechamentos')
-            .select(`
-                *,
-                lojas(nome)
-            `)
-            .order('created_at', { ascending: false }),
-
-        supabase
-            .schema('financeiro')
-            .from('pagamentos')
-            .select('id', { count: 'exact' })
-
-    ])
-
-    return {
-
-        totalFuncionarios:
-
-            funcionarios.count || 0,
-
-        totalLojas:
-
-            lojas.count || 0,
-
-        totalPontos:
-
-            pontos.count || 0,
-
-        totalAdiantamentos:
-
-            adiantamentos.data?.reduce(
-
-                (soma, item) =>
-
-                    soma + Number(item.valor),
-
-                0
-
-            ) || 0,
-
-        fechamentos:
-
-            fechamentos.data || [],
-
-        totalPagamentos:
-
-            pagamentos.count || 0
+        params.inicio = inicio;
 
     }
+
+    if (fim) {
+
+        params.fim = fim;
+
+    }
+
+    const { data } = await api.get(
+
+        "/dashboard",
+
+        {
+
+            params
+
+        }
+
+    );
+
+    return data;
+
+}
+
+export async function carregarGrafico(
+
+    inicio,
+
+    fim
+
+) {
+
+    const { data } = await api.get(
+
+        "/dashboard/grafico",
+
+        {
+
+            params: {
+
+                inicio,
+
+                fim
+
+            }
+
+        }
+
+    );
+
+    return data;
+
+}
+
+export async function buscarAlertas() {
+
+    const alertas = [];
+
+    // Recebimentos pendentes
+
+    const recebimentos =
+        await listarRecebimentos();
+
+    const pendentes = recebimentos.length;
+
+    if (pendentes > 0) {
+
+        alertas.push({
+
+            tipo: "danger",
+
+            mensagem: `${pendentes} recebimento(s) aguardando confirmação`
+
+        });
+
+    }
+
+    else {
+
+        alertas.push({
+
+            tipo: "success",
+
+            mensagem: "Nenhum recebimento pendente"
+
+        });
+
+    }
+
+    // Backlog
+
+    alertas.push({
+
+        tipo: "success",
+
+        mensagem: "Nenhum pagamento vencido"
+
+    });
+
+    alertas.push({
+
+        tipo: "success",
+
+        mensagem: "Nenhum fechamento pendente"
+
+    });
+
+    return alertas;
 
 }

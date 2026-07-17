@@ -6,6 +6,8 @@ import gmailRoutes from "./routes/gmail.js";
 import solicitacoesRoutes from "./routes/solicitacoes.js";
 import pagamentosLocalizaRoutes from "./routes/pagamentos-localiza.js";
 import contas from "./routes/contas.js";
+import dashboardRoutes
+    from "./routes/dashboard.routes.js";
 
 
 dotenv.config();
@@ -46,6 +48,14 @@ app.use("/importacoes/solicitacoes", solicitacoesRoutes);
 app.use("/importacoes/pagamentos-localiza", pagamentosLocalizaRoutes);
 
 app.use("/contas", contas);
+
+app.use(
+
+    "/dashboard",
+
+    dashboardRoutes
+
+);
 
 app.get("/", (req, res) => {
 

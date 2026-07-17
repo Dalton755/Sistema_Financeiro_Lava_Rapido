@@ -179,7 +179,7 @@ router.post("/importar", async (req, res) => {
 
         const resposta = await fetch(
 
-            "https://script.google.com/macros/s/AKfycbxN2vz1DIFwi3h0hXo4Dv-AmDjJvuZ3yn65OK33rdVGvx-1gVnpBJj10iT4ufLJvueqoA/exec",
+            "https://script.google.com/macros/s/AKfycbxuARSgnWnRd3zE6OVh0zdoquzkofCNJpmQmHfUOyFwE5Mn8u-hlhgWAxs1hQhD10mOXQ/exec",
 
             {
 
@@ -203,8 +203,63 @@ router.post("/importar", async (req, res) => {
 
         const resultado = await resposta.json();
 
-        return res.json(resultado);
+        console.log("================================");
+        console.log("RESPOSTA DO APPS SCRIPT");
+        console.log("================================");
+        console.log(JSON.stringify(resultado, null, 2));
 
+        if (!resultado.sucesso) {
+
+            return res.status(400).json(resultado);
+
+        }
+
+        let importados = 0;
+        let erros = [];
+
+        for (const pagamento of (resultado.pagamentos ?? [])) {
+
+            try {
+
+                const dadosPdf = await extrairDadosPagamento(
+                    pagamento.payload.pdf
+                );
+
+                pagamento.payload.fornecedorCodigo = dadosPdf.fornecedorCodigo;
+                pagamento.payload.fornecedorNome = dadosPdf.fornecedorNome;
+                pagamento.payload.dataPagamento = dadosPdf.dataPagamento;
+
+                const respostaGravacao = await salvarPagamentos(
+                    pagamento.payload
+                );
+
+                importados += respostaGravacao.quantidade ?? 0;
+
+            } catch (erro) {
+
+                console.error(erro);
+
+                erros.push({
+
+                    messageId: pagamento.payload.messageId,
+
+                    erro: erro.message
+
+                });
+
+            }
+
+        }
+
+        return res.json({
+
+            sucesso: erros.length === 0,
+
+            importados,
+
+            erros
+
+        });
     }
 
     catch (erro) {
