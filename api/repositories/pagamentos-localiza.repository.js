@@ -1,4 +1,4 @@
-import { supabase } from "../../api/services/supabase.js";
+import { supabase } from "../services/supabase.js";
 
 export async function salvarPagamentos(payload) {
 
