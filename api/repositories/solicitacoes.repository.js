@@ -1,4 +1,4 @@
-import { supabase } from "../services/supabase.js";
+import { supabase } from "../../api/services/supabase.js";
 import { registrarImportacao } from "./importacoes.repository.js";
 
 

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { salvarSolicitacao } from "../../server/repositories/solicitacoes.repository.js";
+import { salvarSolicitacao } from "../repositories/solicitacoes.repository.js";
 
 const router = Router();
 

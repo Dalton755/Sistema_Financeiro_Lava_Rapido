@@ -1,13 +1,12 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import testeRoutes from "../server/routes/teste.js";
-import gmailRoutes from "../server/routes/gmail.js";
-import solicitacoesRoutes from "../server/routes/solicitacoes.js";
-import pagamentosLocalizaRoutes from "../server/routes/pagamentos-localiza.js";
-import contas from "../server/routes/contas.js";
-import dashboardRoutes
-    from "../server/routes/dashboard.routes.js";
+import testeRoutes from "./routes/teste.js";
+import gmailRoutes from "./routes/gmail.js";
+import solicitacoesRoutes from "./routes/solicitacoes.js";
+import pagamentosLocalizaRoutes from "./routes/pagamentos-localiza.js";
+import contas from "./routes/contas.js";
+import dashboardRoutes from "./routes/dashboard.routes.js";
 
 
 dotenv.config();
@@ -82,6 +81,22 @@ app.get("/health", (req, res) => {
         data: new Date()
 
     });
+
+});
+
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+
+    console.log("");
+
+    console.log("================================");
+
+    console.log("SERVIDOR INICIADO");
+
+    console.log("================================");
+
+    console.log(`Rodando na porta ${PORT}`);
 
 });
 

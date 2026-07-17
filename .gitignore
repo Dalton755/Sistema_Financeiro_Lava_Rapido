@@ -33,7 +33,6 @@ api/credentials/token.json
 
 node_modules/
 
-server/credentials/
 api/credentials/
 
 *.env
