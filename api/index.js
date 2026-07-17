@@ -1,13 +1,13 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import testeRoutes from "./routes/teste.js";
-import gmailRoutes from "./routes/gmail.js";
-import solicitacoesRoutes from "./routes/solicitacoes.js";
-import pagamentosLocalizaRoutes from "./routes/pagamentos-localiza.js";
-import contas from "./routes/contas.js";
+import testeRoutes from "../server/routes/teste.js";
+import gmailRoutes from "../server/routes/gmail.js";
+import solicitacoesRoutes from "../server/routes/solicitacoes.js";
+import pagamentosLocalizaRoutes from "../server/routes/pagamentos-localiza.js";
+import contas from "../server/routes/contas.js";
 import dashboardRoutes
-    from "./routes/dashboard.routes.js";
+    from "../server/routes/dashboard.routes.js";
 
 
 dotenv.config();
@@ -85,20 +85,5 @@ app.get("/health", (req, res) => {
 
 });
 
-const PORT = process.env.PORT || 3001;
+export default app;
 
-app.listen(PORT, () => {
-
-    console.log("");
-
-    console.log("==============================");
-
-    console.log(" Financeiro API ONLINE");
-
-    console.log("==============================");
-
-    console.log(` Porta: ${PORT}`);
-
-    console.log("");
-
-});

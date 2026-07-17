@@ -44,7 +44,7 @@ const CONFIG = {
 
   API: {
 
-    URL: "http://localhost:3001"
+    URL: "https://sistemafinanceirolavarapido-production.up.railway.app"
 
 },
 

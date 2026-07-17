@@ -32,3 +32,9 @@ api/credentials/token.json
 .env.*
 
 node_modules/
+
+server/credentials/
+api/credentials/
+
+*.env
+.env
