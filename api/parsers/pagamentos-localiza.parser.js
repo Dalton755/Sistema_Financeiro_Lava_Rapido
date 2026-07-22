@@ -11,7 +11,7 @@ export async function extrairDadosPagamento(pdfBase64) {
     console.log("Bytes:", buffer.length);
 
     const parser = new PDFParse({
-        data: buffer
+        data: buffer 
     });
 
     const resultado = await parser.getText();

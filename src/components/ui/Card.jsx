@@ -2,13 +2,17 @@ export default function Card({
 
     children,
 
-    className = ""
+    className = "",
+
+    onClick
 
 }) {
 
     return (
 
         <div
+
+            onClick={onClick}
 
             className={`
                 bg-white

@@ -1,5 +1,5 @@
 import { supabase }
-from '../lib/supabase'
+  from '../lib/supabase'
 
 export async function listarFuncionarios() {
 
@@ -31,32 +31,34 @@ export async function listarFuncionarios() {
 
 }
 
-export async function criarFuncionario(
-  funcionario
-) {
+export async function criarFuncionario(funcionario) {
 
-  const {
-    data,
-    error
-  } = await supabase
-
-    .schema('financeiro')
-
-    .from('funcionarios')
-
-    .insert([
-      funcionario
-    ])
-
+  const { data, error } = await supabase
+    .schema("financeiro")
+    .from("funcionarios")
+    .insert([funcionario])
     .select()
+    .single();
 
-    .single()
+  if (error) throw error;
 
-  if (error)
-    throw error
+  const vigenciaInicial = data.created_at.substring(0, 10);
 
-  return data
+  const { error: erroHistorico } = await supabase
+    .schema("financeiro")
+    .from("funcionario_valor_hora")
+    .insert([
+      {
+        funcionario_id: data.id,
+        valor_hora: data.valor_hora,
+        vigencia_inicio: vigenciaInicial,
+        vigencia_fim: null
+      }
+    ]);
 
+  if (erroHistorico) throw erroHistorico;
+
+  return data;
 }
 
 export async function atualizarFuncionario(
@@ -91,6 +93,25 @@ export async function atualizarFuncionario(
 
   return data
 
+}
+
+export async function alterarValorHoraFuncionario(
+  funcionarioId,
+  novoValorHora,
+  vigenciaInicio
+) {
+  const { error } = await supabase.rpc(
+    "alterar_valor_hora_funcionario",
+    {
+      p_funcionario_id: funcionarioId,
+      p_novo_valor: novoValorHora,
+      p_vigencia_inicio: vigenciaInicio
+    }
+  );
+
+  if (error) {
+    throw error;
+  }
 }
 
 export async function desativarFuncionario(

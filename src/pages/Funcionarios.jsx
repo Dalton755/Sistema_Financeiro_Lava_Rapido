@@ -19,10 +19,13 @@ import {
     from 'lucide-react'
 
 import {
+
     listarFuncionarios,
     criarFuncionario,
     atualizarFuncionario,
+    alterarValorHoraFuncionario,
     desativarFuncionario
+
 }
     from '../services/funcionarios'
 
@@ -278,15 +281,52 @@ export default function Funcionarios() {
 
             if (funcionarioEditando) {
 
+                const valorAlterado =
+                    Number(funcionarioEditando.valor_hora) !==
+                    Number(novoFuncionario.valor_hora);
+
                 await atualizarFuncionario(
 
                     funcionarioEditando.id,
 
                     {
-                        ...novoFuncionario
+
+                        ...novoFuncionario,
+
+                        // não atualiza o valor da hora aqui
+                        valor_hora: funcionarioEditando.valor_hora
+
                     }
 
-                )
+                );
+
+                if (valorAlterado) {
+
+                    const vigencia = prompt(
+
+                        "Informe a data de início da vigência (AAAA-MM-DD)",
+
+                        new Date().toISOString().substring(0, 10)
+
+                    );
+
+                    if (!vigencia) {
+
+                        throw new Error("Vigência não informada.");
+
+                    }
+
+                    await alterarValorHoraFuncionario(
+
+                        funcionarioEditando.id,
+
+                        Number(novoFuncionario.valor_hora),
+
+                        vigencia
+
+                    );
+
+                }
 
             }
 

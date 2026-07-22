@@ -1,17 +1,11 @@
 export default function PageContainer({ children }) {
 
     return (
+        <div className="container-fluid py-4 px-4">
 
-        <div className="min-h-screen bg-gray-50">
-
-            <div className="max-w-7xl mx-auto p-8">
-
-                {children}
-
-            </div>
+            {children}
 
         </div>
-
     );
 
 }

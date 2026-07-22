@@ -2,7 +2,6 @@ import { supabase }
     from '../lib/supabase'
 
 import {
-
     listarAdiantamentosEmAbertoFuncionario
 
 }
@@ -11,7 +10,6 @@ import {
 
 
 import {
-
     criarFuncionarioFechamento
 
 }
@@ -19,7 +17,6 @@ import {
     from '../factories/funcionarioFechamentoFactory'
 
 import {
-
     criarFechamento
 
 }
@@ -28,21 +25,54 @@ import {
 
 
 import {
-
     criarItensFechamento
 
 } from '../repositories/fechamentoItensRepository'
 
 import {
-
     fecharPontos
 
 }
 
     from '../repositories/pontoRepository'
 
+import {
+    gerarDemonstrativos
+}
+    from './demonstrativos'
 
 
+async function obterValorHoraNaData(funcionarioId, data) {
+
+    const { data: registro, error } = await supabase
+
+        .schema('financeiro')
+
+        .from('funcionario_valor_hora')
+
+        .select('valor_hora')
+
+        .eq('funcionario_id', funcionarioId)
+
+        .lte('vigencia_inicio', data)
+
+        .or(`vigencia_fim.is.null,vigencia_fim.gte.${data}`)
+
+        .order('vigencia_inicio', { ascending: false })
+
+        .limit(1)
+
+        .maybeSingle();
+
+    if (error) {
+
+        throw error;
+
+    }
+
+    return Number(registro?.valor_hora ?? 0);
+
+}
 
 
 
@@ -77,6 +107,8 @@ export async function listarFechamentos() {
 
 export async function gerarPreviaFechamento({
 
+
+
     tipo,
 
     lojaId,
@@ -88,6 +120,8 @@ export async function gerarPreviaFechamento({
     quinzena
 
 }) {
+
+    console.log(">>> GERAR PREVIA FECHAMENTO EXECUTOU <<<");
 
     let dataInicio
     let dataFim
@@ -165,6 +199,8 @@ export async function gerarPreviaFechamento({
                 funcionarios (
                     id,
                     nome,
+                    cpf,
+                    cargo,
                     valor_hora
                 )
             `)
@@ -221,6 +257,12 @@ export async function gerarPreviaFechamento({
         error
 
     } = await consulta
+
+    console.log("PONTOS:");
+    console.log(pontos);
+
+    console.log("FUNCIONARIO DO PRIMEIRO PONTO:");
+    console.log(pontos?.[0]?.funcionarios);
 
     if (error)
         throw error
@@ -337,22 +379,23 @@ export async function gerarPreviaFechamento({
 
             funcionario.pontos[0]?.escala ?? '-'
 
-        let valorBruto = 0
+        let valorBruto = 0;
 
         for (const ponto of funcionario.pontos) {
 
-            const horas = Number(ponto.horas)
+            const valorHora = Number(funcionario.valor_hora);
 
-            const horasNormais = Math.min(horas, 8)
+            ponto.valor_hora = valorHora;
 
-            const horasExtras = Math.max(horas - 8, 0)
+            const horas = Number(ponto.horas);
+
+            const horasNormais = Math.min(horas, 8);
+
+            const horasExtras = Math.max(horas - 8, 0);
 
             valorBruto +=
-
-                (horasNormais * funcionario.valor_hora) +
-
-                (horasExtras * 12)
-
+                (horasNormais * valorHora) +
+                (horasExtras * 12);
         }
 
         funcionario.valor_bruto = Number(
@@ -827,7 +870,10 @@ export async function confirmarFechamento(
 
             previa.totalHoras,
 
-        valor_hora: 0,
+        valor_hora:
+            previa.tipo === "FUNCIONARIO"
+                ? previa.funcionarios[0].valor_hora
+                : null,
 
         valor_bruto:
 
@@ -922,6 +968,15 @@ export async function confirmarFechamento(
         itensCriados
 
     )
+
+    await gerarDemonstrativos(
+        fechamento,
+        previa
+    );
+
+    console.log(
+        'DEMONSTRATIVOS GERADOS'
+    );
 
     const idsPontos =
 

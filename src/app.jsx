@@ -56,6 +56,9 @@ import Contas from "./pages/Contas";
 import Recebimentos
   from "./pages/Recebimentos";
 
+import Demonstrativos
+  from "./pages/financeiro/DemonstrativosPage";
+
 
 
 
@@ -153,6 +156,13 @@ export function App() {
           path="/recebimentos"
           element={<Recebimentos />}
         />
+
+        <Route
+          path="/demonstrativos"
+          element={<Demonstrativos />}
+        />
+
+
 
 
 

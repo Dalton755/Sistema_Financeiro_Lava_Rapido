@@ -14,6 +14,14 @@ export function criarFuncionarioFechamento(
 
             ponto.funcionarios.nome,
 
+        cpf:
+
+            ponto.funcionarios.cpf,
+
+        cargo:
+
+            ponto.funcionarios.cargo,
+
         horas: 0,
 
         valor_hora:

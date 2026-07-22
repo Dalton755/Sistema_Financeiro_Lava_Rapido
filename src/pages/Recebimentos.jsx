@@ -30,6 +30,8 @@ import {
     formatarMoeda
 } from "../lib/formatadores";
 
+import Layout from "../components/Layout";
+
 export default function Recebimentos() {
 
     const [
@@ -159,172 +161,176 @@ export default function Recebimentos() {
 
     return (
 
-        <PageContainer>
+        <Layout>
 
-            <PageHeader
+            <PageContainer>
 
-                title="Recebimentos"
+                <PageHeader
 
-                subtitle="Confirme os pagamentos importados automaticamente."
+                    title="Recebimentos"
 
-            />
+                    subtitle="Confirme os pagamentos importados automaticamente."
 
-            <div className="card shadow-sm border-0 mb-4">
+                />
 
-                <div className="card-body d-flex justify-content-between align-items-center">
+                <div className="card shadow-sm border-0 mb-4">
 
-                    <div>
+                    <div className="card-body d-flex justify-content-between align-items-center">
 
-                        <h5 className="mb-1">
+                        <div>
 
-                            Importação de Pagamentos
+                            <h5 className="mb-1">
 
-                        </h5>
+                                Importação de Pagamentos
 
-                        <small className="text-muted">
+                            </h5>
 
-                            Busque novos pagamentos enviados pela Localiza.
+                            <small className="text-muted">
 
-                        </small>
+                                Busque novos pagamentos enviados pela Localiza.
+
+                            </small>
+
+                        </div>
+
+                        <button
+
+                            className="btn btn-primary btn-lg"
+
+                            onClick={importar}
+
+                            disabled={importando}
+
+                        >
+
+                            {
+
+                                importando
+
+                                    ?
+
+                                    <>
+
+                                        <span
+
+                                            className="spinner-border spinner-border-sm me-2"
+
+                                            role="status"
+
+                                        />
+
+                                        Importando...
+
+                                    </>
+
+                                    :
+
+                                    <>
+
+                                        <i className="bi bi-arrow-repeat me-2"></i>
+
+                                        Importar Pagamentos
+
+                                    </>
+
+                            }
+
+                        </button>
 
                     </div>
 
-                    <button
-
-                        className="btn btn-primary btn-lg"
-
-                        onClick={importar}
-
-                        disabled={importando}
-
-                    >
-
-                        {
-
-                            importando
-
-                                ?
-
-                                <>
-
-                                    <span
-
-                                        className="spinner-border spinner-border-sm me-2"
-
-                                        role="status"
-
-                                    />
-
-                                    Importando...
-
-                                </>
-
-                                :
-
-                                <>
-
-                                    <i className="bi bi-arrow-repeat me-2"></i>
-
-                                    Importar Pagamentos
-
-                                </>
-
-                        }
-
-                    </button>
-
                 </div>
 
-            </div>
+                <div className="row g-3 mb-4">
 
-            <div className="row g-3 mb-4">
+                    <div className="col-md-4">
 
-                <div className="col-md-4">
-
-                    <SummaryCard
-                        title="Pendentes"
-                        value={quantidadeRecebimentos}
-                        icon="bi bi-hourglass-split"
-                        color="warning"
-                    />
-
-                </div>
-
-                <div className="col-md-4">
-
-                    <SummaryCard
-                        title="Notas"
-                        value={quantidadeNotas}
-                        icon="bi bi-receipt"
-                        color="primary"
-                    />
-
-                </div>
-
-                <div className="col-md-4">
-
-                    <SummaryCard
-                        title="Valor Pendente"
-                        value={formatarMoeda(valorTotal)}
-                        icon="bi bi-cash-stack"
-                        color="success"
-                    />
-
-                </div>
-
-            </div>
-
-            {
-
-                recebimentos.length === 0
-
-                    ?
-
-                    (
-
-                        <EmptyState
-
-                            title="Nenhum recebimento pendente"
-
-                            description="Todos os pagamentos importados já foram confirmados."
-
+                        <SummaryCard
+                            title="Pendentes"
+                            value={quantidadeRecebimentos}
+                            icon="bi bi-hourglass-split"
+                            color="warning"
                         />
 
-                    )
+                    </div>
 
-                    :
+                    <div className="col-md-4">
 
-                    (
+                        <SummaryCard
+                            title="Notas"
+                            value={quantidadeNotas}
+                            icon="bi bi-receipt"
+                            color="primary"
+                        />
 
-                        recebimentos.map(recebimento => (
+                    </div>
 
-                            <RecebimentoCard
-                                key={recebimento.messageId}
-                                recebimento={recebimento}
-                                onConfirmado={() => {
+                    <div className="col-md-4">
 
-                                    setRecebimentos(atual =>
+                        <SummaryCard
+                            title="Valor Pendente"
+                            value={formatarMoeda(valorTotal)}
+                            icon="bi bi-cash-stack"
+                            color="success"
+                        />
 
-                                        atual.filter(
+                    </div>
 
-                                            item =>
+                </div>
 
-                                                item.messageId !== recebimento.messageId
+                {
 
-                                        )
+                    recebimentos.length === 0
 
-                                    );
+                        ?
 
-                                }}
+                        (
+
+                            <EmptyState
+
+                                title="Nenhum recebimento pendente"
+
+                                description="Todos os pagamentos importados já foram confirmados."
+
                             />
 
-                        ))
+                        )
 
-                    )
+                        :
 
-            }
+                        (
 
-        </PageContainer>
+                            recebimentos.map(recebimento => (
+
+                                <RecebimentoCard
+                                    key={recebimento.messageId}
+                                    recebimento={recebimento}
+                                    onConfirmado={() => {
+
+                                        setRecebimentos(atual =>
+
+                                            atual.filter(
+
+                                                item =>
+
+                                                    item.messageId !== recebimento.messageId
+
+                                            )
+
+                                        );
+
+                                    }}
+                                />
+
+                            ))
+
+                        )
+
+                }
+
+            </PageContainer>
+
+        </Layout>
 
     );
 

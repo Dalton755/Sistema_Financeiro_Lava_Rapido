@@ -5,6 +5,7 @@ import CustosTab from "../components/dashboard/tabs/CustosTab";
 import EquipeTab from "../components/dashboard/tabs/EquipeTab";
 import ClientesTab from "../components/dashboard/tabs/ClientesTab";
 import AlertasTab from "../components/dashboard/tabs/AlertasTab";
+import Layout from "../components/Layout";
 
 
 import { useEffect, useState } from "react";
@@ -21,9 +22,9 @@ import DashboardChart from "../components/dashboard/charts/DashboardChart";
 
 import {
 
-    carregarGrafico,
+  carregarGrafico,
 
-    buscarAlertas
+  buscarAlertas
 
 } from "../services/dashboard";
 
@@ -90,23 +91,23 @@ export default function Dashboard() {
 
       const [
 
-    resultado,
+        resultado,
 
-    serie,
+        serie,
 
-    movimentacoes,
+        movimentacoes,
 
-    alertas
+        alertas
 
-] = await Promise.all([
+      ] = await Promise.all([
 
-    listarDashboard(),
+        listarDashboard(),
 
-    carregarGrafico(),
+        carregarGrafico(),
 
-    listarMovimentacoes(),
+        listarMovimentacoes(),
 
-    buscarAlertas()
+        buscarAlertas()
 
 
 
@@ -133,133 +134,139 @@ export default function Dashboard() {
 
   return (
 
-    <PageContainer>
+    <Layout>
 
-      <PageHeader
+      <PageContainer>
 
-        title="Dashboard"
 
-        subtitle="Visão geral do financeiro."
 
-      />
+        <PageHeader
 
-      <DashboardNavigation
+          title="Dashboard"
 
-        ativa={abaAtiva}
+          subtitle="Visão geral do financeiro."
 
-        onChange={setAbaAtiva}
+        />
 
-      />
+        <DashboardNavigation
 
-      {
+          ativa={abaAtiva}
 
-        !dados
+          onChange={setAbaAtiva}
 
-          ?
+        />
 
-          (
+        {
 
-            <div className="text-center py-5">
+          !dados
 
-              Carregando...
+            ?
 
-            </div>
+            (
 
-          )
+              <div className="text-center py-5">
 
-          :
+                Carregando...
 
-          (
+              </div>
 
-            <>
+            )
 
-              {
+            :
 
-                abaAtiva === 0 && (
+            (
 
-                  <ExecutiveTab
+              <>
 
-                    dados={dados}
+                {
 
-                    grafico={grafico}
+                  abaAtiva === 0 && (
 
-                    movimentacoes={movimentacoes}
+                    <ExecutiveTab
 
-                    alertas={alertas}
+                      dados={dados}
 
-                  />
+                      grafico={grafico}
 
-                )
+                      movimentacoes={movimentacoes}
 
-              }
+                      alertas={alertas}
 
-              {
+                    />
 
-                abaAtiva === 1 && (
+                  )
 
-                  <FinanceiroTab />
+                }
 
-                )
+                {
 
-              }
+                  abaAtiva === 1 && (
 
-              {
+                    <FinanceiroTab />
 
-                abaAtiva === 2 && (
+                  )
 
-                  <OperacoesTab />
+                }
 
-                )
+                {
 
-              }
+                  abaAtiva === 2 && (
 
-              {
+                    <OperacoesTab />
 
-                abaAtiva === 3 && (
+                  )
 
-                  <CustosTab />
+                }
 
-                )
+                {
 
-              }
+                  abaAtiva === 3 && (
 
-              {
+                    <CustosTab />
 
-                abaAtiva === 4 && (
+                  )
 
-                  <EquipeTab />
+                }
 
-                )
+                {
 
-              }
+                  abaAtiva === 4 && (
 
-              {
+                    <EquipeTab />
 
-                abaAtiva === 5 && (
+                  )
 
-                  <ClientesTab />
+                }
 
-                )
+                {
 
-              }
+                  abaAtiva === 5 && (
 
-              {
+                    <ClientesTab />
 
-                abaAtiva === 6 && (
+                  )
 
-                  <AlertasTab />
+                }
 
-                )
+                {
 
-              }
+                  abaAtiva === 6 && (
 
-            </>
+                    <AlertasTab />
 
-          )
+                  )
 
-      }
+                }
 
-    </PageContainer>
+              </>
+
+            )
+
+        }
+
+      </PageContainer>
+
+    </Layout>
 
   )
     ;

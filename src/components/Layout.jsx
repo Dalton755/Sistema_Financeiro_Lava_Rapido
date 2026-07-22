@@ -12,7 +12,9 @@ import {
 
     Wallet,
 
-    Landmark
+    Landmark,
+
+    FileText
 
 }
     from 'lucide-react'
@@ -170,6 +172,11 @@ export default function Layout({
                         Pagamentos
                     </Link>
 
+                    <Link to="/demonstrativos">
+                        <FileText size={18} />
+                        Demonstrativos
+                    </Link>
+
                     <Link to="/financeiro">
                         <Landmark size={18} />
                         Financeiro
@@ -244,6 +251,10 @@ export default function Layout({
 
                     <Link to="/pagamentos">
                         💵 Pagamentos
+                    </Link>
+
+                    <Link to="/demonstrativos">
+                        📄 Demonstrativos
                     </Link>
 
                     <Link to="/financeiro">
